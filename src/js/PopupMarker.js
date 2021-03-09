@@ -87,8 +87,6 @@ export class PopupMarker extends Marker {
             //.copy(evt.detail.intersection.pointOnLine || evt.detail.intersection.point)
             //.sub(this.position);
 
-        console.log(int);
-
         if (isHires) {
             this.element.innerHTML = `
                 <div class="group">
@@ -178,6 +176,10 @@ export class PopupMarker extends Marker {
                     ${info}
                 </div>
             `;
+        }
+
+        if (this.appState.debug){
+            console.debug("Clicked Position Data:", evt.detail);
         }
 
         this.open();

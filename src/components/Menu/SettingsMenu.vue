@@ -16,31 +16,33 @@
     <Group title="Resolution">
       <SimpleButton v-for="stage of qualityStages" :key="stage.name"
                     :active="mapViewer.superSampling === stage.value"
-                    @action="$bluemap.mapViewer.superSampling = stage.value"
+                    @action="$bluemap.mapViewer.superSampling = stage.value; $bluemap.saveUserSettings();"
       >{{stage.name}}</SimpleButton>
     </Group>
 
     <Group title="Render-Distance">
       <Slider :value="mapViewer.loadedHiresViewDistance" :min="50" :max="500" :step="10"
-              @update="mapViewer.loadedHiresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea();">Hires layer</Slider>
+              @update="mapViewer.loadedHiresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">Hires layer</Slider>
       <Slider :value="mapViewer.loadedLowresViewDistance" :min="500" :max="7000" :step="100"
-              @update="mapViewer.loadedLowresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea();">Lowres layer</Slider>
+              @update="mapViewer.loadedLowresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">Lowres layer</Slider>
     </Group>
 
     <Group title="Free-Flight Controls">
       <Slider :value="appState.controls.mouseSensitivity" :min="0.1" :max="5" :step="0.05"
-              @update="appState.controls.mouseSensitivity = $event; $bluemap.updateControlsSettings();">Mouse-Sensitivity</Slider>
-      <SwitchButton :on="appState.controls.invertMouse" @action="appState.controls.invertMouse = !appState.controls.invertMouse; $bluemap.updateControlsSettings()">Invert Mouse Y</SwitchButton>
+              @update="appState.controls.mouseSensitivity = $event; $bluemap.updateControlsSettings();" @lazy="$bluemap.saveUserSettings()">Mouse-Sensitivity</Slider>
+      <SwitchButton :on="appState.controls.invertMouse" @action="appState.controls.invertMouse = !appState.controls.invertMouse; $bluemap.updateControlsSettings(); $bluemap.saveUserSettings()">Invert Mouse Y</SwitchButton>
     </Group>
 
     <Group title="Theme">
       <SimpleButton v-for="theme of themes" :key="theme.name"
                     :active="appState.theme === theme.value"
-                    @action="$bluemap.setTheme(theme.value)"
+                    @action="$bluemap.setTheme(theme.value); $bluemap.saveUserSettings();"
       >{{theme.name}}</SimpleButton>
     </Group>
 
-    <SwitchButton :on="appState.debug" @action="switchDebug">Debug</SwitchButton>
+    <SwitchButton :on="appState.debug" @action="switchDebug(); $bluemap.saveUserSettings();">Debug</SwitchButton>
+
+    <SimpleButton @action="$bluemap.resetSettings()">Reset All Settings</SimpleButton>
   </div>
 </template>
 

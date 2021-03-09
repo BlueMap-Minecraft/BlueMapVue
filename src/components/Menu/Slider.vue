@@ -2,7 +2,7 @@
 <div class="slider">
   <div class="label"><slot />: <span class="value">{{formattedValue}}</span></div>
   <label>
-    <input type="range" :min="min" :max="max" :step="step" :value="value" @input="$emit('update', parseFloat($event.target.value))">
+    <input type="range" :min="min" :max="max" :step="step" :value="value" @input="$emit('update', parseFloat($event.target.value))" @change="$emit('lazy', parseFloat($event.target.value))">
   </label>
 </div>
 </template>

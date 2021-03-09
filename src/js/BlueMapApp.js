@@ -34,6 +34,7 @@ import {MarkerFileManager} from "bluemap/src/markers/MarkerFileManager";
 import {MainMenu} from "@/js/MainMenu";
 import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
+import {getCookie, setCookie} from "@/js/Utils";
 
 export class BlueMapApp {
 
@@ -52,6 +53,10 @@ export class BlueMapApp {
         this.playerMarkerManager = null;
         /** @type {MarkerFileManager} */
         this.markerFileManager = null;
+
+        /** @type {{useCookies: boolean, maps: []}} */
+        this.settings = null;
+        this.savedUserSettings = new Map();
 
         this.maps = [];
         this.mapsMap = new Map();
@@ -92,34 +97,30 @@ export class BlueMapApp {
         this.appState.maps.splice(0, this.appState.maps.length);
         this.mapsMap.clear();
 
-        let unloadPromise = this.mapViewer.switchMap(null)
-            .then(() => {
-                oldMaps.forEach(map => map.dispose());
-            });
+        // load settings
+        await this.getSettings();
 
-        let loadPromise = this.loadMaps()
-            .then(maps => {
-                this.maps = maps;
-                for (let map of maps) {
-                    this.mapsMap.set(map.data.id, map);
-                    this.appState.maps.push(map.data);
-                }
-            })
+        // unload loaded maps
+        await this.mapViewer.switchMap(null);
+        oldMaps.forEach(map => map.dispose());
 
-        try {
-            await unloadPromise;
-            await loadPromise;
-        } catch (err) {
-            alert(this.events, "Failed to load map: " + err.toString(), "error");
-            return;
+        // load maps
+        this.maps = this.loadMaps();
+        for (let map of this.maps) {
+            this.mapsMap.set(map.data.id, map);
+            this.appState.maps.push(map.data);
         }
 
+        // switch to new map
         if (this.maps.length > 0) {
             this.switchMap(this.maps[0].data.id)
                 .catch(err => {
                     alert(this.events, "Failed to switch to map: " + err.toString(), "error");
                 });
         }
+
+        // load user settings
+        this.loadUserSettings();
     }
 
     /**
@@ -160,39 +161,46 @@ export class BlueMapApp {
     }
 
     /**
-     * @returns {Promise<BlueMapMap[]>}
+     * @returns BlueMapMap[]
      */
     loadMaps() {
-        return this.loadSettings().then(settings => {
-            let maps = [];
+        let settings = this.settings;
+        let maps = [];
 
-            // create maps
-            if (settings.maps !== undefined){
-                for (let mapId in settings.maps) {
-                    if (!Object.prototype.hasOwnProperty.call(settings.maps, mapId)) continue;
+        // create maps
+        if (settings.maps !== undefined){
+            for (let mapId in settings.maps) {
+                if (!Object.prototype.hasOwnProperty.call(settings.maps, mapId)) continue;
 
-                    let mapSettings = settings.maps[mapId];
-                    if (mapSettings.enabled) {
-                        let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.dataUrl + "settings.json", this.dataUrl + "textures.json", this.mapViewer.events);
-                        maps.push(map);
+                let mapSettings = settings.maps[mapId];
+                if (mapSettings.enabled) {
+                    let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.dataUrl + "settings.json", this.dataUrl + "textures.json", this.mapViewer.events);
+                    maps.push(map);
 
-                        map.loadSettings()
-                            .catch(error => {
-                                alert(this.events, `Failed to load settings for map '${map.data.id}':` + error, "warning");
-                            });
-                    }
+                    map.loadSettings()
+                        .catch(error => {
+                            alert(this.events, `Failed to load settings for map '${map.data.id}':` + error, "warning");
+                        });
                 }
             }
+        }
 
-            // sort maps
-            maps.sort((map1, map2) => {
-                let sort = settings.maps[map1.data.id].ordinal - settings.maps[map2.data.id].ordinal;
-                if (isNaN(sort)) return 0;
-                return sort;
-            });
-
-            return maps;
+        // sort maps
+        maps.sort((map1, map2) => {
+            let sort = settings.maps[map1.data.id].ordinal - settings.maps[map2.data.id].ordinal;
+            if (isNaN(sort)) return 0;
+            return sort;
         });
+
+        return maps;
+    }
+
+    async getSettings() {
+        if (!this.settings){
+            this.settings = await this.loadSettings();
+        }
+
+        return this.settings;
     }
 
     /**
@@ -301,6 +309,63 @@ export class BlueMapApp {
         else {
             this.mapViewer.rootElement.classList.remove("theme-light");
             this.mapViewer.rootElement.classList.remove("theme-dark");
+        }
+    }
+
+    resetSettings() {
+        this.saveUserSetting("resetSettings", true);
+        location.reload();
+    }
+
+    loadUserSettings(){
+        if (!this.settings.useCookies) return;
+
+        if (this.loadUserSetting("resetSettings", false)) {
+            alert(this.events, "Settings reset!", "info");
+            this.saveUserSettings();
+            return;
+        }
+
+        this.mapViewer.superSampling = this.loadUserSetting("superSampling", this.mapViewer.data.superSampling);
+        this.mapViewer.data.loadedHiresViewDistance = this.loadUserSetting("hiresViewDistance", this.mapViewer.data.loadedHiresViewDistance);
+        this.mapViewer.data.loadedLowresViewDistance = this.loadUserSetting("lowresViewDistance", this.mapViewer.data.loadedLowresViewDistance);
+        this.mapViewer.updateLoadedMapArea();
+        this.appState.controls.mouseSensitivity = this.loadUserSetting("mouseSensitivity", this.appState.controls.mouseSensitivity);
+        this.appState.controls.invertMouse = this.loadUserSetting("invertMouse", this.appState.controls.invertMouse);
+        this.updateControlsSettings();
+        this.setTheme(this.loadUserSetting("theme", this.appState.theme));
+        this.setDebug(this.loadUserSetting("debug", this.appState.debug));
+
+        alert(this.events, "Settings loaded!", "info");
+    }
+
+    saveUserSettings() {
+        if (!this.settings.useCookies) return;
+
+        this.saveUserSetting("resetSettings", false);
+
+        this.saveUserSetting("superSampling", this.mapViewer.data.superSampling);
+        this.saveUserSetting("hiresViewDistance", this.mapViewer.data.loadedHiresViewDistance);
+        this.saveUserSetting("lowresViewDistance", this.mapViewer.data.loadedLowresViewDistance);
+        this.saveUserSetting("mouseSensitivity", this.appState.controls.mouseSensitivity);
+        this.saveUserSetting("invertMouse", this.appState.controls.invertMouse);
+        this.saveUserSetting("theme", this.appState.theme);
+        this.saveUserSetting("debug", this.appState.debug);
+
+        alert(this.events, "Settings saved!", "info");
+    }
+
+    loadUserSetting(key, defaultValue){
+        let value = getCookie("bluemap-" + key);
+
+        if (value === undefined) return defaultValue;
+        return value;
+    }
+
+    saveUserSetting(key, value){
+        if (this.savedUserSettings.get(key) !== value){
+            this.savedUserSettings.set(key, value);
+            setCookie("bluemap-" + key, value);
         }
     }
 
