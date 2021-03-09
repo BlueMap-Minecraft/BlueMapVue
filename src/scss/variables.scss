@@ -1,0 +1,45 @@
+// responsive breaks
+$mobile-break: 575.98px;
+
+// themes
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
+
+@mixin dark-theme {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  --theme-bg: #181818;
+  --theme-bg-light: #333;
+  --theme-fg: #fff;
+  --theme-fg-light: #aaa;
+
+  //SwitchButton
+  --theme-switch-button-on: #006EDE;
+
+  //DayNightSwitch
+  --theme-stars-day: #fff;
+  --theme-moon-day: #ff0;
+  --theme-stars-night: #444;
+  --theme-moon-night: #000;
+}
+
+@mixin light-theme {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  --theme-bg: #eee;
+  --theme-bg-light: #aaa;
+  --theme-fg: #000;
+  --theme-fg-light: #444;
+
+  //SwitchButton
+  --theme-switch-button-on: #006EDE;
+
+  //DayNightSwitch
+  --theme-stars-day: #444;
+  --theme-moon-day: #000;
+  --theme-stars-night: #fff;
+  --theme-moon-night: #ff0;
+}

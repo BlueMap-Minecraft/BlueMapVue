@@ -1,0 +1,58 @@
+@import "variables.scss";
+
+// ### global rules ###
+:root {
+  line-height: 1rem;
+
+  @include dark-theme;
+
+  .theme-light {
+    @include light-theme;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @include light-theme;
+
+    .theme-dark {
+      @include dark-theme;
+    }
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+// normalize input fields
+input {
+  display: inline-block;
+  box-sizing: content-box;
+
+  border: none;
+  outline: none;
+
+  margin: 0;
+  padding: 0;
+
+  font: inherit;
+  color: inherit;
+}
+
+// scrollbar
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-bg-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--theme-fg-light);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-fg);
+}
+
+@import "markers.scss";

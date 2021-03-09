@@ -1,0 +1,3 @@
+[submodule "BlueMapWeb"]
+	path = BlueMapWeb
+	url = https://github.com/BlueMap-Minecraft/BlueMapWeb
