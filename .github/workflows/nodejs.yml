@@ -13,11 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: ln -s ./BlueMapVue ./node_modules/bluemap
     - run: npm ci
     - run: npm run build
     - uses: actions/upload-artifact@v2
