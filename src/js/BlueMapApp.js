@@ -26,15 +26,15 @@ import "bluemap/src/BlueMap";
 import {MapViewer} from "bluemap/src/MapViewer";
 import {MapControls} from "bluemap/src/controls/map/MapControls";
 import {FreeFlightControls} from "bluemap/src/controls/freeflight/FreeFlightControls";
-import {FileLoader} from "three";
+import {FileLoader, MathUtils, Vector3} from "three";
 import {Map as BlueMapMap} from "bluemap/src/map/Map";
-import {alert} from "bluemap/src/util/Utils";
+import {alert, animate, EasingFunctions, generateCacheHash} from "bluemap/src/util/Utils";
 import {PlayerMarkerManager} from "bluemap/src/markers/PlayerMarkerManager";
 import {MarkerFileManager} from "bluemap/src/markers/MarkerFileManager";
 import {MainMenu} from "@/js/MainMenu";
 import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
-import {getCookie, setCookie} from "@/js/Utils";
+import {getCookie, round, setCookie} from "@/js/Utils";
 
 export class BlueMapApp {
 
@@ -58,7 +58,9 @@ export class BlueMapApp {
         this.settings = null;
         this.savedUserSettings = new Map();
 
+        /** @type BlueMapMap[] */
         this.maps = [];
+        /** @type Map<BlueMapMap> */
         this.mapsMap = new Map();
 
         this.dataUrl = "data/";
@@ -85,6 +87,11 @@ export class BlueMapApp {
         this.popupMarker = new PopupMarker("bm-popup", this.appState, this.events);
         this.popupMarkerSet.add(this.popupMarker);
         this.mapViewer.markers.add(this.popupMarkerSet);
+
+        this.updateLoop = null;
+
+        this.hashUpdateTimeout = null;
+        this.viewAnimation = null;
     }
 
 
@@ -111,35 +118,80 @@ export class BlueMapApp {
             this.appState.maps.push(map.data);
         }
 
-        // switch to new map
-        if (this.maps.length > 0) {
-            this.switchMap(this.maps[0].data.id)
-                .catch(err => {
-                    alert(this.events, "Failed to switch to map: " + err.toString(), "error");
-                });
+        // switch to map
+        if (!await this.loadPageAddress()) {
+            if (this.maps.length > 0) await this.switchMap(this.maps[0].data.id);
+            this.resetCamera();
         }
+
+        // map position address
+        window.addEventListener("hashchange", this.loadPageAddress);
+        this.events.addEventListener("bluemapCameraMoved", this.cameraMoved);
+        this.events.addEventListener("bluemapMapInteraction", this.mapInteraction);
 
         // load user settings
         this.loadUserSettings();
+
+        // save user settings
+        this.saveUserSettings();
+
+        // start app update loop
+        if(this.updateLoop) clearTimeout(this.updateLoop);
+        this.updateLoop = setTimeout(this.update, 1000);
+    }
+
+    update = async () => {
+        await this.followPlayerMarkerWorld();
+        this.updateLoop = setTimeout(this.update, 1000);
+    }
+
+    async followPlayerMarkerWorld() {
+        let player = this.mapViewer.controlsManager.controls ?
+            this.mapViewer.controlsManager.controls.data.followingPlayer :
+            false;
+
+        if (this.mapViewer.map && player) {
+            if (player.world !== this.mapViewer.map.data.world){
+
+                /** @type BlueMapMap */
+                let matchingMap = null;
+                for (let map of this.maps) {
+                    if (map.data.world === player.world) {
+                        matchingMap = map;
+                        break;
+                    }
+                }
+
+                if (!matchingMap) {
+                    if (this.mapViewer.controlsManager.controls.stopFollowingPlayerMarker)
+                        this.mapViewer.controlsManager.controls.stopFollowingPlayerMarker();
+                    return;
+                }
+
+                await this.switchMap(matchingMap.data.id);
+            }
+        }
     }
 
     /**
      * @param mapId {String}
+     * @param resetCameraIfNewWorld {boolean}
      * @returns {Promise<void>}
      */
-    switchMap(mapId) {
+    switchMap(mapId, resetCameraIfNewWorld = false) {
         let map = this.mapsMap.get(mapId);
         if (!map) return Promise.reject(`There is no map with the id "${mapId}" loaded!`);
 
         let oldWorld = this.mapViewer.map ? this.mapViewer.map.data.world : null;
-
         return this.mapViewer.switchMap(map).then(() => {
-            if (map && map.data.world !== oldWorld) {
+            if (map) {
                 this.initPlayerMarkerManager();
                 this.initMarkerFileManager();
-            }
 
-            this.resetCamera();
+                if (resetCameraIfNewWorld && map.data.world !== oldWorld) {
+                    this.resetCamera();
+                }
+            }
         });
     }
 
@@ -210,7 +262,7 @@ export class BlueMapApp {
         return new Promise((resolve, reject) => {
             let loader = new FileLoader();
             loader.setResponseType("json");
-            loader.load(this.dataUrl + "settings.json",
+            loader.load(this.dataUrl + "settings.json?" + generateCacheHash(),
                 resolve,
                 () => {},
                 () => reject("Failed to load the settings.json!")
@@ -219,20 +271,23 @@ export class BlueMapApp {
     }
 
     initPlayerMarkerManager() {
-        if (this.playerMarkerManager) {
-            this.playerMarkerManager.clear();
-            this.playerMarkerManager.dispose();
-        }
-
         if (!this.mapViewer.map) return;
 
-        this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, "live/players", this.mapViewer.map.data.world, this.events);
+        if (this.playerMarkerManager) {
+            this.playerMarkerManager.worldId = this.mapViewer.map.data.world;
+        } else {
+            this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, "live/players", this.mapViewer.map.data.world, this.events);
+        }
+
+        this.playerMarkerManager.setAutoUpdateInterval(0);
         this.playerMarkerManager.update()
             .then(() => {
                 this.playerMarkerManager.setAutoUpdateInterval(1000);
             })
             .catch(e => {
                 alert(this.events, e, "warning");
+                this.playerMarkerManager.clear();
+                this.playerMarkerManager.dispose();
             });
     }
 
@@ -251,37 +306,113 @@ export class BlueMapApp {
             })
             .catch(e => {
                 alert(this.events, e, "warning");
+                this.markerFileManager.clear();
+                this.markerFileManager.dispose();
             });
     }
 
     updateControlsSettings() {
         let mouseInvert = this.appState.controls.invertMouse ? -1 : 1;
 
-        this.freeFlightControls.mouseRotate.speedCapture = -0.002 * this.appState.controls.mouseSensitivity;
-        this.freeFlightControls.mouseAngle.speedCapture = -0.002 * this.appState.controls.mouseSensitivity * mouseInvert;
-        this.freeFlightControls.mouseRotate.speedRight = -0.002 * this.appState.controls.mouseSensitivity;
-        this.freeFlightControls.mouseAngle.speedRight = -0.002 * this.appState.controls.mouseSensitivity * mouseInvert;
+        this.freeFlightControls.mouseRotate.speedCapture = -1.5 * this.appState.controls.mouseSensitivity;
+        this.freeFlightControls.mouseAngle.speedCapture = -1.5 * this.appState.controls.mouseSensitivity * mouseInvert;
+        this.freeFlightControls.mouseRotate.speedRight = -2 * this.appState.controls.mouseSensitivity;
+        this.freeFlightControls.mouseAngle.speedRight = -2 * this.appState.controls.mouseSensitivity * mouseInvert;
     }
 
-    setPerspectiveView() {
-        if (this.mapViewer.controlsManager.controls !== this.mapControls) {
-            this.mapViewer.controlsManager.controls = this.mapControls;
-        } else {
-            this.mapControls.setPerspectiveView();
-        }
+    setPerspectiveView(transition = 0, minDistance = 5) {
+        if (!this.mapViewer.map) return;
+        if (this.viewAnimation) this.viewAnimation.cancel();
+
+        let cm = this.mapViewer.controlsManager;
+        cm.controls = null;
+
+        let startDistance = cm.distance;
+        let targetDistance = Math.max(5, minDistance, startDistance);
+
+        let startY = cm.position.y;
+        let targetY = MathUtils.lerp(this.mapViewer.map.terrainHeightAt(cm.position.x, cm.position.z) + 3, 0, targetDistance / 500);
+
+        let startAngle = cm.angle;
+        let targetAngle = Math.min(Math.PI / 2, startAngle, this.mapControls.getMaxPerspectiveAngleForDistance(targetDistance));
+
+        let startOrtho = cm.ortho;
+        let startTilt = cm.tilt;
+
+        this.viewAnimation = animate(p => {
+            let ep = EasingFunctions.easeInOutQuad(p);
+            cm.position.y = MathUtils.lerp(startY, targetY, ep);
+            cm.distance = MathUtils.lerp(startDistance, targetDistance, ep);
+            cm.angle = MathUtils.lerp(startAngle, targetAngle, ep);
+            cm.ortho = MathUtils.lerp(startOrtho, 0, p);
+            cm.tilt = MathUtils.lerp(startTilt, 0, ep);
+        }, transition, finished => {
+            this.mapControls.reset();
+            if (finished) cm.controls = this.mapControls;
+        });
+
         this.appState.controls.state = "perspective";
     }
 
-    setFlatView() {
-        if (this.mapViewer.controlsManager.controls !== this.mapControls) {
-            this.mapViewer.controlsManager.controls = this.mapControls;
-        }
-        this.mapControls.setOrthographicView();
+    setFlatView(transition = 0, minDistance = 5) {
+        if (!this.mapViewer.map) return;
+        if (this.viewAnimation) this.viewAnimation.cancel();
+
+        let cm = this.mapViewer.controlsManager;
+        cm.controls = null;
+
+        let startDistance = cm.distance;
+        let targetDistance = Math.max(5, minDistance, startDistance);
+
+        let startRotation = cm.rotation;
+        let startAngle = cm.angle;
+        let startOrtho = cm.ortho;
+        let startTilt = cm.tilt;
+
+        this.viewAnimation = animate(p => {
+            let ep = EasingFunctions.easeInOutQuad(p);
+            cm.distance = MathUtils.lerp(startDistance, targetDistance, ep);
+            cm.rotation = MathUtils.lerp(startRotation, 0, ep);
+            cm.angle = MathUtils.lerp(startAngle, 0, ep);
+            cm.ortho = MathUtils.lerp(startOrtho, 1, p);
+            cm.tilt = MathUtils.lerp(startTilt, 0, ep);
+        }, transition, finished => {
+            this.mapControls.reset();
+            if (finished) cm.controls = this.mapControls;
+        });
+
         this.appState.controls.state = "flat";
     }
 
-    setFreeFlight() {
-        this.mapViewer.controlsManager.controls = this.freeFlightControls;
+    setFreeFlight(transition = 0, targetY = undefined) {
+        if (!this.mapViewer.map) return;
+        if (this.viewAnimation) this.viewAnimation.cancel();
+
+        let cm = this.mapViewer.controlsManager;
+        cm.controls = null;
+
+        let startDistance = cm.distance;
+
+        let startY = cm.position.y;
+        if (!targetY) targetY = this.mapViewer.map.terrainHeightAt(cm.position.x, cm.position.z) + 3;
+
+        let startAngle = cm.angle;
+        let targetAngle = Math.PI / 2;
+
+        let startOrtho = cm.ortho;
+        let startTilt = cm.tilt;
+
+        this.viewAnimation = animate(p => {
+            let ep = EasingFunctions.easeInOutQuad(p);
+            cm.position.y = MathUtils.lerp(startY, targetY, ep);
+            cm.distance = MathUtils.lerp(startDistance, 0, ep);
+            cm.angle = MathUtils.lerp(startAngle, targetAngle, ep);
+            cm.ortho = MathUtils.lerp(startOrtho, 0, Math.min(p * 2, 1));
+            cm.tilt = MathUtils.lerp(startTilt, 0, ep);
+        }, transition, finished => {
+            if (finished) cm.controls = this.freeFlightControls;
+        });
+
         this.appState.controls.state = "free";
     }
 
@@ -312,6 +443,18 @@ export class BlueMapApp {
         }
     }
 
+    async updateMap() {
+        try {
+            this.mapViewer.clearTileCache();
+            if (this.mapViewer.map) {
+                await this.switchMap(this.mapViewer.map.data.id);
+            }
+            this.saveUserSettings();
+        } catch (e) {
+            alert(this.events, e, "error");
+        }
+    }
+
     resetSettings() {
         this.saveUserSetting("resetSettings", true);
         location.reload();
@@ -325,6 +468,8 @@ export class BlueMapApp {
             this.saveUserSettings();
             return;
         }
+
+        this.mapViewer.clearTileCache(this.loadUserSetting("tileCacheHash", this.mapViewer.tileCacheHash));
 
         this.mapViewer.superSampling = this.loadUserSetting("superSampling", this.mapViewer.data.superSampling);
         this.mapViewer.data.loadedHiresViewDistance = this.loadUserSetting("hiresViewDistance", this.mapViewer.data.loadedHiresViewDistance);
@@ -343,6 +488,7 @@ export class BlueMapApp {
         if (!this.settings.useCookies) return;
 
         this.saveUserSetting("resetSettings", false);
+        this.saveUserSetting("tileCacheHash", this.mapViewer.tileCacheHash);
 
         this.saveUserSetting("superSampling", this.mapViewer.data.superSampling);
         this.saveUserSetting("hiresViewDistance", this.mapViewer.data.loadedHiresViewDistance);
@@ -366,6 +512,90 @@ export class BlueMapApp {
         if (this.savedUserSettings.get(key) !== value){
             this.savedUserSettings.set(key, value);
             setCookie("bluemap-" + key, value);
+        }
+    }
+
+    cameraMoved = () => {
+        if (this.hashUpdateTimeout) clearTimeout(this.hashUpdateTimeout);
+        this.hashUpdateTimeout = setTimeout(this.updatePageAddress, 1500);
+    }
+
+    updatePageAddress = () => {
+        let hash = "#";
+
+        if (this.mapViewer.map) {
+            hash += this.mapViewer.map.data.id;
+
+            let controls = this.mapViewer.controlsManager;
+            hash += ":" + round(controls.position.x, 0);
+            hash += ":" + round(controls.position.y, 0);
+            hash += ":" + round(controls.position.z, 0);
+            hash += ":" + round(controls.distance, 0);
+            hash += ":" + round(controls.rotation, 2);
+            hash += ":" + round(controls.angle, 2);
+            hash += ":" + round(controls.tilt, 2);
+            hash += ":" + round(controls.ortho, 0);
+            hash += ":" + this.appState.controls.state;
+        }
+
+        history.replaceState(undefined, undefined, hash);
+    }
+
+    loadPageAddress = async () => {
+        let hash = window.location.hash.substr(1);
+        let values = hash.split(":");
+
+        if (values.length !== 10) return false;
+
+        let controls = this.mapViewer.controlsManager;
+        controls.controls = null;
+
+        if (!this.mapViewer.map || this.mapViewer.map.data.id !== values[0]) {
+            try {
+                await this.switchMap(values[0]);
+            } catch (e) {
+                return false;
+            }
+        }
+
+        controls.position.x = parseFloat(values[1]);
+        controls.position.y = parseFloat(values[2]);
+        controls.position.z = parseFloat(values[3]);
+        controls.distance = parseFloat(values[4]);
+        controls.rotation = parseFloat(values[5]);
+        controls.angle = parseFloat(values[6]);
+        controls.tilt = parseFloat(values[7]);
+        controls.ortho = parseFloat(values[8]);
+
+        switch (values[9]) {
+            case "flat" : this.setFlatView(0); break;
+            case "free" : this.setFreeFlight(0, controls.position.y); break;
+            default : this.setPerspectiveView(0); break;
+        }
+
+        return true;
+    }
+
+    mapInteraction = event => {
+        if (event.detail.data.doubleTap) {
+            let cm = this.mapViewer.controlsManager;
+            let pos = (event.detail.hit ? event.detail.hit.point : false) || event.detail.object.getWorldPosition(new Vector3());
+
+            let startDistance = cm.distance;
+            let targetDistance = Math.max(startDistance * 0.25, 5);
+
+            let startX = cm.position.x;
+            let targetX = pos.x;
+
+            let startZ = cm.position.z;
+            let targetZ = pos.z;
+
+            this.viewAnimation = animate(p => {
+                let ep = EasingFunctions.easeInOutQuad(p);
+                cm.distance = MathUtils.lerp(startDistance, targetDistance, ep);
+                cm.position.x = MathUtils.lerp(startX, targetX, ep);
+                cm.position.z = MathUtils.lerp(startZ, targetZ, ep);
+            }, 500);
         }
     }
 

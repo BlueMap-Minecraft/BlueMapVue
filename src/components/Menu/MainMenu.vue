@@ -10,8 +10,9 @@
       <SimpleButton @action="menu.openPage('markers', 'Markers', {markerSet: markers})" :submenu="true">Markers</SimpleButton>
       <SimpleButton @action="menu.openPage('settings', 'Settings')" :submenu="true">Settings</SimpleButton>
       <hr>
+      <SimpleButton @action="goFullscreen">Go Fullscreen</SimpleButton>
       <SimpleButton @action="$bluemap.resetCamera()">Reset Camera</SimpleButton>
-      <SimpleButton>Update Map</SimpleButton>
+      <SimpleButton @action="$bluemap.updateMap()" title="Clear Tile Cache">Update Map</SimpleButton>
     </div>
 
     <div v-if="menu.currentPage().id === 'maps'">
@@ -43,6 +44,11 @@ export default {
     return {
       appState: this.$bluemap.appState,
       markers: this.$bluemap.mapViewer.markers.data,
+    }
+  },
+  methods: {
+    goFullscreen() {
+      document.body.requestFullscreen();
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <div>
     <Group title="View / Controls">
-      <SimpleButton :active="appState.controls.state === 'perspective'" @action="$bluemap.setPerspectiveView()">Perspective</SimpleButton>
-      <SimpleButton :active="appState.controls.state === 'flat'" @action="$bluemap.setFlatView()">Flat</SimpleButton>
-      <SimpleButton :active="appState.controls.state === 'free'" @action="$bluemap.setFreeFlight()">Free-Flight</SimpleButton>
+      <SimpleButton :active="appState.controls.state === 'perspective'" @action="$bluemap.setPerspectiveView(500, appState.controls.state === 'free' ? 100 : 0)">Perspective</SimpleButton>
+      <SimpleButton :active="appState.controls.state === 'flat'" @action="$bluemap.setFlatView(500, appState.controls.state === 'free' ? 100 : 0)">Flat</SimpleButton>
+      <SimpleButton :active="appState.controls.state === 'free'" @action="$bluemap.setFreeFlight(500)">Free-Flight</SimpleButton>
     </Group>
 
     <Group title="Lighting">
@@ -23,7 +23,7 @@
     <Group title="Render-Distance">
       <Slider :value="mapViewer.loadedHiresViewDistance" :min="50" :max="500" :step="10"
               @update="mapViewer.loadedHiresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">Hires layer</Slider>
-      <Slider :value="mapViewer.loadedLowresViewDistance" :min="500" :max="7000" :step="100"
+      <Slider :value="mapViewer.loadedLowresViewDistance" :min="500" :max="10000" :step="100"
               @update="mapViewer.loadedLowresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">Lowres layer</Slider>
     </Group>
 

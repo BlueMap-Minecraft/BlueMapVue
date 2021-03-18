@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     switchMap(mapId) {
-      this.$bluemap.switchMap(mapId);
+      this.$bluemap.switchMap(mapId, true);
     }
   }
 }

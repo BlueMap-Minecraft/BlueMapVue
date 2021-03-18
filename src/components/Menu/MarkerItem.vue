@@ -1,18 +1,31 @@
 <template>
-  <div class="marker-item" :class="{'marker-hidden': !marker.visible}" :title="marker.id" @click="click">
-    <div class="icon" v-if="marker.type === 'player'">
-      <img :src="'assets/playerheads/' + marker.playerUuid + '.png'" alt="playerhead" @error="steve">
-    </div>
-    <div class="info">
-      <div class="label">{{markerLabel}}</div>
-      <div class="stats">
-        <div>
-          {{marker.type}}-marker
-        </div>
-        <div>
-          ({{marker.position.x | position}} | {{marker.position.y | position}} | {{marker.position.z | position}})
+  <div class="marker-item" :class="{'marker-hidden': !marker.visible}">
+    <div class="marker-button" :title="marker.id" @click="click(false)">
+      <div class="icon" v-if="marker.type === 'player'">
+        <img :src="'assets/playerheads/' + marker.playerUuid + '.png'" alt="playerhead" @error="steve">
+      </div>
+      <div class="info">
+        <div class="label">{{markerLabel}}</div>
+        <div class="stats">
+          <div>
+            {{marker.type}}-marker
+          </div>
+          <div>
+            ({{marker.position.x | position}} | {{marker.position.y | position}} | {{marker.position.z | position}})
+          </div>
         </div>
       </div>
+    </div>
+    <div class="follow-player-button" :class="{active: controls.controls.followingPlayer && controls.controls.followingPlayer.id === marker.id}"
+         v-if="marker.type === 'player'" @click="click(true)" title="Follow Player">
+      <svg viewBox="0 0 30 30">
+        <circle fill="none" stroke-width="3" stroke-miterlimit="10" cx="15" cy="15" r="10.375"/>
+        <line fill="none" stroke-width="3" stroke-miterlimit="10" x1="3.25" y1="15" x2="1.063" y2="15"/>
+        <line fill="none" stroke-width="3" stroke-miterlimit="10" x1="15" y1="26.75" x2="15" y2="28.938"/>
+        <line fill="none" stroke-width="3" stroke-miterlimit="10" x1="26.75" y1="15" x2="28.938" y2="15"/>
+        <line fill="none" stroke-width="3" stroke-miterlimit="10" x1="15" y1="3.25" x2="15" y2="1.063"/>
+        <circle stroke="none" cx="15" cy="15" r="6.042"/>
+      </svg>
     </div>
   </div>
 </template>
@@ -21,7 +34,12 @@
 export default {
   name: "MarkerItem",
   props: {
-    marker: Object
+    marker: Object,
+  },
+  data() {
+    return {
+      controls: this.$bluemap.mapViewer.controlsManager.data,
+    }
   },
   computed: {
     markerLabel() {
@@ -46,9 +64,39 @@ export default {
     }
   },
   methods: {
-    click() {
-      if (!this.marker.visible) return;
-      this.$bluemap.mapViewer.controlsManager.position.copy(this.marker.position);
+    async click(follow) {
+      let cm = this.$bluemap.mapViewer.controlsManager;
+      
+      if (cm.controls && cm.controls.stopFollowingPlayerMarker) {
+        cm.controls.stopFollowingPlayerMarker();
+      }
+
+      if (this.marker.type === "player") {
+
+        if (this.$bluemap.mapViewer.map.data.world !== this.marker.world) {
+          let matchingMap = null;
+          for (let map of this.$bluemap.maps) {
+            if (map.data.world === this.marker.world) {
+              matchingMap = map;
+              break;
+            }
+          }
+
+          if (!matchingMap) return;
+
+          //this.$bluemap.appState.menu.closeAll();
+          await this.$bluemap.switchMap(matchingMap.data.id);
+        }
+
+        if (follow && cm.controls && cm.controls.followPlayerMarker) {
+          cm.controls.followPlayerMarker(this.marker);
+        }
+
+      } else if (!this.marker.visible) {
+        return;
+      }
+
+      cm.position.copy(this.marker.position);
     },
     steve(event) {
       event.target.src = "assets/steve.png";
@@ -74,57 +122,92 @@ export default {
   white-space: nowrap;
   user-select: none;
 
-  &:hover {
-    background-color: var(--theme-bg-light);
-  }
-
   &.marker-hidden {
     opacity: 0.5;
     filter: grayscale(1);
   }
 
-  .info {
-    position: relative;
+  .marker-button {
+    display: flex;
     flex-grow: 1;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
+    cursor: pointer;
 
-    .label {
-      line-height: 2em;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      margin: 0 0.5em 1.5em 0.5em;
+    &:hover {
+      background-color: var(--theme-bg-light);
     }
 
-    .stats {
-      display: flex;
-      margin: 0 0.5em;
+    > .info {
+      position: relative;
+      flex-grow: 1;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
 
-      position: absolute;
-      bottom: 0;
+      .label {
+        line-height: 2em;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        margin: 0 0.5em 1.5em 0.5em;
+      }
 
-      font-size: 0.8em;
-      line-height: 2em;
-      color: var(--theme-fg-light);
+      .stats {
+        display: flex;
+        margin: 0 0.5em;
 
-      > div {
-        &:not(:first-child) {
-          margin-left: 0.5em;
-          padding-left: 0.5em;
-          border-left: solid 1px var(--theme-bg-light);
+        position: absolute;
+        bottom: 0;
+
+        font-size: 0.8em;
+        line-height: 2em;
+        color: var(--theme-fg-light);
+
+        > div {
+          &:not(:first-child) {
+            margin-left: 0.5em;
+            padding-left: 0.5em;
+            border-left: solid 1px var(--theme-bg-light);
+          }
         }
+      }
+    }
+
+    > .icon {
+      height: 2.5em;
+      margin: 0.5em;
+      flex-shrink: 0;
+
+      img {
+        image-rendering: pixelated;
+        height: 100%;
       }
     }
   }
 
-  .icon {
-    height: 2.5em;
-    margin: 0.5em;
-    flex-shrink: 0;
+  > .follow-player-button {
+    width: 2em;
+    cursor: pointer;
+    background-color: var(--theme-bg);
 
-    img {
-      image-rendering: pixelated;
-      height: 100%;
+    &:hover, &.active {
+      background-color: var(--theme-bg-light);
+    }
+
+    > svg {
+      position: relative;
+      fill: var(--theme-fg-light);
+      stroke: var(--theme-fg-light);
+
+      top: 50%;
+      transform: translate(0, -50%) scale(0.75);
+    }
+
+    &:active {
+      background-color: var(--theme-fg-light);
+      color: var(--theme-bg);
+
+      > svg {
+        fill: var(--theme-bg-light);
+        stroke: var(--theme-bg-light);
+      }
     }
   }
 }

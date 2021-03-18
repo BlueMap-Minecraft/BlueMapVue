@@ -6,7 +6,7 @@ export const setCookie = (key, value, days = 360) => {
 
     let expireDate = new Date();
     expireDate.setTime(expireDate.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = key + "=" + value + ";" + "expires=" + expireDate.toUTCString();
+    document.cookie = key + "=" + value + ";" + "expires=" + expireDate.toUTCString() + ";" + "SameSite=Lax";
 };
 
 /**
@@ -36,3 +36,8 @@ export const getCookie = key => {
 
     return undefined;
 };
+
+export const round = (value, precision) => {
+    let f = Math.pow(10, precision);
+    return Math.round(value * f) / f;
+}

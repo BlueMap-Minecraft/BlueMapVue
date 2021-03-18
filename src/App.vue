@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="{'theme-light': appState.theme === 'light', 'theme-dark': appState.theme === 'dark'}">
+    <FreeFlightMobileControls v-if="appState.controls.state === 'free'" />
     <ControlBar />
     <MainMenu :menu="appState.menu" />
   </div>
@@ -8,10 +9,12 @@
 <script>
 import ControlBar from "@/components/ControlBar/ControlBar";
 import MainMenu from "@/components/Menu/MainMenu";
+import FreeFlightMobileControls from "@/components/Controls/FreeFlightMobileControls";
 
 export default {
   name: 'App',
   components: {
+    FreeFlightMobileControls,
     MainMenu,
     ControlBar
   },

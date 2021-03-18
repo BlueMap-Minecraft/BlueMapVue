@@ -55,13 +55,13 @@
     },
     methods: {
       setPerspectiveView() {
-        this.$bluemap.setPerspectiveView();
+        this.$bluemap.setPerspectiveView(500, this.isFreeFlight ? 100 : 0);
       },
       setFlatView() {
-        this.$bluemap.setFlatView();
+        this.$bluemap.setFlatView(500, this.isFreeFlight ? 100 : 0);
       },
       setFreeFlight() {
-        this.$bluemap.setFreeFlight();
+        this.$bluemap.setFreeFlight(500);
       }
     }
   }
