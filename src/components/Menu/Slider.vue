@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     formattedValue() {
-      return this.value.toFixed(countDecimals(this.step));
+      return parseFloat(this.value).toFixed(countDecimals(this.step));
     }
   }
 }
