@@ -6,13 +6,13 @@
             @close="menu.closeAll()">
 
     <div v-if="menu.currentPage().id === 'root'">
-      <SimpleButton @action="menu.openPage('maps', 'Maps')" :submenu="true">Maps</SimpleButton>
-      <SimpleButton @action="menu.openPage('markers', 'Markers', {markerSet: markers})" :submenu="true">Markers</SimpleButton>
-      <SimpleButton @action="menu.openPage('settings', 'Settings')" :submenu="true">Settings</SimpleButton>
+      <SimpleButton @action="menu.openPage('maps', $t('maps.title'))" :submenu="true">{{ $t("maps.title") }}</SimpleButton>
+      <SimpleButton @action="menu.openPage('markers', $t('markers.title'), {markerSet: markers})" :submenu="true">{{ $t("markers.title") }}</SimpleButton>
+      <SimpleButton @action="menu.openPage('settings', $t('settings.title'))" :submenu="true">{{ $t("settings.title") }}</SimpleButton>
       <hr>
-      <SimpleButton @action="goFullscreen">Go Fullscreen</SimpleButton>
-      <SimpleButton @action="$bluemap.resetCamera()">Reset Camera</SimpleButton>
-      <SimpleButton @action="$bluemap.updateMap()" title="Clear Tile Cache">Update Map</SimpleButton>
+      <SimpleButton @action="goFullscreen">{{ $t("goFullscreen.title") }}</SimpleButton>
+      <SimpleButton @action="$bluemap.resetCamera()">{{ $t("resetCamera.title") }}</SimpleButton>
+      <SimpleButton @action="$bluemap.updateMap()" :title="$t('updateMap.description')">{{ $t("updateMap.title") }}</SimpleButton>
     </div>
 
     <div v-if="menu.currentPage().id === 'maps'">

@@ -22,6 +22,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import i18n from "../i18n";
+
 export class MainMenu {
 
     static NULL_PAGE = {
@@ -39,7 +41,7 @@ export class MainMenu {
         return this.pageStack[this.pageStack.length - 1];
     }
 
-    openPage(id = "root", title = "Menu", data = {}) {
+    openPage(id = "root", title = i18n.t("menu.title"), data = {}) {
         if (!this.isOpen){
             this.pageStack.splice(0, this.pageStack.length);
             this.isOpen = true;

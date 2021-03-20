@@ -1,22 +1,22 @@
 <template>
   <div class="control-bar">
-    <MenuButton :close="appState.menu.isOpen" :back="false" @action="appState.menu.reOpenPage()" title="Menu" />
+    <MenuButton :close="appState.menu.isOpen" :back="false" @action="appState.menu.reOpenPage()" :title="$t('menu.title')" />
     <div class="space thin-hide"></div>
-    <SvgButton v-if="appState.maps.length > 0" class="thin-hide" title="Map-List"
-               @action="appState.menu.openPage('maps', 'Maps')">
+    <SvgButton v-if="appState.maps.length > 0" class="thin-hide" :title="$t('maps.ctrlBar')"
+               @action="appState.menu.openPage('maps', $t('maps.title'))">
       <svg viewBox="0 0 30 30">
         <polygon points="26.708,22.841 19.049,25.186 11.311,20.718 3.292,22.841 7.725,5.96 13.475,4.814 19.314,7.409 25.018,6.037 "/>
       </svg>
     </SvgButton>
-    <SvgButton v-if="markers.markerSets.length > 0 || markers.markers.length > 0" class="thin-hide" title="Marker-List"
-               @action="appState.menu.openPage('markers', 'Markers', {markerSet: markers})">
+    <SvgButton v-if="markers.markerSets.length > 0 || markers.markers.length > 0" class="thin-hide" :title="$t('markers.ctrlBar')"
+               @action="appState.menu.openPage('markers', t('markers.title'), {markerSet: markers})">
       <svg viewBox="0 0 30 30">
         <path d="M15,3.563c-4.459,0-8.073,3.615-8.073,8.073c0,6.483,8.196,14.802,8.196,14.802s7.951-8.013,7.951-14.802
 			C23.073,7.177,19.459,3.563,15,3.563z M15,15.734c-2.263,0-4.098-1.835-4.098-4.099c0-2.263,1.835-4.098,4.098-4.098
 			c2.263,0,4.098,1.835,4.098,4.098C19.098,13.899,17.263,15.734,15,15.734z"/>
       </svg>
     </SvgButton>
-    <SvgButton v-if="!playerMarkerSet.fake" class="thin-hide" title="Player-List" @action="openPlayerList">
+    <SvgButton v-if="!playerMarkerSet.fake" class="thin-hide" :title="$t('players.ctrlBar')" @action="openPlayerList">
       <svg viewBox="0 0 30 30">
         <g>
           <path d="M8.95,14.477c0.409-0.77,1.298-1.307,2.164-1.309h0.026c-0.053-0.234-0.087-0.488-0.087-0.755
@@ -43,11 +43,11 @@
       </svg>
     </SvgButton>
     <div class="space thin-hide greedy"></div>
-    <DayNightSwitch class="thin-hide" title="Day/Night" />
+    <DayNightSwitch class="thin-hide" :title="$t('lighting.dayNightSwitch.ctrlBar')" />
     <div class="space thin-hide"></div>
     <ControlsSwitch class="thin-hide"></ControlsSwitch>
     <div class="space thin-hide"></div>
-    <SvgButton class="thin-hide" title="Reset Camera & Position" @action="$bluemap.resetCamera()">
+    <SvgButton class="thin-hide" :title="$t('resetCamera.ctrlBar')" @action="$bluemap.resetCamera()">
       <svg viewBox="0 0 30 30">
         <rect x="7.085" y="4.341" transform="matrix(0.9774 0.2116 -0.2116 0.9774 3.2046 -1.394)" width="2.063" height="19.875"/>
         <path d="M12.528,5.088c0,0,3.416-0.382,4.479-0.031c1.005,0.332,2.375,2.219,3.382,2.545c1.096,0.354,4.607-0.089,4.607-0.089
@@ -56,7 +56,7 @@
       </svg>
     </SvgButton>
     <PositionInput class="pos-input" />
-    <Compass title="Compass / Face North" />
+    <Compass :title="$t('compass.ctrlBar')" />
   </div>
 </template>
 
