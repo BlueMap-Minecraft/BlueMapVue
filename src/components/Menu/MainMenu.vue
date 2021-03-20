@@ -6,13 +6,14 @@
             @close="menu.closeAll()">
 
     <div v-if="menu.currentPage().id === 'root'">
-      <SimpleButton @action="menu.openPage('maps', $t('maps.title'))" :submenu="true">{{ $t("maps.title") }}</SimpleButton>
-      <SimpleButton @action="menu.openPage('markers', $t('markers.title'), {markerSet: markers})" :submenu="true">{{ $t("markers.title") }}</SimpleButton>
-      <SimpleButton @action="menu.openPage('settings', $t('settings.title'))" :submenu="true">{{ $t("settings.title") }}</SimpleButton>
+      <SimpleButton @action="menu.openPage('maps', () => $t('maps.title'))" :submenu="true">{{ $t("maps.button") }}</SimpleButton>
+      <SimpleButton @action="menu.openPage('markers', () => $t('markers.title'), {markerSet: markers})" :submenu="true">{{ $t("markers.button") }}</SimpleButton>
+      <SimpleButton @action="menu.openPage('settings', () => $t('settings.title'))" :submenu="true">{{ $t("settings.button") }}</SimpleButton>
+      <SimpleButton @action="menu.openPage('info', () => $t('info.title'))" :submenu="true">{{ $t("info.button") }}</SimpleButton>
       <hr>
-      <SimpleButton @action="goFullscreen">{{ $t("goFullscreen.title") }}</SimpleButton>
-      <SimpleButton @action="$bluemap.resetCamera()">{{ $t("resetCamera.title") }}</SimpleButton>
-      <SimpleButton @action="$bluemap.updateMap()" :title="$t('updateMap.description')">{{ $t("updateMap.title") }}</SimpleButton>
+      <SimpleButton @action="goFullscreen">{{ $t("goFullscreen.button") }}</SimpleButton>
+      <SimpleButton @action="$bluemap.resetCamera()">{{ $t("resetCamera.button") }}</SimpleButton>
+      <SimpleButton @action="$bluemap.updateMap()" :title="$t('updateMap.tooltip')">{{ $t("updateMap.button") }}</SimpleButton>
     </div>
 
     <div v-if="menu.currentPage().id === 'maps'">
@@ -22,6 +23,8 @@
     <MarkerSetMenu v-if="menu.currentPage().id === 'markers'" :menu="menu" />
 
     <SettingsMenu v-if="menu.currentPage().id === 'settings'" />
+
+    <div class="info-content" v-if="menu.currentPage().id === 'info'" v-html="$t('info.content')"></div>
 
   </SideMenu>
 </template>
@@ -54,6 +57,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.info-content {
+  font-size: 0.8em;
 
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      th, td {
+        padding: 0.2em 0.5em;
+        border: solid 1px var(--theme-bg-light);
+      }
+
+      th {
+        font-weight: inherit;
+        text-align: inherit;
+      }
+    }
+  }
+}
 </style>

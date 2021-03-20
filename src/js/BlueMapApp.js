@@ -35,6 +35,7 @@ import {MainMenu} from "@/js/MainMenu";
 import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
 import {getCookie, round, setCookie} from "@/js/Utils";
+import i18n from "../i18n";
 
 export class BlueMapApp {
 
@@ -129,15 +130,15 @@ export class BlueMapApp {
         this.events.addEventListener("bluemapCameraMoved", this.cameraMoved);
         this.events.addEventListener("bluemapMapInteraction", this.mapInteraction);
 
-        // load user settings
-        this.loadUserSettings();
-
-        // save user settings
-        this.saveUserSettings();
-
         // start app update loop
         if(this.updateLoop) clearTimeout(this.updateLoop);
         this.updateLoop = setTimeout(this.update, 1000);
+
+        // load user settings
+        await this.loadUserSettings();
+
+        // save user settings
+        this.saveUserSettings();
     }
 
     update = async () => {
@@ -192,6 +193,8 @@ export class BlueMapApp {
                     this.resetCamera();
                 }
             }
+
+            this.updatePageAddress();
         });
     }
 
@@ -210,6 +213,7 @@ export class BlueMapApp {
 
         controls.controls = this.mapControls;
         this.appState.controls.state = "perspective";
+        this.updatePageAddress();
     }
 
     /**
@@ -348,7 +352,10 @@ export class BlueMapApp {
             cm.tilt = MathUtils.lerp(startTilt, 0, ep);
         }, transition, finished => {
             this.mapControls.reset();
-            if (finished) cm.controls = this.mapControls;
+            if (finished){
+                cm.controls = this.mapControls;
+                this.updatePageAddress();
+            }
         });
 
         this.appState.controls.state = "perspective";
@@ -378,7 +385,10 @@ export class BlueMapApp {
             cm.tilt = MathUtils.lerp(startTilt, 0, ep);
         }, transition, finished => {
             this.mapControls.reset();
-            if (finished) cm.controls = this.mapControls;
+            if (finished){
+                cm.controls = this.mapControls;
+                this.updatePageAddress();
+            }
         });
 
         this.appState.controls.state = "flat";
@@ -410,7 +420,10 @@ export class BlueMapApp {
             cm.ortho = MathUtils.lerp(startOrtho, 0, Math.min(p * 2, 1));
             cm.tilt = MathUtils.lerp(startTilt, 0, ep);
         }, transition, finished => {
-            if (finished) cm.controls = this.freeFlightControls;
+            if (finished){
+                cm.controls = this.freeFlightControls;
+                this.updatePageAddress();
+            }
         });
 
         this.appState.controls.state = "free";
@@ -460,7 +473,7 @@ export class BlueMapApp {
         location.reload();
     }
 
-    loadUserSettings(){
+    async loadUserSettings(){
         if (!this.settings.useCookies) return;
 
         if (this.loadUserSetting("resetSettings", false)) {
@@ -479,6 +492,7 @@ export class BlueMapApp {
         this.appState.controls.invertMouse = this.loadUserSetting("invertMouse", this.appState.controls.invertMouse);
         this.updateControlsSettings();
         this.setTheme(this.loadUserSetting("theme", this.appState.theme));
+        await i18n.setLanguage(this.loadUserSetting("lang", i18n.locale));
         this.setDebug(this.loadUserSetting("debug", this.appState.debug));
 
         alert(this.events, "Settings loaded!", "info");
@@ -496,6 +510,7 @@ export class BlueMapApp {
         this.saveUserSetting("mouseSensitivity", this.appState.controls.mouseSensitivity);
         this.saveUserSetting("invertMouse", this.appState.controls.invertMouse);
         this.saveUserSetting("theme", this.appState.theme);
+        this.saveUserSetting("lang", i18n.locale);
         this.saveUserSetting("debug", this.appState.debug);
 
         alert(this.events, "Settings saved!", "info");
@@ -539,6 +554,10 @@ export class BlueMapApp {
         }
 
         history.replaceState(undefined, undefined, hash);
+
+        document.title = i18n.t("pageTitle", {
+            map: this.mapViewer.map ? this.mapViewer.map.data.name : "?"
+        });
     }
 
     loadPageAddress = async () => {

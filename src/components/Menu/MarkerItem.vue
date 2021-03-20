@@ -7,7 +7,7 @@
       <div class="info">
         <div class="label">{{markerLabel}}</div>
         <div class="stats">
-          <div>
+          <div v-if="appState.debug">
             {{marker.type}}-marker
           </div>
           <div>
@@ -38,6 +38,7 @@ export default {
   },
   data() {
     return {
+      appState: this.$bluemap.appState,
       controls: this.$bluemap.mapViewer.controlsManager.data,
     }
   },

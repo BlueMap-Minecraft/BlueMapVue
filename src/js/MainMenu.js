@@ -41,17 +41,26 @@ export class MainMenu {
         return this.pageStack[this.pageStack.length - 1];
     }
 
-    openPage(id = "root", title = i18n.t("menu.title"), data = {}) {
+    openPage(id = "root", title = () => i18n.t("menu.title"), data = {}) {
         if (!this.isOpen){
             this.pageStack.splice(0, this.pageStack.length);
             this.isOpen = true;
         }
 
-        this.pageStack.push({
-            id: id,
-            title: title,
-            ...data
-        });
+        if (typeof title === "function"){
+            this.pageStack.push({
+                id: id,
+                get title(){ return title() },
+                ...data
+            });
+        } else {
+            this.pageStack.push({
+                id: id,
+                title: title,
+                ...data
+            });
+        }
+
     }
 
     closePage() {

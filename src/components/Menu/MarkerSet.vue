@@ -2,17 +2,17 @@
   <div class="marker-set" :title="markerSet.id">
     <div class="info" @click="toggle">
       <div class="marker-set-switch">
-        <div class="label">{{ markerSet.label }}</div>
+        <div class="label">{{ label }}</div>
         <SwitchHandle :on="markerSet.visible" v-if="markerSet.toggleable"/>
       </div>
       <div class="stats">
         <div>
           {{ markerSet.markers.length }}
-          {{ markerSet.markers.length !== 1 ? "markers" : "marker" }}
+          {{ $tc('markers.marker', markerSet.markers.length) }}
         </div>
         <div v-if="filteredMarkerSets.length > 0">
           {{ filteredMarkerSets.length }}
-          {{ filteredMarkerSets.length !== 1 ? "marker-sets" : "marker-set" }}
+          {{ $tc('markers.markerSet', filteredMarkerSets.length) }}
         </div>
       </div>
     </div>
@@ -41,6 +41,10 @@ export default {
       return this.markerSet.markerSets.filter(markerSet => {
         return (markerSet.id !== "bm-popup-set");
       });
+    },
+    label() {
+      if (this.markerSet.id === "bm-players") return this.$t("players.title");
+      return this.markerSet.label;
     }
   },
   methods: {

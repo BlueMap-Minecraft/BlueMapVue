@@ -51,6 +51,62 @@ body {
   padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+  text-align: left;
+  margin: 1em 0 0.5em 0;
+  padding: 0;
+}
+
+h1, h2 {
+  position: relative;
+
+  font-size: 1.2em;
+
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
+
+  width: calc(100% - 0.5em);
+  overflow: hidden;
+
+  &:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: '';
+
+    width: 100%;
+    height: 1px;
+    background-color: var(--theme-bg-light);
+  }
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+  padding-left: 0;
+}
+
+p {
+  margin: 0.5em;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+kbd {
+  background-color: var(--theme-bg-light);
+  border-radius: 0.2em;
+  margin: 0;
+  padding: 0 0.2em;
+}
+
 // normalize input fields
 input {
   display: inline-block;

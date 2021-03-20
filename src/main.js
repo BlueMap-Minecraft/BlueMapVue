@@ -35,20 +35,21 @@ String.prototype.includesCI = function (val) {
 
 // bluemap app
 const bluemap = new BlueMapApp(document.getElementById("map-container"));
+window.bluemap = bluemap;
 
 // init vue
 Vue.config.productionTip = false;
 Object.defineProperty(Vue.prototype, '$bluemap', {
-  get () { return bluemap }
+  get() { return bluemap; }
 });
 
-let vue = new Vue({
+const vue = new Vue({
   i18n,
   render: h => h(App)
 }).$mount('#app');
 
-// make bluemap accessible in console
-window.bluemap = bluemap;
+// load languages
+i18n.loadLanguageSettings();
 
 // load bluemap next tick (to let the assets load first)
 vue.$nextTick(() => {

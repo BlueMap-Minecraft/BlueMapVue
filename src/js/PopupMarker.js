@@ -26,6 +26,7 @@ import {Marker} from "bluemap/src/markers/Marker";
 import {CSS2DObject} from "bluemap/src/util/CSS2DRenderer";
 import {animate, htmlToElement} from "bluemap/src/util/Utils";
 import {BoxGeometry, MeshBasicMaterial, Mesh, Vector2} from "three";
+import i18n from "../i18n";
 
 export class PopupMarker extends Marker {
 
@@ -90,7 +91,7 @@ export class PopupMarker extends Marker {
         if (isHires) {
             this.element.innerHTML = `
                 <div class="group">
-                    <div class="label">Block:</div>
+                    <div class="label">${i18n.t("blockTooltip.block")}:</div>
                     <div class="content">
                         <div class="entry"><span class="label">x: </span><span class="value">${this.position.x}</span></div>
                         <div class="entry"><span class="label">y: </span><span class="value">${this.position.y}</span></div>
@@ -101,7 +102,7 @@ export class PopupMarker extends Marker {
         } else {
             this.element.innerHTML = `
                 <div class="group">
-                    <div class="label">Position:</div>
+                    <div class="label">${i18n.t("blockTooltip.position")}:</div>
                     <div class="content">
                         <div class="entry"><span class="label">x: </span><span class="value">${this.position.x}</span></div>
                         <div class="entry"><span class="label">z: </span><span class="value">${this.position.z}</span></div>
@@ -118,7 +119,7 @@ export class PopupMarker extends Marker {
             this.element.innerHTML += `
                 <hr>
                 <div class="group">
-                    <div class="label">Chunk:</div>
+                    <div class="label">${i18n.t("blockTooltip.chunk")}:</div>
                     <div class="content">
                         <div class="entry"><span class="label">x: </span><span class="value">${chunkCoords.x}</span></div>
                         <div class="entry"><span class="label">y: </span><span class="value">${chunkCoords.y}</span></div>
@@ -127,13 +128,13 @@ export class PopupMarker extends Marker {
                 </div>
                 <hr>
                 <div class="group">
-                    <div class="label">Region:</div>
+                    <div class="label">${i18n.t("blockTooltip.region.region")}:</div>
                     <div class="content">
                         <div class="entry"><span class="label">x: </span><span class="value">${regionCoords.x}</span></div>
                         <div class="entry"><span class="label">z: </span><span class="value">${regionCoords.y}</span></div>
                     </div>
                     <div class="content">
-                        <div class="entry"><span class="label">File: </span><span class="value">${regionFile}</span></div>
+                        <div class="entry"><span class="label">${i18n.t("blockTooltip.region.file")}: </span><span class="value">${regionFile}</span></div>
                     </div>
                 </div>
             `;
@@ -149,10 +150,10 @@ export class PopupMarker extends Marker {
                 this.element.innerHTML += `
                     <hr>
                     <div class="group">
-                        <div class="label">Light:</div>
+                        <div class="label">${i18n.t("blockTooltip.light.light")}:</div>
                         <div class="content">
-                            <div class="entry"><span class="label">Sun: </span><span class="value">${sunlight}</span></div>
-                            <div class="entry"><span class="label">Block: </span><span class="value">${blocklight}</span></div>
+                            <div class="entry"><span class="label">${i18n.t("blockTooltip.light.sun")}: </span><span class="value">${sunlight}</span></div>
+                            <div class="entry"><span class="label">${i18n.t("blockTooltip.light.block")}: </span><span class="value">${blocklight}</span></div>
                         </div>
                     </div>
                 `;

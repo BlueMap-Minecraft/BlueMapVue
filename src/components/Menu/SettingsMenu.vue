@@ -1,16 +1,16 @@
 <template>
   <div>
     <Group title="View / Controls">
-      <SimpleButton :active="appState.controls.state === 'perspective'" @action="$bluemap.setPerspectiveView(500, appState.controls.state === 'free' ? 100 : 0)">{{$t('controls.perspective.title')}}</SimpleButton>
-      <SimpleButton :active="appState.controls.state === 'flat'" @action="$bluemap.setFlatView(500, appState.controls.state === 'free' ? 100 : 0)">{{$t('controls.flatView.title')}}</SimpleButton>
-      <SimpleButton :active="appState.controls.state === 'free'" @action="$bluemap.setFreeFlight(500)">{{$t('controls.freeFlight.title')}}</SimpleButton>
+      <SimpleButton :active="appState.controls.state === 'perspective'" @action="$bluemap.setPerspectiveView(500, appState.controls.state === 'free' ? 100 : 0)">{{$t('controls.perspective.button')}}</SimpleButton>
+      <SimpleButton :active="appState.controls.state === 'flat'" @action="$bluemap.setFlatView(500, appState.controls.state === 'free' ? 100 : 0)">{{$t('controls.flatView.button')}}</SimpleButton>
+      <SimpleButton :active="appState.controls.state === 'free'" @action="$bluemap.setFreeFlight(500)">{{$t('controls.freeFlight.button')}}</SimpleButton>
     </Group>
 
     <Group :title="$t('lighting.title')">
       <Slider :value="mapViewer.uniforms.sunlightStrength.value" :min="0" :max="1" :step="0.01"
-              @update="mapViewer.uniforms.sunlightStrength.value = $event">Sunlight</Slider>
+              @update="mapViewer.uniforms.sunlightStrength.value = $event">{{$t('lighting.sunlight')}}</Slider>
       <Slider :value="mapViewer.uniforms.ambientLight.value" :min="0" :max="1" :step="0.01"
-              @update="mapViewer.uniforms.ambientLight.value = $event">Ambient-Light</Slider>
+              @update="mapViewer.uniforms.ambientLight.value = $event">{{$t('lighting.ambientLight')}}</Slider>
     </Group>
 
     <Group :title="$t('resolution.title')">
@@ -40,9 +40,16 @@
       >{{theme.name}}</SimpleButton>
     </Group>
 
-    <SwitchButton :on="appState.debug" @action="switchDebug(); $bluemap.saveUserSettings();">{{ $t("debug.title") }}</SwitchButton>
+    <Group v-if="$i18n.languages.length > 1" :title="$t('language.title')">
+      <SimpleButton v-for="lang of $i18n.languages" :key="lang.locale"
+                    :active="lang.locale === $i18n.locale"
+                    @action="$i18n.locale = lang.locale; $bluemap.saveUserSettings();"
+      >{{lang.name}}</SimpleButton>
+    </Group>
 
-    <SimpleButton @action="$bluemap.resetSettings()">{{ $t("resetAllSettings.title") }}</SimpleButton>
+    <SwitchButton :on="appState.debug" @action="switchDebug(); $bluemap.saveUserSettings();">{{ $t("debug.button") }}</SwitchButton>
+
+    <SimpleButton @action="$bluemap.resetSettings()">{{ $t("resetAllSettings.button") }}</SimpleButton>
   </div>
 </template>
 
@@ -54,15 +61,15 @@ import SwitchButton from "@/components/Menu/SwitchButton";
 import i18n from "../../i18n";
 
 const themes = [
-  {name: i18n.t("theme.default"), value: null},
-  {name: i18n.t("theme.dark"), value: 'dark'},
-  {name: i18n.t("theme.light"), value: 'light'},
+  {get name(){ return i18n.t("theme.default")}, value: null},
+  {get name(){ return i18n.t("theme.dark")}, value: 'dark'},
+  {get name(){ return i18n.t("theme.light")}, value: 'light'},
 ];
 
 const qualityStages = [
-  {name: i18n.t("resolution.high"), value: 2},
-  {name: i18n.t("resolution.normal"), value: 1},
-  {name: i18n.t("resolution.low"), value: 0.5},
+  {get name(){ return i18n.t("resolution.high")}, value: 2},
+  {get name(){ return i18n.t("resolution.normal")}, value: 1},
+  {get name(){ return i18n.t("resolution.low")}, value: 0.5},
 ];
 
 export default {
