@@ -22,9 +22,10 @@
   },
   "homepage": "https://bluecolo.red/bluemap",
   "dependencies": {
+    "bluemap": "file:./BlueMapWeb",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
-    "bluemap": "file:./BlueMapWeb"
+    "vue-i18n": "^8.24.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

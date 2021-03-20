@@ -26,6 +26,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import {BlueMapApp} from "@/js/BlueMapApp";
+import i18n from './i18n';
 
 // utils
 String.prototype.includesCI = function (val) {
@@ -42,6 +43,7 @@ Object.defineProperty(Vue.prototype, '$bluemap', {
 });
 
 let vue = new Vue({
+  i18n,
   render: h => h(App)
 }).$mount('#app');
 
