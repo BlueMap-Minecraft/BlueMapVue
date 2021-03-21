@@ -11,6 +11,10 @@ export default {
             name: "Deutsch"
         },
         {
+            locale: "nl",
+            name: "Nederlands"
+        },
+        {
             locale: "fr",
             name: "French"
         },
