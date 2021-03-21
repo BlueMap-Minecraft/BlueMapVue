@@ -75,6 +75,7 @@ export default {
         tooltip: "Compass / Face North"
     },
     controls: {
+        title: "View / Controls",
         perspective: {
             button: "Perspective",
             tooltip: "Perspective-View"

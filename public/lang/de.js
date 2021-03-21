@@ -75,6 +75,7 @@ export default {
         tooltip: "Kompass / nach Norden ausrichten"
     },
     controls: {
+        title: "Ansicht / Steuerung",
         perspective: {
             button: "Perspectiv-Sicht",
             tooltip: "Perspectivische Sicht"
