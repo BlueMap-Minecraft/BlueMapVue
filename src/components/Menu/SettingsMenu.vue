@@ -43,7 +43,7 @@
     <Group v-if="$i18n.languages.length > 1" :title="$t('language.title')">
       <SimpleButton v-for="lang of $i18n.languages" :key="lang.locale"
                     :active="lang.locale === $i18n.locale"
-                    @action="$i18n.locale = lang.locale; $bluemap.saveUserSettings();"
+                    @action="$i18n.setLanguage(lang.locale); $bluemap.saveUserSettings();"
       >{{lang.name}}</SimpleButton>
     </Group>
 

@@ -49,7 +49,7 @@ const vue = new Vue({
 }).$mount('#app');
 
 // load languages
-i18n.loadLanguageSettings();
+i18n.loadLanguageSettings().catch(error => console.error(error));
 
 // load bluemap next tick (to let the assets load first)
 vue.$nextTick(() => {
