@@ -10,6 +10,10 @@ export default {
             locale: "de",
             name: "Deutsch"
         },
+        {
+            locale: "ja",
+            name: "日本語"
+        }
         */
     ]
 }
