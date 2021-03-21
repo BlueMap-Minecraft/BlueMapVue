@@ -75,6 +75,7 @@ export default {
         tooltip: "Boussole / Pointe le Nord"
     },
     controls: {
+	title: "Vue / Contrôles",
         perspective: {
             button: "Perspective",
             tooltip: "Vue en Perspective"
