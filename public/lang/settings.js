@@ -14,6 +14,6 @@ export default {
             locale: "fr",
             name: "French"
         },
-	*/
+        */
     ]
 }
