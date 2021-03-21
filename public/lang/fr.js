@@ -82,7 +82,7 @@ export default {
         flatView: {
             button: "Plate",
             tooltip: "Orthographique / Vue Plate",
-        // },
+        },
         freeFlight: {
             button: "Vol Libre",
             tooltip: "Vol Libre / Mode Spectateur"
