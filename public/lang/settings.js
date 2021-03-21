@@ -11,9 +11,13 @@ export default {
             name: "Deutsch"
         },
         {
+            locale: "fr",
+            name: "French"
+        },
+        {
             locale: "ja",
             name: "日本語"
-        }
+        },
         */
     ]
 }
