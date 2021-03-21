@@ -62,7 +62,7 @@ export default {
         light: "ライト"
     },
     debug: {
-        button: "懸賞情報の表示"
+        button: "デバッグ情報の表示"
     },
     resetAllSettings: {
         button: "設定をリセット"
