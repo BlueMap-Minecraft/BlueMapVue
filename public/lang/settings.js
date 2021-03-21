@@ -1,11 +1,11 @@
 export default {
     default: "en",
     languages: [
+        // remove the languages you don't need, reorder them, or add your own
         {
             locale: "en",
             name: "English"
         },
-        /* // uncomment the languages you need, or add your own
         {
             locale: "de",
             name: "Deutsch"
@@ -18,6 +18,5 @@ export default {
             locale: "ja",
             name: "日本語"
         },
-        */
     ]
 }

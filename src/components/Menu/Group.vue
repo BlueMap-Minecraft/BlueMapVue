@@ -23,6 +23,7 @@ export default {
   padding-top: 1em;
   border: solid 1px var(--theme-bg-light);
 
+
   > .title {
     position: absolute;
     top: calc(-0.5em - 1px);
@@ -33,6 +34,11 @@ export default {
 
   &:first-child {
     margin-top: 1em;
+  }
+
+  > .content {
+    max-height: 15em;
+    overflow-y: auto;
   }
 }
 </style>
