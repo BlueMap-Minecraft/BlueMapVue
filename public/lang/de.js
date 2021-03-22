@@ -77,8 +77,8 @@ export default {
     controls: {
         title: "Ansicht / Steuerung",
         perspective: {
-            button: "Perspectiv-Sicht",
-            tooltip: "Perspectivische Sicht"
+            button: "Perspektiv-Sicht",
+            tooltip: "Perspektivische Sicht"
         },
         flatView: {
             button: "Flache Sicht",
@@ -86,7 +86,7 @@ export default {
         },
         freeFlight: {
             button: "Freie Kamera",
-            tooltip: "Freie Kamera / Beobachter Modus"
+            tooltip: "Freie Kamera / Zuschauermodus"
         }
     },
     language: {
