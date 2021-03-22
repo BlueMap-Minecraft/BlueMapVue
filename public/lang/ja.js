@@ -131,7 +131,7 @@ export default {
 	<table>
 		<tr><th>移動</th><td>一本指でドラッグ</td></tr>
 		<tr><th>ズーム</th><td>ピンチ イン/アウト</td></tr>
-		<tr><th>回転 / 傾き</th><td>日本指でドラッグ + 回転 / 昇降</td></tr>
+		<tr><th>回転 / 傾き</th><td>二本指でドラッグ + 回転 / 昇降</td></tr>
 	</table>
 </p>
 <br><hr>
