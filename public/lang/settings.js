@@ -22,5 +22,9 @@ export default {
             locale: "ja",
             name: "日本語"
         },
+        {
+            locale: "ru",
+            name: "Русский"
+        },
     ]
 }
