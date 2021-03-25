@@ -22,5 +22,13 @@ export default {
             locale: "ja",
             name: "日本語"
         },
+        {
+            locale: "pl",
+            name: "Polski"
+        },
+        {
+            locale: "it",
+            name: "Italiano"
+        },
     ]
 }
