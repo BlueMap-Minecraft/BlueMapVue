@@ -112,27 +112,27 @@ export default {
         content: `
 <img src="assets/logo.png" style="display: block; width: 40%; margin: 3em auto; border-radius: 50%">
 <p>
-	<h2>Mouse-Controls:</h2>
+	<h2>Управление мышью:</h2>
 	<table>
-		<tr><th>move</th><td><kbd>left-click</kbd> + drag</td></tr>
-		<tr><th>zoom</th><td><kbd>mousewheel</kbd> (scroll)</td></tr>
-		<tr><th>rotate / tilt</th><td><kbd>right-click</kbd> + drag</td></tr>
+		<tr><th>перемещение</th><td>зажать <kbd>ЛКМ</kbd></td></tr>
+		<tr><th>приближение</th><td>прокрутить <kbd>колесо</kbd></td></tr>
+		<tr><th>поворот / наклон</th><td>зажать <kbd>ПКМ</kbd></td></tr>
 	</table>
 </p>
 <p>
-	<h2>Keyboard-Controls:</h2>
+	<h2>Управление клавиатурой:</h2>
 	<table>
-		<tr><th>move</th><td><kbd>wasd</kbd> / <kbd>arrow-keys</kbd></td></tr>
-		<tr><th>zoom</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> or <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
-		<tr><th>rotate / tilt</th><td><kbd>Left-Alt</kbd> + <kbd>wasd</kbd> / <kbd>arrow-keys</kbd> or <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
+		<tr><th>перемещение</th><td><kbd>WASD</kbd> / <kbd>стрелки</kbd></td></tr>
+		<tr><th>приближение</th><td>Нампад: <kbd>+</kbd>/<kbd>-</kbd> или <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
+		<tr><th>поворот / наклон</th><td><kbd>Левый Alt</kbd> + <kbd>WASD</kbd> / <kbd>стрелки</kbd> или <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
 	</table>
 </p>
 <p>
-	<h2>Touch-Controls:</h2>
+	<h2>Управление сенсором:</h2>
 	<table>
-		<tr><th>move</th><td>touch + drag</td></tr>
-		<tr><th>zoom</th><td>touch with two fingers + pinch</td></tr>
-		<tr><th>rotate / tilt</th><td>touch with two fingers + rotate / move up/down</td></tr>
+		<tr><th>перемещение</th><td>коснуться и переместить</td></tr>
+		<tr><th>приближение</th><td>коснуться двумя пальцами и ущипнуть</td></tr>
+		<tr><th>поворот / наклон</th><td>коснуться двумя пальцами и повернуть / переместить вверх/вниз</td></tr>
 	</table>
 </p>
 <br><hr>
