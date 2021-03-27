@@ -19,12 +19,24 @@ export default {
             name: "French"
         },
         {
+            locale: "fi",
+            name: "Suomi"
+        },
+        {
             locale: "ja",
             name: "日本語"
         },
         {
             locale: "ru",
             name: "Русский"
+        },
+        {
+            locale: "pl",
+            name: "Polski"
+        },
+        {
+            locale: "it",
+            name: "Italiano"
         },
     ]
 }
