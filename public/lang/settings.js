@@ -38,5 +38,9 @@ export default {
             locale: "it",
             name: "Italiano"
         },
+        {
+            locale: "zh_CN",
+            name: "简体中文"
+        },
     ]
 }
