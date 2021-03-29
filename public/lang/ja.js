@@ -14,7 +14,8 @@ export default {
         button: "マーカー",
         tooltip: "マーカー一覧",
         marker: "マーカー | マーカー",
-        markerSet: "マーカーグループ | マーカーグループ"
+        markerSet: "マーカーグループ | マーカーグループ",
+		searchPlaceholder: "検索..."
     },
     settings: {
         title: "設定",
