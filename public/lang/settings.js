@@ -42,5 +42,9 @@ export default {
             locale: "zh_CN",
             name: "简体中文"
         },
+        {
+            locale: "zh_TW",
+            name: "繁體中文"
+        },
     ]
 }
