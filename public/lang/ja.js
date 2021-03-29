@@ -76,6 +76,7 @@ export default {
         tooltip: "方角 / クリックで方角をリセット"
     },
     controls: {
+        title: "視点",
         perspective: {
             button: "立体",
             tooltip: "立体表示"
