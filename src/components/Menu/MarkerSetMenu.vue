@@ -5,7 +5,7 @@
   </div>
   <hr v-if="filteredMarkerSets.length > 0 & thisMarkerSet.markers.length > 0">
   <div class="markers" v-if="thisMarkerSet.markers.length > 0">
-    <TextInput :value="filter.search" @input="filter.search = $event.target.value" placeholder="Search..." />
+    <TextInput :value="filter.search" @input="filter.search = $event.target.value" :placeholder="$t('markers.searchPlaceholder')" />
     <MarkerItem v-for="marker of filteredMarkers" :key="marker.id" :marker="marker" />
   </div>
 </div>

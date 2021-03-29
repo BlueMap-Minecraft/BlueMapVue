@@ -14,7 +14,8 @@ export default {
         button: "Markers",
         tooltip: "Marker-List",
         marker: "marker | markers",
-        markerSet: "marker-set | marker-sets"
+        markerSet: "marker-set | marker-sets",
+        searchPlaceholder: "Search..."
     },
     settings: {
         title: "Settings",
