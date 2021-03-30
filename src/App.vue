@@ -3,6 +3,7 @@
     <FreeFlightMobileControls v-if="appState.controls.state === 'free'" />
     <ControlBar />
     <MainMenu :menu="appState.menu" />
+    <Loading :loading="appState.loading" />
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import ControlBar from "@/components/ControlBar/ControlBar";
 import MainMenu from "@/components/Menu/MainMenu";
 import FreeFlightMobileControls from "@/components/Controls/FreeFlightMobileControls";
+import Loading from "@/components/Loading";
 
 export default {
   name: 'App',
   components: {
     FreeFlightMobileControls,
     MainMenu,
-    ControlBar
+    ControlBar,
+    Loading
   },
   data() {
     return {
