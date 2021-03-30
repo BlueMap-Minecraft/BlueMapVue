@@ -52,7 +52,7 @@ export default {
 	z-index: 1000;
 	width: 100%;
 	height: 100vh;
-	background-color: var(--theme-bg);
+	background-color: #181818; /* If write "var(--theme-bg)" your eyes will explode if using a light theme. */
 	position: relative;
 	transition: all 300ms 0s ease;
 }
