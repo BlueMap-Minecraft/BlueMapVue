@@ -4,20 +4,26 @@
 			<div class="logo">
 				<img src="/assets/logo.png" alt="">
 			</div>
+			<Indeterminate />
 		</div>
 	</div>
 </template>
 <script>
+import Indeterminate from "./Indeterminate";
+
 const keyframe = [
 	{
 		opacity: 1,
 	}, {
 		opacity: 0
 	}
-]
+];
 
 export default {
-	name: 'loading',
+	name: 'Loading',
+	components: {
+		Indeterminate
+	},
 	props: {
 		loading: {
 			type: Boolean,
@@ -58,7 +64,9 @@ export default {
 }
 
 div.container {
-	display: inline-block;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
 	position: absolute;
 	top: 50%;
 	left: 50%;

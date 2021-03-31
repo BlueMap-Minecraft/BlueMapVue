@@ -11,7 +11,7 @@
 import ControlBar from "@/components/ControlBar/ControlBar";
 import MainMenu from "@/components/Menu/MainMenu";
 import FreeFlightMobileControls from "@/components/Controls/FreeFlightMobileControls";
-import Loading from "@/components/Loading";
+import Loading from "@/components/LoadingScreen/LoadingScreen";
 
 export default {
   name: 'App',
