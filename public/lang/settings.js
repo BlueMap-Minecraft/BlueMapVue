@@ -47,7 +47,7 @@ export default {
             name: "繁體中文"
         },
         {
-            locale: "en_PI",
+            locale: "en_PT",
             name: "Pirate Speak"
         }
     ]
