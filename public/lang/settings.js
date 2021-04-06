@@ -27,12 +27,12 @@ export default {
             name: "Polski"
         },
         {
-            locale: "fi",
-            name: "Suomi"
-        },
-        {
             locale: "ru",
             name: "Русский"
+        },
+        {
+            locale: "fi",
+            name: "Suomi"
         },
         {
             locale: "ja",
