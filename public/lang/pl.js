@@ -30,7 +30,7 @@ export default {
     },
     updateMap: {
         button: "Załaduj mapę ponownie",
-        tooltip: "Wyczyąź pamięć podręczną mapy"
+        tooltip: "Wyczyść pamięć podręczną mapy"
     },
     lighting: {
         title: "Oświetlenie",
