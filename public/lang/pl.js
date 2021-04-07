@@ -22,15 +22,15 @@ export default {
         button: "Ustawienia"
     },
     goFullscreen: {
-        button: "Tryb pełnoekranowym"
+        button: "Tryb pełnoekranowy"
     },
     resetCamera: {
         button: "Wyśrodkuj kamerę",
-        tooltip: "Kamera wraca do domyślej pozycji"
+        tooltip: "Zresetuj pozycję kamery"
     },
     updateMap: {
         button: "Załaduj mapę ponownie",
-        tooltip: "Czyści pamięć podręczną mapy"
+        tooltip: "Wyczyąź pamięć podręczną mapy"
     },
     lighting: {
         title: "Oświetlenie",
@@ -43,8 +43,8 @@ export default {
     resolution: {
         title: "Rozdzielczość",
         high: "Wysoka (SSAA, x2)",
-        normal: "Normalna (Native, x1)",
-        low: "Niska (Upscaling, x0.5)"
+        normal: "Normalna (Natywna, x1)",
+        low: "Niska (Skalowanie, x0.5)"
     },
     freeFlightControls: {
         title: "Sterowanie w locie swobodnym",
@@ -98,7 +98,7 @@ export default {
         position: "Pozycja",
         chunk: "Chunk",
         region: {
-            region: "Region",
+            region: "Teren",
             file: "Plik"
         },
         light: {
@@ -145,7 +145,7 @@ export default {
 			<td>
 				<kbd>Lewy ALT</kbd> + <kbd>WASD</kbd>,
 				<br />
-				<kbd>Lewy ALT</kbd> + <kbd>strzałki</kbd>,
+				<kbd>Lewy ALT</kbd> + <kbd>Strzałki</kbd>,
 				<br /><br />
 				Alternatywnie: <kbd>Delete</kbd> / <kbd>End</kbd> / <kbd>Page Up</kbd> / <kbd>Page Down</kbd>
 			</td>
@@ -164,7 +164,7 @@ export default {
 </p>
 <br><hr>
 <p>
-Ta mapa została wygenerowana z &#9829; używając <a href="https://bluecolo.red/bluemap">BlueMap</a>. Autor tłumaczenia - <a href="https://artuu.pl">Artuu</a>.
+Ta mapa została wygenerowana z &#9829; używając <a href="https://bluecolo.red/bluemap">BlueMap</a>. Autor tłumaczenia - <a href="https://artuu.pl">Artuu</a>m Poprawki - <a href="https://github.com/kacperleague9">Kaspian</a>.
 </p>
 		`
     }
