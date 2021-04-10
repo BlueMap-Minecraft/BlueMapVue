@@ -73,7 +73,7 @@ export default {
         tooltip: "玩家列表"
     },
     compass: {
-        tooltip: "指南针 / 朝北"
+        tooltip: "罗盘 / 朝北"
     },
     controls: {
         title: "视野 / 控制",
