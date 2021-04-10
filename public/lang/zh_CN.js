@@ -30,7 +30,7 @@ export default {
     },
     updateMap: {
         button: "更新地图",
-        tooltip: "清空图块缓存"
+        tooltip: "清除方块缓存"
     },
     lighting: {
         title: "光照",
