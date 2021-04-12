@@ -43,7 +43,7 @@ export default {
     resolution: {
         title: "Rozdzielczość",
         high: "Wysoka (SSAA, x2)",
-        normal: "Normalna (Natywna, x1)",
+        normal: "Normalna (Bazowa, x1)",
         low: "Niska (Skalowanie, x0.5)"
     },
     freeFlightControls: {
@@ -98,7 +98,7 @@ export default {
         position: "Pozycja",
         chunk: "Chunk",
         region: {
-            region: "Teren",
+            region: "Region",
             file: "Plik"
         },
         light: {
@@ -164,8 +164,6 @@ export default {
 </p>
 <br><hr>
 <p>
-Ta mapa została wygenerowana z &#9829; używając <a href="https://bluecolo.red/bluemap">BlueMap</a>. Autor tłumaczenia - <a href="https://artuu.pl">Artuu</a>m Poprawki - <a href="https://github.com/kacperleague9">Kaspian</a>.
-</p>
-		`
+Ta mapa została wygenerowana z &#9829; używając <a href="https://bluecolo.red/bluemap">BlueMap</a>.</p>
     }
 }
