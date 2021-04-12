@@ -77,7 +77,8 @@ export class BlueMapApp {
             menu: this.mainMenu,
             maps: [],
             theme: null,
-            debug: false
+            debug: false,
+            loading: true
         };
 
         // init
@@ -139,6 +140,8 @@ export class BlueMapApp {
 
         // save user settings
         this.saveUserSettings();
+
+        this.appState.loading = false;
     }
 
     update = async () => {
