@@ -129,7 +129,7 @@ export default {
 			<td>
 				<kbd>Klawisze WASD</kbd>
 				<br />
-				albo <kbd>strzałki</kbd>
+				albo <kbd>Strzałki</kbd>
 			</td>
 		</tr>
 		<tr>
