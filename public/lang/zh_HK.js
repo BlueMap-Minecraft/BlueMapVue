@@ -32,7 +32,7 @@ export default {
         tooltip: "移除地圖快取"
     },
     lighting: {
-        title: "雷電",
+        title: "光影",
         dayNightSwitch: {
             tooltip: "日/夜"
         },
@@ -51,9 +51,9 @@ export default {
         invertMouseY: "反轉Y軸"
     },
     renderDistance: {
-        title: "Render Distance",
-        hiresLayer: "Hires layer",
-        lowersLayer: "Lowres layer"
+        title: "渲染距離",
+        hiresLayer: "高解像度層",
+        lowersLayer: "低解像度層"
     },
     theme: {
         title: "顯示距離",
