@@ -2,7 +2,7 @@
 	<div class="loading-sceen" :class="{loading}" v-if="show">
 		<div class="container">
 			<div class="logo">
-				<img src="/assets/logo.png" alt="">
+				<img src="https://media.discordapp.net/attachments/608326602807312395/715050934224551976/2-white.png?width=1038&height=1038" alt="">
 			</div>
 			<Indeterminate />
 		</div>
