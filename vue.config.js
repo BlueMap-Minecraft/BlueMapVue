@@ -3,18 +3,19 @@
  */
 module.exports = {
     publicPath: './',
+    outputDir: '/var/www/html/bluemap',
     devServer: {
         proxy: {
             '/data': {
-                target: 'https://bluecolored.de/bluemap',
+                target: 'https://maps.freeserver.pro/bluemap',
                 changeOrigin: true,
             },
             '/assets/playerheads': {
-                target: 'https://bluecolored.de/bluemap',
+                target: 'https://maps.freeserver.pro/bluemap',
                 changeOrigin: true,
             },
             '/live': {
-                target: 'https://bluecolored.de/bluemap',
+                target: 'https://maps.freeserver.pro/bluemap',
                 changeOrigin: true,
             },
         }
