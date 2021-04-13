@@ -23,8 +23,12 @@
     <MarkerSetMenu v-if="menu.currentPage().id === 'markers'" :menu="menu" />
 
     <SettingsMenu v-if="menu.currentPage().id === 'settings'" />
-
-    <div class="info-content" v-if="menu.currentPage().id === 'info'" v-html="$t('info.content')"></div>
+    <template v-if="menu.currentPage().id === 'info'">
+      <div class="info-content" v-html="$t('info.content')"></div>
+      <a target="_blank" href="https://freeserver.pro/privacy-policy/">
+        FREESERVER Privacy Policy
+      </a>
+    </template>
 
   </SideMenu>
 </template>
