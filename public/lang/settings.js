@@ -44,7 +44,11 @@ export default {
         },
         {
             locale: "zh_TW",
-            name: "繁體中文"
+            name: "中文(台灣)"
+        },
+        {
+            locale: "zh_HK",
+            name: "中文(香港)"
         },
     ]
 }
