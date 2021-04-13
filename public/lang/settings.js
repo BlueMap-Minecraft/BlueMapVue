@@ -1,5 +1,5 @@
 export default {
-    default: "en",
+    default: "ja",
     languages: [
         // remove the languages you don't need, reorder them, or add your own
         {
