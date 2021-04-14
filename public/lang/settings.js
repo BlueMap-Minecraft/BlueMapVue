@@ -23,6 +23,10 @@ export default {
             name: "Italiano"
         },
         {
+            locale: "lv",
+            name: "Latviešu"
+        },
+        {
             locale: "nl",
             name: "Nederlands"
         },
