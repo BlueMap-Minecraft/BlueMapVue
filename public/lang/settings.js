@@ -23,6 +23,10 @@ export default {
             name: "Italiano"
         },
         {
+            locale: "lv",
+            name: "Latviešu"
+        },
+        {
             locale: "nl",
             name: "Nederlands"
         },
@@ -53,10 +57,6 @@ export default {
         {
             locale: "zh_HK",
             name: "中文(香港)"
-        },
-        {
-            locale: "lv",
-            name: "Latviešu"
         },
     ]
 }
