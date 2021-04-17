@@ -35,6 +35,10 @@ export default {
             name: "Polski"
         },
         {
+            locale: "pt_PT",
+            name: "Português (Portugal)"
+        },
+        {
             locale: "ru",
             name: "Русский"
         },
@@ -57,10 +61,6 @@ export default {
         {
             locale: "zh_HK",
             name: "中文(香港)"
-        },
-        {
-            locale: "pt_PT",
-            name: "Português (Portugal)"
         },
     ]
 }
