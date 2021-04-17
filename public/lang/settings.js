@@ -58,5 +58,10 @@ export default {
             locale: "zh_HK",
             name: "中文(香港)"
         },
+        {
+            locale: "pt_PT",
+            name: "Português (Portugal)"
+        },
     ]
 }
+
