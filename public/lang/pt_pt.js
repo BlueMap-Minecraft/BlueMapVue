@@ -57,7 +57,7 @@ export default {
         lowersLayer: "Camada de baixa resolução"
     },
     theme: {
-        title: "Thema",
+        title: "Tema",
         default: "Padrão (Sistema/Browser)",
         dark: "Escuro",
         light: "Claro"
@@ -91,7 +91,7 @@ export default {
         }
     },
     language: {
-        title: "Lingua",
+        title: "Língua",
     },
     blockTooltip: {
         block: "Bloco",
@@ -124,7 +124,7 @@ export default {
 	<h2>Controlos do teclado:</h2>
 	<table>
 		<tr><th>mover</th><td><kbd>wasd</kbd> / <kbd>setas</kbd></td></tr>
-		<tr><th>zoom</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> or <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
+		<tr><th>zoom</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> ou <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
 		<tr><th>rodar / inclinar</th><td><kbd>Alt-esquerdo</kbd> + <kbd>wasd</kbd> / <kbd>setas</kbd> ou <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
 	</table>
 </p>
