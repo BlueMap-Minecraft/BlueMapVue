@@ -35,6 +35,10 @@ export default {
             name: "Polski"
         },
         {
+            locale: "pt_PT",
+            name: "Português (Portugal)"
+        },
+        {
             locale: "ru",
             name: "Русский"
         },
@@ -60,3 +64,4 @@ export default {
         },
     ]
 }
+
