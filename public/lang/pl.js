@@ -7,86 +7,87 @@ export default {
     maps: {
         title: "Mapy",
         button: "Mapy",
-        tooltip: "Lista-Map"
+        tooltip: "Lista map"
     },
     markers: {
         title: "Punkty",
         button: "Punkty",
-        tooltip: "Lista-Punktów",
+        tooltip: "Lista punktów",
         marker: "punkt | punkty",
-        markerSet: "set-punktów | sety-punktów"
+        markerSet: "zestaw punktów | zestawy punktów",
+        searchPlaceholder: "Szukaj..."
     },
     settings: {
-        title: "Opcje",
-        button: "Opcje"
+        title: "Ustawienia",
+        button: "Ustawienia"
     },
     goFullscreen: {
-        button: "Idz Na FullScreena"
+        button: "Tryb pełnoekranowy"
     },
     resetCamera: {
-        button: "Zresetuj Camerę",
-        tooltip: "Zresetuj Camerę I Pozycję"
+        button: "Wyśrodkuj kamerę",
+        tooltip: "Zresetuj pozycję kamery"
     },
     updateMap: {
-        button: "Aktualizuj Mape",
-        tooltip: "Wyczyść Chace Mapy"
+        button: "Załaduj mapę ponownie",
+        tooltip: "Wyczyść pamięć podręczną mapy"
     },
     lighting: {
-        title: "Illuminacja",
+        title: "Oświetlenie",
         dayNightSwitch: {
             tooltip: "Dzień/Noc"
         },
-        sunlight: "Oświetlenie",
-        ambientLight: "Oświetlenie-Naturalne"
+        sunlight: "Światło słoneczne",
+        ambientLight: "Światło otoczenia"
     },
     resolution: {
-        title: "Rezolucja",
+        title: "Rozdzielczość",
         high: "Wysoka (SSAA, x2)",
-        normal: "Normalna (Natywna, x1)",
-        low: "Słaba (Upscaling, x0.5)"
+        normal: "Normalna (Bazowa, x1)",
+        low: "Niska (Skalowanie, x0.5)"
     },
     freeFlightControls: {
-        title: "Kontrola Free-Flight",
-        mouseSensitivity: "Sensytywność-Myszki",
-        invertMouseY: "Odwruć Y Myszy"
+        title: "Sterowanie w locie swobodnym",
+        mouseSensitivity: "Czułość myszy",
+        invertMouseY: "Odwróć oś Y myszy"
     },
     renderDistance: {
-        title: "Dalekość Renderowania",
-        hiresLayer: "Layer Wysokiej Rezolucij",
-        lowersLayer: "Layer Słabej Rezolucij"
+        title: "Odległość renderowania",
+        hiresLayer: "Warstwa wysokiej rozdzielczości",
+        lowersLayer: "Warstwa niskiej rozdzielczości"
     },
     theme: {
         title: "Motyw",
-        default: "Default (Systemu/Browser)",
-        dark: "Czarny",
-        light: "Biały"
+        default: "Domyślny (według ustawień systemowych)",
+        dark: "Tryb ciemny",
+        light: "Tryb jasny"
     },
     debug: {
-        button: "Debug"
+        button: "Debugowanie"
     },
     resetAllSettings: {
-        button: "Zresetuj Opcje"
+        button: "Przywróć ustawienia fabryczne"
     },
     players: {
         title: "Gracze",
-        tooltip: "Lista-Graczy"
+        tooltip: "Lista graczy"
     },
     compass: {
-        tooltip: "Kompas / Na Północ"
+        tooltip: "Kompas (północ)"
     },
     controls: {
-        title: "Widok / Kontrole",
+        title: "Widok",
         perspective: {
-            button: "Prospektywa",
-            tooltip: "Visuale-Prospektywa"
+            button: "Perspektywa",
+            tooltip: "Widok z perspektywy"
         },
         flatView: {
             button: "Płaski",
-            tooltip: "Ortograficzna / Widok-Płaski",
+            tooltip: "Widok płaski",
         },
         freeFlight: {
-            button: "Free-Flight",
-            tooltip: "Free-Flight / Tryb Widza"
+            button: "Swobodny lot",
+            tooltip: "Tryb widza"
         }
     },
     language: {
@@ -108,37 +109,62 @@ export default {
     },
     info: {
         title: "Informacje",
-        button: "Informacje",
+        button: "Informacje i skróty klawiszowe",
         content: `
 <img src="assets/logo.png" style="display: block; width: 40%; margin: 3em auto; border-radius: 50%">
 <p>
-	<h2>Kontrole-Myszki:</h2>
+	<h2>Sterowanie myszką</h2>
 	<table>
-		<tr><th>ruch</th><td><kbd>przycisk-lewy</kbd> + przesuwanie</td></tr>
-		<tr><th>zoom</th><td><kbd>kółko</kbd> (przewijai)</td></tr>
-		<tr><th>obrót / nachylenie</th><td><kbd>przycisk-prawy</kbd> + przesuwanie</td></tr>
+		<tr><th>Poruszanie się</th><td><kbd>lewy przycisk</kbd> + przeciągnięcie</td></tr>
+		<tr><th>Zbliżenie i oddalenie</th><td><kbd>kółko myszy</kbd> (przewijanie)</td></tr>
+		<tr><th>Obrót i pochylenie</th><td><kbd>prawy przycisk</kbd> + przeciągnięcie</td></tr>
 	</table>
 </p>
+<br />
 <p>
-	<h2>Kontrolowanie-Klawiaturą:</h2>
+	<h2>Sterowanie klawiaturą</h2>
 	<table>
-		<tr><th>ruch</th><td><kbd>wasd</kbd> / <kbd>przyciski-strzałki</kbd></td></tr>
-		<tr><th>zoom</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> czy <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
-		<tr><th>obrót / nachylenie</th><td><kbd>Alt-Sinistro</kbd> + <kbd>wasd</kbd> / <kbd>przyciski-strzałki</kbd> czy <kbd>Usuń</kbd>/<kbd>Zakończ</kbd>/<kbd>Strona Do Góry</kbd>/<kbd>Strona Do Dołu</kbd></td></tr>
+		<tr>
+			<th>Poruszanie się</th>
+			<td>
+				<kbd>Klawisze WASD</kbd>
+				<br />
+				albo <kbd>Strzałki</kbd>
+			</td>
+		</tr>
+		<tr>
+			<th>Zbliżenie i oddalenie</th>
+			<td>
+				Klawiatura numeryczna: <kbd>+</kbd> / <kbd>-</kbd>
+				<br />
+				lub <kbd>Insert (Ins)</kbd> / <kbd>Home</kbd>
+			</td>
+		</tr>
+		<tr>
+			<th>Obrót i pochylenie</th>
+			<td>
+				<kbd>Lewy ALT</kbd> + <kbd>WASD</kbd>,
+				<br />
+				<kbd>Lewy ALT</kbd> + <kbd>Strzałki</kbd>,
+				<br /><br />
+				Alternatywnie: <kbd>Delete</kbd> / <kbd>End</kbd> / <kbd>Page Up</kbd> / <kbd>Page Down</kbd>
+			</td>
+		</tr>
 	</table>
 </p>
+<br />
 <p>
-	<h2>Controlowanie-Dotykiem:</h2>
+	<h2>Sterowanie dotykowe (telefon)</h2>
 	<table>
-		<tr><th>ruch</th><td>dotyk + przewijanie</td></tr>
-		<tr><th>zoom</th><td>dotyk dwoma palcami + rozciągnięcie</td></tr>
-		<tr><th>obrót / nachylenie</th><td>dotyk dwoma palcami + obrót / ruch do góry/dołu</td></tr>
+		<tr><th>Poruszanie się</th><td>Przeciąganie jednym palcem po ekranie</td></tr>
+		<tr><th>Zbliżenie i oddalenie</th><td>Uszczypnięcie dwoma palcami</td></tr>
+		<tr><th>Obrót</th><td>Przeciąganie palca po ekranie, jednocześnie trzymając mapę drugim palcem</td></tr>
+		<tr><th>Pochylenie</th><td>Przeciąganie dwoma palcami po ekranie w pionie</td></tr>
 	</table>
 </p>
 <br><hr>
 <p>
-	Ta mapa została zgenerowana przez &#9829; używąjac <a href="https://bluecolo.red/bluemap">BlueMap</a>.
-</p>
+Ta mapa została wygenerowana z &#9829; używając <a href="https://bluecolo.red/bluemap">BlueMap</a>.</p>
 		`
     }
 }

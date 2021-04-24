@@ -14,7 +14,8 @@ export default {
         button: "マーカー",
         tooltip: "マーカー一覧",
         marker: "マーカー | マーカー",
-        markerSet: "マーカーグループ | マーカーグループ"
+        markerSet: "マーカーグループ | マーカーグループ",
+        searchPlaceholder: "検索..."
     },
     settings: {
         title: "設定",
@@ -75,6 +76,7 @@ export default {
         tooltip: "方角 / クリックで方角をリセット"
     },
     controls: {
+        title: "視点",
         perspective: {
             button: "立体",
             tooltip: "立体表示"
