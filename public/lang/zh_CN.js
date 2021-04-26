@@ -2,7 +2,7 @@ export default {
     pageTitle: "BlueMap - {map}",
     menu: {
         title: "菜单",
-        tooltip: "菜单"
+        tooltip: "打开菜单"
     },
     maps: {
         title: "地图",
@@ -15,22 +15,22 @@ export default {
         tooltip: "标记列表",
         marker: "标记 | 标记列表",
         markerSet: "标记集 | 标记集",
-		searchPlaceholder: "搜寻中..."
+	searchPlaceholder: "搜寻中..."
     },
     settings: {
         title: "设置",
-        button: "设置"
+        button: "打开设置"
     },
     goFullscreen: {
-        button: "全屏显示"
+        button: "全屏"
     },
     resetCamera: {
-        button: "重置视野",
-        tooltip: "重置视角 & 位置"
+        button: "重置镜头",
+        tooltip: "重置镜头 & 位置"
     },
     updateMap: {
         button: "更新地图",
-        tooltip: "清空 Tile 缓存"
+        tooltip: "清除方块缓存"
     },
     lighting: {
         title: "光照",
@@ -47,9 +47,9 @@ export default {
         low: "低 (粗糙, x0.5)"
     },
     freeFlightControls: {
-        title: "自由视野控制器",
-        mouseSensitivity: "鼠标移动灵敏度",
-        invertMouseY: "鼠标反转 Y"
+        title: "自由飞行控制",
+        mouseSensitivity: "鼠标灵敏度",
+        invertMouseY: "反转鼠标 Y"
     },
     renderDistance: {
         title: "渲染距离",
@@ -63,7 +63,7 @@ export default {
         light: "白亮主题"
     },
     debug: {
-        button: "Debug"
+        button: "调试"
     },
     resetAllSettings: {
         button: "重置所有设置"
@@ -73,7 +73,7 @@ export default {
         tooltip: "玩家列表"
     },
     compass: {
-        tooltip: "方向指示器 / 朝北"
+        tooltip: "罗盘 / 朝北"
     },
     controls: {
         title: "视野 / 控制",
@@ -115,16 +115,16 @@ export default {
 <p>
 	<h2>鼠标控制:</h2>
 	<table>
-		<tr><th>移动</th><td><kbd>左击</kbd> + 拖拽</td></tr>
+		<tr><th>移动</th><td><kbd>左键</kbd> + 拖拽</td></tr>
 		<tr><th>缩放</th><td><kbd>鼠标中键</kbd> (滚动)</td></tr>
-		<tr><th>旋转 / 倾斜</th><td><kbd>右击</kbd> + 拖拽</td></tr>
+		<tr><th>旋转 / 倾斜</th><td><kbd>右键</kbd> + 拖拽</td></tr>
 	</table>
 </p>
 <p>
 	<h2>键盘控制:</h2>
 	<table>
 		<tr><th>移动</th><td><kbd>wasd</kbd> / <kbd>方向键</kbd></td></tr>
-		<tr><th>缩放</th><td>数字键盘: <kbd>+</kbd>/<kbd>-</kbd> 或者 <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
+		<tr><th>缩放</th><td>小键盘: <kbd>+</kbd>/<kbd>-</kbd> 或者 <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
 		<tr><th>旋转 / 倾斜</th><td><kbd>左-Alt</kbd> + <kbd>wasd</kbd> / <kbd>方向键</kbd> 或 <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
 	</table>
 </p>
