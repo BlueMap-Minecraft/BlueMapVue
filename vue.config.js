@@ -3,7 +3,7 @@
  */
 module.exports = {
     publicPath: './',
-    outputDir: '/var/www/html/bluemap',
+    outputDir: 'dist/',
     devServer: {
         proxy: {
             '/data': {
