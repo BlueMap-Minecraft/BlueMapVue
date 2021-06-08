@@ -82,6 +82,7 @@ export class BlueMapApp {
 
         // init
         this.updateControlsSettings();
+        this.initGeneralEvents();
 
         // popup on click
         this.popupMarkerSet = new MarkerSet("bm-popup-set");
@@ -322,6 +323,15 @@ export class BlueMapApp {
         this.freeFlightControls.mouseAngle.speedCapture = -1.5 * this.appState.controls.mouseSensitivity * mouseInvert;
         this.freeFlightControls.mouseRotate.speedRight = -2 * this.appState.controls.mouseSensitivity;
         this.freeFlightControls.mouseAngle.speedRight = -2 * this.appState.controls.mouseSensitivity * mouseInvert;
+    }
+
+    initGeneralEvents() {
+        //close menu on fullscreen
+        document.addEventListener("fullscreenchange", evt => {
+            if (document.fullscreen) {
+                this.mainMenu.closeAll();
+            }
+        });
     }
 
     setPerspectiveView(transition = 0, minDistance = 5) {
