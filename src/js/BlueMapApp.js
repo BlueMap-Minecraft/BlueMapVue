@@ -55,7 +55,7 @@ export class BlueMapApp {
         /** @type {MarkerFileManager} */
         this.markerFileManager = null;
 
-        /** @type {{useCookies: boolean, maps: []}} */
+        /** @type {{useCookies: boolean, freeFlightEnabled: boolean, maps: []}} */
         this.settings = null;
         this.savedUserSettings = new Map();
 
@@ -73,6 +73,7 @@ export class BlueMapApp {
                 state: "perspective",
                 mouseSensitivity: 1,
                 invertMouse: false,
+                freeFlightEnabled: false,
             },
             menu: this.mainMenu,
             maps: [],
@@ -108,6 +109,7 @@ export class BlueMapApp {
 
         // load settings
         await this.getSettings();
+        this.appState.controls.freeFlightEnabled = this.settings.freeFlightEnabled;
 
         // unload loaded maps
         await this.mapViewer.switchMap(null);
@@ -406,6 +408,7 @@ export class BlueMapApp {
 
     setFreeFlight(transition = 0, targetY = undefined) {
         if (!this.mapViewer.map) return;
+        if (!this.settings.freeFlightEnabled) return this.setPerspectiveView(transition);
         if (this.viewAnimation) this.viewAnimation.cancel();
 
         let cm = this.mapViewer.controlsManager;
