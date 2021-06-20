@@ -3,8 +3,7 @@
  * localStorage.
  */
 export const setLocalStorage = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value))
-    value = JSON.stringify(value);
+    localStorage.setItem(key, JSON.stringify(value));
 };
 
 /**
@@ -12,12 +11,12 @@ export const setLocalStorage = (key, value) => {
  * in JSON format, the parsed value will be returned.
  */
 export const getLocalStorage = key => {
-    const value = localStorage.getItem(key)
+    const value = localStorage.getItem(key);
 
     try {
-        return JSON.parse(value)
+        return JSON.parse(value);
     } catch(e) {
-        return value
+        return value;
     }
 };
 
