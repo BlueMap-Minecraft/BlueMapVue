@@ -1,40 +1,23 @@
 /**
- * Adapted from https://www.w3schools.com/js/js_cookies.asp
+ * Converts a given value to JSON and writes it to the given key in
+ * localStorage.
  */
-export const setCookie = (key, value, days = 360) => {
-    value = JSON.stringify(value);
-
-    let expireDate = new Date();
-    expireDate.setTime(expireDate.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = key + "=" + value + ";" + "expires=" + expireDate.toUTCString() + ";" + "SameSite=Lax";
+export const setLocalStorage = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
 };
 
 /**
- * Adapted from https://www.w3schools.com/js/js_cookies.asp
+ * Fetches the value from a given key from localStorage. If the stored value is
+ * in JSON format, the parsed value will be returned.
  */
-export const getCookie = key => {
-    let cookieString = decodeURIComponent(document.cookie);
-    let cookies = cookieString.split(';');
+export const getLocalStorage = key => {
+    const value = localStorage.getItem(key);
 
-    for(let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i];
-
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
-        }
-
-        if (cookie.indexOf(key + "=") === 0) {
-            let value = cookie.substring(key.length + 1, cookie.length);
-
-            try {
-                value = JSON.parse(value);
-            } catch (e) {} // eslint-disable-line no-empty
-
-            return value;
-        }
+    try {
+        return JSON.parse(value);
+    } catch(e) {
+        return value;
     }
-
-    return undefined;
 };
 
 export const round = (value, precision) => {

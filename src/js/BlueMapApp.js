@@ -34,7 +34,7 @@ import {MarkerFileManager} from "bluemap/src/markers/MarkerFileManager";
 import {MainMenu} from "@/js/MainMenu";
 import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
-import {getCookie, round, setCookie} from "@/js/Utils";
+import {getLocalStorage, round, setLocalStorage} from "@/js/Utils";
 import i18n from "../i18n";
 
 export class BlueMapApp {
@@ -530,7 +530,7 @@ export class BlueMapApp {
     }
 
     loadUserSetting(key, defaultValue){
-        let value = getCookie("bluemap-" + key);
+        let value = getLocalStorage("bluemap-" + key);
 
         if (value === undefined) return defaultValue;
         return value;
@@ -539,7 +539,7 @@ export class BlueMapApp {
     saveUserSetting(key, value){
         if (this.savedUserSettings.get(key) !== value){
             this.savedUserSettings.set(key, value);
-            setCookie("bluemap-" + key, value);
+            setLocalStorage("bluemap-" + key, value);
         }
     }
 
