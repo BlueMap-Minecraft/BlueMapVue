@@ -14,7 +14,9 @@ export default {
         button: "Merkit",
         tooltip: "Merkkilista",
         marker: "merkki | merkkiä",
-        markerSet: "merkkisetti | merkkisettiä"
+        markerSet: "merkkisetti | merkkisettiä",
+        searchPlaceholder: "Etsi...",
+        followPlayerTitle: "Seuraa pelaajaa"
     },
     settings: {
         title: "Asetukset",
@@ -141,4 +143,4 @@ export default {
 </p>
 		`
     }
-}
+};
