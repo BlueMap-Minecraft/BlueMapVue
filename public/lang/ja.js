@@ -15,7 +15,8 @@ export default {
         tooltip: "マーカー一覧",
         marker: "マーカー | マーカー",
         markerSet: "マーカーグループ | マーカーグループ",
-        searchPlaceholder: "検索..."
+        searchPlaceholder: "検索...",
+        followPlayerTitle: "プレイヤーを追跡"
     },
     settings: {
         title: "設定",

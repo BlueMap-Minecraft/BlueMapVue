@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="follow-player-button" :class="{active: controls.controls.followingPlayer && controls.controls.followingPlayer.id === marker.id}"
-         v-if="marker.type === 'player'" @click="click(true)" title="Follow Player">
+         v-if="marker.type === 'player'" @click="click(true)" :title="$t('markers.followPlayerTitle')">
       <svg viewBox="0 0 30 30">
         <circle fill="none" stroke-width="3" stroke-miterlimit="10" cx="15" cy="15" r="10.375"/>
         <line fill="none" stroke-width="3" stroke-miterlimit="10" x1="3.25" y1="15" x2="1.063" y2="15"/>
