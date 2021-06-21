@@ -14,7 +14,9 @@ export default {
         button: "Marker",
         tooltip: "Markerliste",
         marker: "Marker | Marker",
-        markerSet: "Markerset | Markersets"
+        markerSet: "Markerset | Markersets",
+        searchPlaceholder: "Suche...",
+        followPlayerTitle: "Spieler folgen"
     },
     settings: {
         title: "Einstellungen",
@@ -141,4 +143,4 @@ export default {
 </p>
 		`
     }
-}
+};

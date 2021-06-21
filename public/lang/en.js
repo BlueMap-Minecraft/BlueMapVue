@@ -15,7 +15,8 @@ export default {
         tooltip: "Marker-List",
         marker: "marker | markers",
         markerSet: "marker-set | marker-sets",
-        searchPlaceholder: "Search..."
+        searchPlaceholder: "Search...",
+        followPlayerTitle: "Follow Player"
     },
     settings: {
         title: "Settings",
@@ -142,4 +143,4 @@ export default {
 </p>
 		`
     }
-}
+};
