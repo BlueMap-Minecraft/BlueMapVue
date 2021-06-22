@@ -14,7 +14,9 @@ export default {
         button: "Balises",
         tooltip: "Liste des balises",
         marker: "balises | balises",
-        markerSet: "Collection de balises | Collections de balises"
+        markerSet: "Collection de balises | Collections de balises",
+        searchPlaceholder: "Rechercher...",
+        followPlayerTitle: "Suivre ce Joueur"
     },
     settings: {
         title: "Paramètres",
