@@ -13,6 +13,10 @@ export const setLocalStorage = (key, value) => {
 export const getLocalStorage = key => {
     const value = localStorage.getItem(key);
 
+    // return undefined for not defined values
+    // because "null" might be ambiguous if there is actually "null" stored for that key
+    if (value == null) return undefined;
+
     try {
         return JSON.parse(value);
     } catch(e) {
