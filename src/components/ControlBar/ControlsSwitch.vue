@@ -18,7 +18,7 @@
         <path d="M22.371,4.158c1.65,0,3,1.35,3,3v15.684c0,1.65-1.35,3-3,3H7.629c-1.65,0-3-1.35-3-3V7.158c0-1.65,1.35-3,3-3H22.371z"/>
       </svg>
     </SvgButton>
-    <SvgButton :active="isFreeFlight" @action="setFreeFlight" :title="$t('controls.freeFlight.tooltip')">
+    <SvgButton v-if="controls.freeFlightEnabled" :active="isFreeFlight" @action="setFreeFlight" :title="$t('controls.freeFlight.tooltip')">
       <svg viewBox="0 0 30 30">
         <path d="M21.927,11.253c-0.256-0.487-0.915-0.885-1.465-0.885h-2.004c-0.55,0-0.726-0.356-0.39-0.792c0,0,0.698-0.905,0.698-2.041
           c0-2.08-1.687-3.767-3.767-3.767s-3.767,1.687-3.767,3.767c0,1.136,0.698,2.041,0.698,2.041c0.336,0.436,0.161,0.794-0.389,0.797

@@ -34,7 +34,7 @@ import {MarkerFileManager} from "bluemap/src/markers/MarkerFileManager";
 import {MainMenu} from "@/js/MainMenu";
 import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
-import {getCookie, round, setCookie} from "@/js/Utils";
+import {getLocalStorage, round, setLocalStorage} from "@/js/Utils";
 import i18n from "../i18n";
 
 export class BlueMapApp {
@@ -55,7 +55,7 @@ export class BlueMapApp {
         /** @type {MarkerFileManager} */
         this.markerFileManager = null;
 
-        /** @type {{useCookies: boolean, maps: []}} */
+        /** @type {{useCookies: boolean, freeFlightEnabled: boolean, maps: []}} */
         this.settings = null;
         this.savedUserSettings = new Map();
 
@@ -73,6 +73,7 @@ export class BlueMapApp {
                 state: "perspective",
                 mouseSensitivity: 1,
                 invertMouse: false,
+                freeFlightEnabled: false,
             },
             menu: this.mainMenu,
             maps: [],
@@ -83,6 +84,7 @@ export class BlueMapApp {
 
         // init
         this.updateControlsSettings();
+        this.initGeneralEvents();
 
         // popup on click
         this.popupMarkerSet = new MarkerSet("bm-popup-set");
@@ -108,6 +110,7 @@ export class BlueMapApp {
 
         // load settings
         await this.getSettings();
+        this.appState.controls.freeFlightEnabled = this.settings.freeFlightEnabled;
 
         // unload loaded maps
         await this.mapViewer.switchMap(null);
@@ -327,6 +330,15 @@ export class BlueMapApp {
         this.freeFlightControls.mouseAngle.speedRight = -2 * this.appState.controls.mouseSensitivity * mouseInvert;
     }
 
+    initGeneralEvents() {
+        //close menu on fullscreen
+        document.addEventListener("fullscreenchange", evt => {
+            if (document.fullscreen) {
+                this.mainMenu.closeAll();
+            }
+        });
+    }
+
     setPerspectiveView(transition = 0, minDistance = 5) {
         if (!this.mapViewer.map) return;
         if (this.viewAnimation) this.viewAnimation.cancel();
@@ -399,6 +411,7 @@ export class BlueMapApp {
 
     setFreeFlight(transition = 0, targetY = undefined) {
         if (!this.mapViewer.map) return;
+        if (!this.settings.freeFlightEnabled) return this.setPerspectiveView(transition);
         if (this.viewAnimation) this.viewAnimation.cancel();
 
         let cm = this.mapViewer.controlsManager;
@@ -520,7 +533,7 @@ export class BlueMapApp {
     }
 
     loadUserSetting(key, defaultValue){
-        let value = getCookie("bluemap-" + key);
+        let value = getLocalStorage("bluemap-" + key);
 
         if (value === undefined) return defaultValue;
         return value;
@@ -529,7 +542,7 @@ export class BlueMapApp {
     saveUserSetting(key, value){
         if (this.savedUserSettings.get(key) !== value){
             this.savedUserSettings.set(key, value);
-            setCookie("bluemap-" + key, value);
+            setLocalStorage("bluemap-" + key, value);
         }
     }
 

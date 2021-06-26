@@ -10,11 +10,13 @@ export default {
         tooltip: "Kaartenlijst"
     },
     markers: {
-        title: "Marker",
-        button: "Marker",
+        title: "Markers",
+        button: "Markers",
         tooltip: "Markerlijst",
-        marker: "Marker | Marker",
-        markerSet: "Markerset | Markersets"
+        marker: "marker | markers",
+        markerSet: "Markerset | Markersets",
+        searchPlaceholder: "Zoek...",
+        followPlayerTitle: "Volg Speler"
     },
     settings: {
         title: "Instellingen",
@@ -141,4 +143,4 @@ export default {
 </p>
 		`
     }
-}
+};
