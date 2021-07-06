@@ -64,7 +64,7 @@ export class BlueMapApp {
         /** @type Map<BlueMapMap> */
         this.mapsMap = new Map();
 
-        this.dataUrl = "data/";
+        this.dataUrl = this.baseURL + "/data/";
 
         this.mainMenu = new MainMenu();
 
@@ -286,7 +286,7 @@ export class BlueMapApp {
         if (this.playerMarkerManager) {
             this.playerMarkerManager.worldId = this.mapViewer.map.data.world;
         } else {
-            this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, "live/players", this.mapViewer.map.data.world, this.events);
+            this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, this.baseURL + "/live/players", this.mapViewer.map.data.world, this.events);
         }
 
         this.playerMarkerManager.setAutoUpdateInterval(0);
@@ -634,4 +634,7 @@ export class BlueMapApp {
         }
     }
 
+    get baseURL () {
+        return 'https://api-bluemap.freeserver.pro'
+    }
 }
