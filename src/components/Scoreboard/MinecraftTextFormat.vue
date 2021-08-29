@@ -12,7 +12,7 @@ export default {
 
         function child (text) {
             const color = text.match(/§[0-9a-fk-or]/g);
-                console.log(text);
+
             if (color) {
                 const colorCode = color[0].replace("§", "");
                 text = text.replace(color[0], "");
