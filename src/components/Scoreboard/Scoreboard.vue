@@ -3,7 +3,7 @@
 		<header><minecraft-text-format :text="displayTitle" /></header>
 		<main>
 			<div class="score" v-for="(v, i) in scores" :key="i">
-				<minecraft-text-format :text="v" />
+				<minecraft-text-format :text="placeholder(v)" />
 			</div>
 		</main>
 	</div>
@@ -23,6 +23,16 @@ export default {
 		scores: [],
 		loaded: false
 	}),
+	computed: {
+		mapViewer() { return this.$bluemap.mapViewer.data }
+	},
+	methods: {
+		placeholder (text) {
+			return text
+				.replace('%server_name', 'BlueMap')
+				.replace('%world_name', this.mapViewer.map.name);
+		}
+	},
 	mounted () {
 		const db = getDatabase();
 		const sidebarData = ref(db, 'sidebarData');
