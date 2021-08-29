@@ -4,6 +4,7 @@
     <ControlBar />
     <MainMenu :menu="appState.menu" />
     <Loading :loading="appState.loading" />
+    <Scoreboard />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import ControlBar from "@/components/ControlBar/ControlBar";
 import MainMenu from "@/components/Menu/MainMenu";
 import FreeFlightMobileControls from "@/components/Controls/FreeFlightMobileControls";
 import Loading from "@/components/LoadingScreen/LoadingScreen";
+import Scoreboard from "@/components/Scoreboard/Scoreboard";
 
 export default {
   name: 'App',
@@ -19,7 +21,8 @@ export default {
     FreeFlightMobileControls,
     MainMenu,
     ControlBar,
-    Loading
+    Loading,
+    Scoreboard
   },
   data() {
     return {

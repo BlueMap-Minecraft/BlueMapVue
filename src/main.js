@@ -26,6 +26,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import {BlueMapApp} from "@/js/BlueMapApp";
+import { initializeApp } from 'firebase/app';
 import i18n from './i18n';
 
 // utils
@@ -37,11 +38,23 @@ String.prototype.includesCI = function (val) {
 const bluemap = new BlueMapApp(document.getElementById("map-container"));
 window.bluemap = bluemap;
 
+const firebaseApp = initializeApp({
+  apiKey: "AIzaSyCEUllvYM4c_DLOgUmykIQgrv1qDg-hQ4Q",
+  authDomain: "realtimedisplays-database.firebaseapp.com",
+  databaseURL: "https://realtimedisplays-database-default-rtdb.firebaseio.com",
+  projectId: "realtimedisplays-database",
+  storageBucket: "realtimedisplays-database.appspot.com",
+  messagingSenderId: "426154654247",
+  appId: "1:426154654247:web:c8cd9b3624fce920da2c02",
+  measurementId: "G-7647L62VB3"
+});
+
 // init vue
 Vue.config.productionTip = false;
 Object.defineProperty(Vue.prototype, '$bluemap', {
   get() { return bluemap; }
 });
+
 
 const vue = new Vue({
   i18n,
