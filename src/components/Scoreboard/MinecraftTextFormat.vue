@@ -15,19 +15,28 @@ export default {
 
             if (color) {
                 const colorCode = color[0].replace("§", "");
-                text = text.replace(color[0], "");
-                return h("span", {
-                    class: [
-                        `c-${colorCode}`
-                    ]
-                }, [child(text)]);
+                const index = text.indexOf(color[0]);
+
+                const before = text.substring(0, index);
+                const after = text.substring(index + color[0].length);
+
+                console.log(`before:${before} code:${colorCode} after:${after}`);
+
+                return [
+                    before,
+                    h("span", {
+                        class: [
+                            `c-${colorCode}`
+                        ]
+                    }, child(after))
+                ];
             } else {
                 return text;
             }
         }
 
         for (let i = 0; i < splited.length; i++) {
-            childs.push(h("span", {} , [child(splited[i])]));
+            childs.push(h('span', {}, child(splited[i])));
         }
 
         return h('span', {
