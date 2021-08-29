@@ -1,5 +1,5 @@
 <template>
-	<div class="scoreboard" v-if="loaded">
+	<div class="scoreboard" v-if="loaded && show">
 		<header><minecraft-text-format :text="displayTitle" /></header>
 		<main>
 			<div class="score" v-for="(v, i) in scores" :key="i">
@@ -21,7 +21,8 @@ export default {
 	data: () => ({
 		displayTitle: "",
 		scores: [],
-		loaded: false
+		loaded: false,
+		show: true
 	}),
 	computed: {
 		mapViewer() { return this.$bluemap.mapViewer.data }
@@ -41,6 +42,7 @@ export default {
 			const data = snapshot.val();
 			this.displayTitle = data.displayTitle;
 			this.scores = data.scores;
+			this.show = data.show;
 			this.loaded = true;
 		});
 	}
