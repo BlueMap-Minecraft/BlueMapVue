@@ -233,7 +233,7 @@ export class BlueMapApp {
 
                 let mapSettings = settings.maps[mapId];
                 if (mapSettings.enabled) {
-                    let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.dataUrl + "settings.json", this.dataUrl + "textures.json", this.mapViewer.events);
+                    let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.dataUrl + mapId + "/settings.json", this.dataUrl + "textures.json", this.mapViewer.events);
                     maps.push(map);
 
                     map.loadSettings()
