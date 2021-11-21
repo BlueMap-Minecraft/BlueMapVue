@@ -417,7 +417,7 @@ export class BlueMapApp {
         let startDistance = cm.distance;
 
         let startY = cm.position.y;
-        if (!targetY) targetY = this.mapViewer.map.terrainHeightAt(cm.position.x, cm.position.z) + 3;
+        if (!targetY) targetY = this.mapViewer.map.terrainHeightAt(cm.position.x, cm.position.z) + 3 || startY;
 
         let startAngle = cm.angle;
         let targetAngle = Math.PI / 2;
