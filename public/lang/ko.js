@@ -14,7 +14,9 @@ export default {
         button: "마커",
         tooltip: "마커 목록",
         marker: "개의 마커",
-        markerSet: "마커 목록 | 마커 목록"
+        markerSet: "마커 목록 | 마커 목록",
+        searchPlaceholder: "검색...",
+        followPlayerTitle: "플레이어 따라가기"
     },
     settings: {
         title: "설정",
@@ -141,4 +143,4 @@ export default {
 </p>
 		`
     }
-}
+};
