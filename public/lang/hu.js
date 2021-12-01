@@ -74,38 +74,38 @@ export default {
         tooltip: "Játékos lista"
     },
     compass: {
-        tooltip: "Iránytű / Face North"
+        tooltip: "Iránytű / Északra fordulás"
     },
     controls: {
-        title: "View / Controls",
+        title: "Nézet / Vezérlés",
         perspective: {
-            button: "Perspective",
-            tooltip: "Perspective-View"
+            button: "Perspektivikus",
+            tooltip: "Perspektivikus nézet"
         },
         flatView: {
-            button: "Flat",
-            tooltip: "Orthographic / Flat-View",
+            button: "Lapos",
+            tooltip: "Orthographic / Lapos nézet",
         },
         freeFlight: {
-            button: "Free-Flight",
-            tooltip: "Free-Flight / Spectator Mode"
+            button: "Szabadrepülés",
+            tooltip: "Szabadrepülési / Szemlélő mód"
         }
     },
     language: {
         title: "Nyelv",
     },
     blockTooltip: {
-        block: "Block",
-        position: "Position",
+        block: "Blokk",
+        position: "Pozíció",
         chunk: "Chunk",
         region: {
-            region: "Region",
+            region: "Régió",
             file: "Fájl"
         },
         light: {
-            light: "Light",
-            sun: "Sun",
-            block: "Block",
+            light: "Fény",
+            sun: "Nap",
+            block: "Blokk",
         }
     },
     info: {
