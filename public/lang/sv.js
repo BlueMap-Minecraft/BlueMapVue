@@ -5,8 +5,8 @@ export default {
         tooltip: "Meny"
     },
     maps: {
-        title: "Karta",
-        button: "Karta",
+        title: "Kartor",
+        button: "Kartor",
         tooltip: "Kart lista"
     },
     markers: {
@@ -23,7 +23,7 @@ export default {
         button: "Inställningar"
     },
     goFullscreen: {
-        button: "Gå till helskärm"
+        button: "Sätt på helskärm"
     },
     resetCamera: {
         button: "Återställ kamera",
@@ -31,7 +31,7 @@ export default {
     },
     updateMap: {
         button: "Uppdatera karta",
-        tooltip: "Rensa minne"
+        tooltip: "Rensa cacheminne"
     },
     lighting: {
         title: "Ljus",
@@ -53,7 +53,7 @@ export default {
         invertMouseY: "Invertera mus Y"
     },
     renderDistance: {
-        title: "Rendera avstånd",
+        title: "Renderings avstånd",
         hiresLayer: "Hög upplösnings lager",
         lowersLayer: "Låg upplösnings lager"
     },
