@@ -3,6 +3,10 @@ export default {
     languages: [
         // remove the languages you don't need, reorder them, or add your own
         {
+            locale: "hu",
+            name: "Magyar"
+        },
+        {
             locale: "cs",
             name: "Czech"
         },
