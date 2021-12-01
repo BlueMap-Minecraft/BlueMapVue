@@ -27,6 +27,10 @@ export default {
             name: "Latviešu"
         },
         {
+            locale: "hu",
+            name: "Magyar"
+        },
+        {
             locale: "nl",
             name: "Nederlands"
         },
