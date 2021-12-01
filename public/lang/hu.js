@@ -114,32 +114,32 @@ export default {
         content: `
 <img src="assets/logo.png" style="display: block; width: 40%; margin: 3em auto; border-radius: 50%">
 <p>
-	<h2>Mouse-Controls:</h2>
+	<h2>Egeres vezérlés:</h2>
 	<table>
-		<tr><th>move</th><td><kbd>left-click</kbd> + drag</td></tr>
-		<tr><th>zoom</th><td><kbd>mousewheel</kbd> (scroll)</td></tr>
-		<tr><th>rotate / tilt</th><td><kbd>right-click</kbd> + drag</td></tr>
+		<tr><th>mozgatás</th><td><kbd>bal klikk</kbd> + húzás</td></tr>
+		<tr><th>zoomolás</th><td><kbd>görgő</kbd> (görgetés)</td></tr>
+		<tr><th>elforgatás / döntés</th><td><kbd>jobb klikk</kbd> + húzás</td></tr>
 	</table>
 </p>
 <p>
-	<h2>Keyboard-Controls:</h2>
+	<h2>Billentyűzetes vezérlés:</h2>
 	<table>
-		<tr><th>move</th><td><kbd>wasd</kbd> / <kbd>arrow-keys</kbd></td></tr>
-		<tr><th>zoom</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> or <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
-		<tr><th>rotate / tilt</th><td><kbd>Left-Alt</kbd> + <kbd>wasd</kbd> / <kbd>arrow-keys</kbd> or <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
+		<tr><th>mozgatás</th><td><kbd>wasd</kbd> / <kbd>nyilak</kbd></td></tr>
+		<tr><th>zoomolás</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> or <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
+		<tr><th>elforgatás / döntés</th><td><kbd>Bal alt</kbd> + <kbd>wasd</kbd> / <kbd>arrow-keys</kbd> vagy <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
 	</table>
 </p>
 <p>
-	<h2>Touch-Controls:</h2>
+	<h2>Érintéses vezérlés:</h2>
 	<table>
-		<tr><th>move</th><td>touch + drag</td></tr>
-		<tr><th>zoom</th><td>touch with two fingers + pinch</td></tr>
-		<tr><th>rotate / tilt</th><td>touch with two fingers + rotate / move up/down</td></tr>
+		<tr><th>mozgatás</th><td>érintés + húzás</td></tr>
+		<tr><th>zoomolás</th><td>két ujjal érintés + csípés</td></tr>
+		<tr><th>elforgatás / döntés</th><td>két ujjal érintés + forgatás / felfele/lefele mozgatás</td></tr>
 	</table>
 </p>
 <br><hr>
 <p>
-	This map has been generated with &#9829; using <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+	Ez a térkép &#9829; a <a href="https://bluecolo.red/bluemap">BlueMap</a> segítségével lett generálva.
 </p>
 		`
     }
