@@ -51,6 +51,10 @@ export default {
             name: "Suomi"
         },
         {
+            locale: "sp",
+            name: "Spanish"
+        },
+	{
             locale: "sv",
             name: "Svenska"
         },
