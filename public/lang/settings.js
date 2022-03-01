@@ -58,6 +58,10 @@ export default {
             locale: "sv",
             name: "Svenska"
         },
+	{
+            locale: "ua",
+            name: "Українська"
+        },
         {
             locale: "ja",
             name: "日本語"
