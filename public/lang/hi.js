@@ -1,90 +1,90 @@
 export default {
-    pageTitle: "BlueMap - {map}",
+    pageTitle: "ब्लूमैप - {मानचित्र}",
     menu: {
-        title: "Menu",
-        tooltip: "Menu"
+        title: "मेन्यू",
+        tooltip: "मेन्यू"
     },
     maps: {
-        title: "Maps",
-        button: "Maps",
-        tooltip: "Map-List"
+        title: "नक्शे",
+        button: "नक्शे",
+        tooltip: "मानचित्र-सूची"
     },
     markers: {
-        title: "Markers",
-        button: "Markers",
-        tooltip: "Marker-List",
-        marker: "marker | markers",
-        markerSet: "marker-set | marker-sets",
-        searchPlaceholder: "Search...",
-        followPlayerTitle: "Follow Player"
+        title: "मार्करों",
+        button: "मार्करों",
+        tooltip: "मार्कर-सूची",
+        marker: "मार्कर | मार्करों",
+        markerSet: "मार्कर-सेट | मार्कर-सेट",
+        searchPlaceholder: "खोज...",
+        followPlayerTitle: "प्लेयर को फॉलो करें"
     },
     settings: {
-        title: "Settings",
-        button: "Settings"
+        title: "सेटिंग्स",
+        button: "सेटिंग्स"
     },
     goFullscreen: {
-        button: "Go Fullscreen"
+        button: "पूर्णस्क्रीन मोड"
     },
     resetCamera: {
-        button: "Reset Camera",
-        tooltip: "Reset Camera & Position"
+        button: "कैमरा रीसेट करें",
+        tooltip: "कैमरा और स्थिति रीसेट करें"
     },
     updateMap: {
-        button: "Update Map",
-        tooltip: "Clear Tile Cache"
+        button: "नक्शा अपडेट करें",
+        tooltip: "टाइल कैश साफ़ करें"
     },
     lighting: {
-        title: "Lighting",
+        title: "प्रकाश",
         dayNightSwitch: {
-            tooltip: "Day/Night"
+            tooltip: "दिन हो या रात"
         },
-        sunlight: "Sunlight",
-        ambientLight: "Ambient-Light"
+        sunlight: "सूरज की रोशनी",
+        ambientLight: "परिवेश प्रकाश"
     },
     resolution: {
-        title: "Resolution",
-        high: "High (SSAA, x2)",
-        normal: "Normal (Native, x1)",
-        low: "Low (Upscaling, x0.5)"
+        title: "संकल्प",
+        high: "उच्च (SSAA, x2)",
+        normal: "सामान्य (देशी, x1)",
+        low: "कम (अप स्केलिंग, x0.5)"
     },
     freeFlightControls: {
-        title: "Free-Flight Controls",
-        mouseSensitivity: "Mouse-Sensitivity",
-        invertMouseY: "Invert Mouse Y"
+        title: "मुक्त उड़ान नियंत्रण",
+        mouseSensitivity: "माउस-संवेदनशीलता",
+        invertMouseY: "माउस-संवेदनशीलता"
     },
     renderDistance: {
-        title: "Render Distance",
-        hiresLayer: "Hires layer",
-        lowersLayer: "Lowres layer"
+        title: "रेंडर दूरी",
+        hiresLayer: "परत काम देता है",
+        lowersLayer: "निचली परत"
     },
     theme: {
-        title: "Theme",
-        default: "Default (System/Browser)",
-        dark: "Dark",
-        light: "Light"
+        title: "थीम",
+        default: "डिफ़ॉल्ट (सिस्टम / ब्राउज़र)",
+        dark: "डार्क",
+        light: "प्रकाश"
     },
     debug: {
-        button: "Debug"
+        button: "डिबग"
     },
     resetAllSettings: {
-        button: "Reset All Settings"
+        button: "सभी सेटिंग्स रीसेट करें"
     },
     players: {
-        title: "Players",
-        tooltip: "Player-List"
+        title: "खिलाड़ी",
+        tooltip: "प्लेयर-सूची"
     },
     compass: {
-        tooltip: "Compass / Face North"
+        tooltip: "कम्पास / फेस नॉर्थ"
     },
     controls: {
-        title: "View / Controls",
+        title: "देखें / नियंत्रण",
         perspective: {
-            button: "Perspective",
-            tooltip: "Perspective-View"
+            button: "परिप्रेक्ष्य",
+            tooltip: "परिप्रेक्ष्य-दृश्य"
         },
         flatView: {
-            button: "Flat",
-            tooltip: "Orthographic / Flat-View",
+            button: "फ्लैट",
+            tooltip: "ऑर्थोग्राफिक / फ्लैट-व्यू",
         },
         freeFlight: {
             button: "Free-Flight",
