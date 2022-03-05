@@ -87,59 +87,59 @@ export default {
             tooltip: "ऑर्थोग्राफिक / फ्लैट-व्यू",
         },
         freeFlight: {
-            button: "Free-Flight",
-            tooltip: "Free-Flight / Spectator Mode"
+            button: "फ्री-फ्लाइट",
+            tooltip: "फ्री-फ्लाइट / दर्शक मोड"
         }
     },
     language: {
-        title: "Language",
+        title: "भाषा",
     },
     blockTooltip: {
-        block: "Block",
-        position: "Position",
-        chunk: "Chunk",
+        block: "ब्लॉक",
+        position: "स्थिति",
+        chunk: "चंक",
         region: {
-            region: "Region",
-            file: "File"
+            region: "क्षेत्र",
+            file: "फ़ाइल"
         },
         light: {
-            light: "Light",
-            sun: "Sun",
-            block: "Block",
+            light: "प्रकाश",
+            sun: "सूर्य",
+            block: "ब्लॉक",
         }
     },
     info: {
-        title: "Info",
-        button: "Info",
+        title: "जानकारी",
+        button: "जानकारी",
         content: `
 <img src="assets/logo.png" style="display: block; width: 40%; margin: 3em auto; border-radius: 50%">
 <p>
-	<h2>Mouse-Controls:</h2>
+	<h2>माउस-नियंत्रण:</h2>
 	<table>
-		<tr><th>move</th><td><kbd>left-click</kbd> + drag</td></tr>
-		<tr><th>zoom</th><td><kbd>mousewheel</kbd> (scroll)</td></tr>
-		<tr><th>rotate / tilt</th><td><kbd>right-click</kbd> + drag</td></tr>
+		<tr><th>कदम</th><td><kbd>बाएँ क्लिक करें</kbd> + खींचें</td></tr>
+		<tr><th>ज़ूम</th><td><kbd>माउसव्हील</kbd> (स्क्रॉल)</td></tr>
+		<tr><th>घुमाएँ / झुकाव</th><td><kbd>राइट-क्लिक करें</kbd> + खींचें</td></tr>
 	</table>
 </p>
 <p>
-	<h2>Keyboard-Controls:</h2>
+	<h2>कीबोर्ड पर नियंत्रण:</h2>
 	<table>
-		<tr><th>move</th><td><kbd>wasd</kbd> / <kbd>arrow-keys</kbd></td></tr>
-		<tr><th>zoom</th><td>Numpad: <kbd>+</kbd>/<kbd>-</kbd> or <kbd>Ins</kbd>/<kbd>Home</kbd></td></tr>
-		<tr><th>rotate / tilt</th><td><kbd>Left-Alt</kbd> + <kbd>wasd</kbd> / <kbd>arrow-keys</kbd> or <kbd>Delete</kbd>/<kbd>End</kbd>/<kbd>Page Up</kbd>/<kbd>Page Down</kbd></td></tr>
+		<tr><th>कदम</th><td><kbd>wasd</kbd> / <kbd>तीर कुंजी</kbd></td></tr>
+		<tr><th>ज़ूम</th><td>Numpad: <kbd>या</kbd>/<kbd>इन</kbd> होम <kbd>इन</kbd>/<kbd>होम</kbd></td></tr>
+		<tr><th>घुमाएँ / झुकाव</th><td><kbd>बाईं-Alt</kbd> + <kbd>wasd</kbd> / <kbd>तीर कुंजी</kbd> या <kbd>हटाएं</kbd>/<kbd>अंत</kbd>/<kbd>पृष्ठ</kbd>/<kbd>पृष्ठ के नीचे</kbd></td></tr>
 	</table>
 </p>
 <p>
-	<h2>Touch-Controls:</h2>
+	<h2>स्पर्श नियंत्रण:</h2>
 	<table>
-		<tr><th>move</th><td>touch + drag</td></tr>
-		<tr><th>zoom</th><td>touch with two fingers + pinch</td></tr>
-		<tr><th>rotate / tilt</th><td>touch with two fingers + rotate / move up/down</td></tr>
+		<tr><th>कदम</th><td>टच + खींचें</td></tr>
+		<tr><th>ज़ूम</th><td>दो उंगलियों के साथ स्पर्श + चुटकी</td></tr>
+		<tr><th>घुमाएँ / झुकाव</th><td>दो उंगलियों के साथ टच + घुमाएँ/ऊपर / नीचे ले जाएँ</td></tr>
 	</table>
 </p>
 <br><hr>
 <p>
-	This map has been generated with &#9829; using <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+	का उपयोग कर उत्पन्न <a href="https://bluecolo.red/bluemap">BlueMap</a>.
 </p>
 		`
     }
