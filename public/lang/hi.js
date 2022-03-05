@@ -1,5 +1,5 @@
 export default {
-    pageTitle: "ब्लूमैप - {मानचित्र}",
+    pageTitle: "BlueMap - {map}",
     menu: {
         title: "मेन्यू",
         tooltip: "मेन्यू"
