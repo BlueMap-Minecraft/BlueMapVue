@@ -6,7 +6,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/data': {
-                target: 'https://bluecolored.de/bluemap',
+                target: 'https://bluecolored.de/bluemap-dev',
                 changeOrigin: true,
             },
             '/assets/playerheads': {
