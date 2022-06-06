@@ -21,9 +21,9 @@
     </Group>
 
     <Group :title="$t('renderDistance.title')">
-      <Slider :value="mapViewer.loadedHiresViewDistance" :min="50" :max="500" :step="10"
+      <Slider :value="mapViewer.loadedHiresViewDistance" :min="settings.hiresSliderMin" :max="settings.hiresSliderMax" :step="10"
               @update="mapViewer.loadedHiresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">{{ $t("renderDistance.hiresLayer") }}</Slider>
-      <Slider :value="mapViewer.loadedLowresViewDistance" :min="500" :max="10000" :step="100"
+      <Slider :value="mapViewer.loadedLowresViewDistance" :min="settings.lowresSliderMin" :max="settings.lowresSliderMax" :step="100"
               @update="mapViewer.loadedLowresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">{{ $t("renderDistance.lowersLayer") }}</Slider>
     </Group>
 
@@ -79,6 +79,15 @@ name: "SettingsMenu",
     return {
       appState: this.$bluemap.appState,
       mapViewer: this.$bluemap.mapViewer.data,
+      settings: {
+        ...{
+          hiresSliderMax: 500,
+          hiresSliderMin: 50,
+          lowresSliderMax: 10000,
+          lowresSliderMin: 500
+        },
+        ...this.$bluemap.settings
+      },
 
       qualityStages: qualityStages,
       themes: themes,

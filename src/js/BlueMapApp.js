@@ -55,7 +55,20 @@ export class BlueMapApp {
         /** @type {MarkerFileManager} */
         this.markerFileManager = null;
 
-        /** @type {{useCookies: boolean, freeFlightEnabled: boolean, maps: []}} */
+        /** @type {{
+         *      useCookies: boolean,
+         *      freeFlightEnabled: boolean,
+         *      resolutionDefault: number,
+         *      hiresSliderMax: number,
+         *      hiresSliderDefault: number,
+         *      hiresSliderMin: number,
+         *      lowresSliderMax: number,
+         *      lowresSliderDefault: number,
+         *      lowresSliderMin: number,
+         *      startLocation: string,
+         *      maps: string[]
+         *  }}
+         **/
         this.settings = null;
         this.savedUserSettings = new Map();
 
@@ -116,7 +129,7 @@ export class BlueMapApp {
         oldMaps.forEach(map => map.dispose());
 
         // load maps
-        this.maps = this.loadMaps();
+        this.maps = await this.loadMaps();
         for (let map of this.maps) {
             this.mapsMap.set(map.data.id, map);
             this.appState.maps.push(map.data);
@@ -220,33 +233,28 @@ export class BlueMapApp {
     }
 
     /**
-     * @returns BlueMapMap[]
+     * @returns Promise<BlueMapMap[]>
      */
-    loadMaps() {
+    async loadMaps() {
         let settings = this.settings;
         let maps = [];
 
         // create maps
         if (settings.maps !== undefined){
-            for (let mapId in settings.maps) {
-                if (!Object.prototype.hasOwnProperty.call(settings.maps, mapId)) continue;
+            for (let mapId of settings.maps) {
+                let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.mapViewer.events);
+                maps.push(map);
 
-                let mapSettings = settings.maps[mapId];
-                if (mapSettings.enabled) {
-                    let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.dataUrl + "settings.json", this.dataUrl + mapId + "/textures.json", this.mapViewer.events);
-                    maps.push(map);
-
-                    map.loadSettings()
-                        .catch(error => {
-                            alert(this.events, `Failed to load settings for map '${map.data.id}':` + error, "warning");
-                        });
-                }
+                await map.loadSettings()
+                    .catch(error => {
+                        alert(this.events, `Failed to load settings for map '${map.data.id}':` + error, "warning");
+                    });
             }
         }
 
         // sort maps
         maps.sort((map1, map2) => {
-            let sort = settings.maps[map1.data.id].ordinal - settings.maps[map2.data.id].ordinal;
+            let sort = map1.data.sorting - map2.data.sorting;
             if (isNaN(sort)) return 0;
             return sort;
         });
@@ -487,6 +495,10 @@ export class BlueMapApp {
     }
 
     async loadUserSettings(){
+        if (!isNaN(this.settings.resolutionDefault)) this.mapViewer.data.superSampling = this.settings.resolutionDefault;
+        if (!isNaN(this.settings.hiresSliderDefault)) this.mapViewer.data.loadedHiresViewDistance = this.settings.hiresSliderDefault;
+        if (!isNaN(this.settings.lowresSliderDefault)) this.mapViewer.data.loadedLowresViewDistance = this.settings.lowresSliderDefault;
+
         if (!this.settings.useCookies) return;
 
         if (this.loadUserSetting("resetSettings", false)) {
@@ -574,7 +586,7 @@ export class BlueMapApp {
     }
 
     loadPageAddress = async () => {
-        let hash = window.location.hash.substr(1);
+        let hash = window.location.hash.substring(1) || this.settings.startLocation;
         let values = hash.split(":");
 
         if (values.length !== 10) return false;
