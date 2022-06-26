@@ -77,7 +77,7 @@ export class BlueMapApp {
         /** @type Map<BlueMapMap> */
         this.mapsMap = new Map();
 
-        this.dataUrl = "data/";
+        this.dataUrl = "maps/";
 
         this.mainMenu = new MainMenu();
 
@@ -163,55 +163,68 @@ export class BlueMapApp {
     }
 
     async followPlayerMarkerWorld() {
-        let player = this.mapViewer.controlsManager.controls ?
-            this.mapViewer.controlsManager.controls.data.followingPlayer :
-            false;
+        /** @type {PlayerLike} */
+        let player = this.mapViewer.controlsManager.controls?.data.followingPlayer;
 
         if (this.mapViewer.map && player) {
-            if (player.world !== this.mapViewer.map.data.world){
+            if (player.foreign){
 
-                /** @type BlueMapMap */
-                let matchingMap = null;
-                for (let map of this.maps) {
-                    if (map.data.world === player.world) {
+                let matchingMap = await this.findPlayerMap(player.playerUuid)
+                if (matchingMap) {
+                    this.mainMenu.closeAll();
+                    await this.switchMap(matchingMap.data.id, false);
+                    let playerMarker = this.playerMarkerManager.getPlayerMarker(player.playerUuid);
+                    if (playerMarker && this.mapViewer.controlsManager.controls.followPlayerMarker)
+                        this.mapViewer.controlsManager.controls.followPlayerMarker(playerMarker);
+                } else {
+                    if (this.mapViewer.controlsManager.controls.stopFollowingPlayerMarker)
+                        this.mapViewer.controlsManager.controls.stopFollowingPlayerMarker();
+                }
+            }
+        }
+    }
+
+    async findPlayerMap(playerUuid) {
+        /** @type BlueMapMap */
+        let matchingMap = null;
+
+        // search for the map that contains the player
+        if (this.maps.length < 20) {
+            for (let map of this.maps) {
+                let playerData = await this.loadPlayerData(map);
+                if (!Array.isArray(playerData.players)) continue;
+                for (let p of playerData.players) {
+                    if (p.uuid === playerUuid && !p.foreign) {
                         matchingMap = map;
                         break;
                     }
                 }
 
-                if (!matchingMap) {
-                    if (this.mapViewer.controlsManager.controls.stopFollowingPlayerMarker)
-                        this.mapViewer.controlsManager.controls.stopFollowingPlayerMarker();
-                    return;
-                }
-
-                await this.switchMap(matchingMap.data.id);
+                if (matchingMap) break;
             }
         }
+
+        return matchingMap;
     }
 
     /**
      * @param mapId {String}
-     * @param resetCameraIfNewWorld {boolean}
+     * @param resetCamera {boolean}
      * @returns {Promise<void>}
      */
-    switchMap(mapId, resetCameraIfNewWorld = false) {
+    async switchMap(mapId, resetCamera = true) {
         let map = this.mapsMap.get(mapId);
         if (!map) return Promise.reject(`There is no map with the id "${mapId}" loaded!`);
 
-        let oldWorld = this.mapViewer.map ? this.mapViewer.map.data.world : null;
-        return this.mapViewer.switchMap(map).then(() => {
-            if (map) {
-                this.initPlayerMarkerManager();
-                this.initMarkerFileManager();
+        await this.mapViewer.switchMap(map)
 
-                if (resetCameraIfNewWorld && map.data.world !== oldWorld) {
-                    this.resetCamera();
-                }
-            }
+        if (resetCamera) this.resetCamera();
+        this.updatePageAddress();
 
-            this.updatePageAddress();
-        });
+        await Promise.all([
+            this.initPlayerMarkerManager(),
+            this.initMarkerFileManager()
+        ]);
     }
 
     resetCamera() {
@@ -277,7 +290,7 @@ export class BlueMapApp {
         return new Promise((resolve, reject) => {
             let loader = new FileLoader();
             loader.setResponseType("json");
-            loader.load(this.dataUrl + "settings.json?" + generateCacheHash(),
+            loader.load("settings.json?" + generateCacheHash(),
                 resolve,
                 () => {},
                 () => reject("Failed to load the settings.json!")
@@ -285,17 +298,37 @@ export class BlueMapApp {
         });
     }
 
-    initPlayerMarkerManager() {
-        if (!this.mapViewer.map) return;
+    /**
+     * @param map {BlueMapMap}
+     * @returns {Promise<Object>}
+     */
+    loadPlayerData(map) {
+        return new Promise((resolve, reject) => {
+            let loader = new FileLoader();
+            loader.setResponseType("json");
+            loader.load(map.data.dataUrl + "live/players?" + generateCacheHash(),
+                fileData => {
+                    if (!fileData) reject(`Failed to parse '${this.fileUrl}'!`);
+                    else resolve(fileData);
+                },
+                () => {},
+                () => reject(`Failed to load '${this.fileUrl}'!`)
+            )
+        });
+    }
 
-        if (this.playerMarkerManager) {
-            this.playerMarkerManager.worldId = this.mapViewer.map.data.world;
-        } else {
-            this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, "live/players", this.mapViewer.map.data.world, this.events);
+    initPlayerMarkerManager() {
+        if (this.playerMarkerManager){
+            this.playerMarkerManager.clear();
+            this.playerMarkerManager.dispose()
         }
 
+        const map = this.mapViewer.map;
+        if (!map) return;
+
+        this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/players", this.events);
         this.playerMarkerManager.setAutoUpdateInterval(0);
-        this.playerMarkerManager.update()
+        return this.playerMarkerManager.update()
             .then(() => {
                 this.playerMarkerManager.setAutoUpdateInterval(1000);
             })
@@ -312,10 +345,11 @@ export class BlueMapApp {
             this.markerFileManager.dispose();
         }
 
-        if (!this.mapViewer.map) return;
+        const map = this.mapViewer.map;
+        if (!map) return;
 
-        this.markerFileManager = new MarkerFileManager(this.mapViewer.markers, "data/markers.json", this.mapViewer.map.data.id, this.events);
-        this.markerFileManager.update()
+        this.markerFileManager = new MarkerFileManager(this.mapViewer.markers, map.data.dataUrl + "markers.json", map.data.id, this.events);
+        return this.markerFileManager.update()
             .then(() => {
                 this.markerFileManager.setAutoUpdateInterval(1000 * 10);
             })
@@ -586,7 +620,7 @@ export class BlueMapApp {
     }
 
     loadPageAddress = async () => {
-        let hash = window.location.hash.substring(1) || this.settings.startLocation;
+        let hash = window.location.hash?.substring(1) || this.settings.startLocation || "";
         let values = hash.split(":");
 
         if (values.length !== 10) return false;

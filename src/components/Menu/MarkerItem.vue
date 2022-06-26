@@ -89,7 +89,7 @@ export default {
           await this.$bluemap.switchMap(matchingMap.data.id);
         }
 
-        if (follow && cm.controls && cm.controls.followPlayerMarker) {
+        if (follow && cm.controls && cm.controls.followPlayerMarker && this.marker.visible) {
           cm.controls.followPlayerMarker(this.marker);
         }
 

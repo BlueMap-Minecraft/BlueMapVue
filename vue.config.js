@@ -5,18 +5,14 @@ module.exports = {
     publicPath: './',
     devServer: {
         proxy: {
-            '/data': {
-                target: 'https://bluecolored.de/bluemap-dev',
+            '/maps': {
+                target: 'https://localhost:8100',
                 changeOrigin: true,
             },
             '/assets/playerheads': {
                 target: 'https://bluecolored.de/bluemap',
                 changeOrigin: true,
-            },
-            '/live': {
-                target: 'https://bluecolored.de/bluemap',
-                changeOrigin: true,
-            },
+            }
         }
     }
 }
