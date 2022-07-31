@@ -5,12 +5,16 @@ module.exports = {
     publicPath: './',
     devServer: {
         proxy: {
+            '/settings.json': {
+                target: 'http://localhost:8100',
+                changeOrigin: true,
+            },
             '/maps': {
-                target: 'https://localhost:8100',
+                target: 'http://localhost:8100',
                 changeOrigin: true,
             },
             '/assets/playerheads': {
-                target: 'https://bluecolored.de/bluemap',
+                target: 'http://localhost:8100',
                 changeOrigin: true,
             }
         }

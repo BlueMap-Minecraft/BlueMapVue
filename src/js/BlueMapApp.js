@@ -29,13 +29,12 @@ import {FreeFlightControls} from "bluemap/src/controls/freeflight/FreeFlightCont
 import {FileLoader, MathUtils, Vector3} from "three";
 import {Map as BlueMapMap} from "bluemap/src/map/Map";
 import {alert, animate, EasingFunctions, generateCacheHash} from "bluemap/src/util/Utils";
-import {PlayerMarkerManager} from "bluemap/src/markers/PlayerMarkerManager";
-import {MarkerFileManager} from "bluemap/src/markers/MarkerFileManager";
 import {MainMenu} from "@/js/MainMenu";
 import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
 import {getLocalStorage, round, setLocalStorage} from "@/js/Utils";
 import i18n from "../i18n";
+import {MarkerManager, MarkerFileType} from "bluemap/src/markers/MarkerManager";
 
 export class BlueMapApp {
 
@@ -50,14 +49,14 @@ export class BlueMapApp {
         this.mapControls = new MapControls(this.mapViewer.renderer.domElement);
         this.freeFlightControls = new FreeFlightControls(this.mapViewer.renderer.domElement);
 
-        /** @type {PlayerMarkerManager} */
+        /** @type {MarkerManager} */
         this.playerMarkerManager = null;
-        /** @type {MarkerFileManager} */
+        /** @type {MarkerManager} */
         this.markerFileManager = null;
 
         /** @type {{
          *      useCookies: boolean,
-         *      freeFlightEnabled: boolean,
+         *      enableFreeFlight: boolean,
          *      resolutionDefault: number,
          *      hiresSliderMax: number,
          *      hiresSliderDefault: number,
@@ -86,7 +85,7 @@ export class BlueMapApp {
                 state: "perspective",
                 mouseSensitivity: 1,
                 invertMouse: false,
-                freeFlightEnabled: false,
+                enableFreeFlight: false,
             },
             menu: this.mainMenu,
             maps: [],
@@ -122,7 +121,7 @@ export class BlueMapApp {
 
         // load settings
         await this.getSettings();
-        this.appState.controls.freeFlightEnabled = this.settings.freeFlightEnabled;
+        this.appState.controls.enableFreeFlight = this.settings.enableFreeFlight;
 
         // unload loaded maps
         await this.mapViewer.switchMap(null);
@@ -326,7 +325,7 @@ export class BlueMapApp {
         const map = this.mapViewer.map;
         if (!map) return;
 
-        this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/players", this.events);
+        this.playerMarkerManager = new MarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/players", MarkerFileType.PLAYER, this.events);
         this.playerMarkerManager.setAutoUpdateInterval(0);
         return this.playerMarkerManager.update()
             .then(() => {
@@ -348,7 +347,7 @@ export class BlueMapApp {
         const map = this.mapViewer.map;
         if (!map) return;
 
-        this.markerFileManager = new MarkerFileManager(this.mapViewer.markers, map.data.dataUrl + "markers.json", map.data.id, this.events);
+        this.markerFileManager = new MarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/markers", MarkerFileType.NORMAL, this.events);
         return this.markerFileManager.update()
             .then(() => {
                 this.markerFileManager.setAutoUpdateInterval(1000 * 10);
@@ -450,7 +449,7 @@ export class BlueMapApp {
 
     setFreeFlight(transition = 0, targetY = undefined) {
         if (!this.mapViewer.map) return;
-        if (!this.settings.freeFlightEnabled) return this.setPerspectiveView(transition);
+        if (!this.settings.enableFreeFlight) return this.setPerspectiveView(transition);
         if (this.viewAnimation) this.viewAnimation.cancel();
 
         let cm = this.mapViewer.controlsManager;
