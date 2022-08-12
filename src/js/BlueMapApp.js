@@ -58,6 +58,8 @@ export class BlueMapApp {
          *      useCookies: boolean,
          *      enableFreeFlight: boolean,
          *      resolutionDefault: number,
+         *      minZoomDistance: number,
+         *      maxZoomDistance: number,
          *      hiresSliderMax: number,
          *      hiresSliderDefault: number,
          *      hiresSliderMin: number,
@@ -121,6 +123,8 @@ export class BlueMapApp {
 
         // load settings
         await this.getSettings();
+        this.mapControls.minDistance = this.settings.minZoomDistance;
+        this.mapControls.maxDistance = this.settings.maxZoomDistance;
         this.appState.controls.enableFreeFlight = this.settings.enableFreeFlight;
 
         // unload loaded maps
