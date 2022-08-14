@@ -239,7 +239,7 @@ export class BlueMapApp {
 
         if (map) {
             controls.position.set(map.data.startPos.x, 0, map.data.startPos.z);
-            controls.distance = 500;
+            controls.distance = 1500;
             controls.angle = 0;
             controls.rotation = 0;
             controls.tilt = 0;
