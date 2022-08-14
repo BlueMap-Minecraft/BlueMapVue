@@ -21,10 +21,11 @@
     </Group>
 
     <Group :title="$t('renderDistance.title')">
-      <Slider :value="mapViewer.loadedHiresViewDistance" :min="settings.hiresSliderMin" :max="settings.hiresSliderMax" :step="10"
+      <Slider :value="mapViewer.loadedHiresViewDistance" :min="settings.hiresSliderMin" :max="settings.hiresSliderMax" :step="10" :formatter="renderDistanceFormatter"
               @update="mapViewer.loadedHiresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">{{ $t("renderDistance.hiresLayer") }}</Slider>
       <Slider :value="mapViewer.loadedLowresViewDistance" :min="settings.lowresSliderMin" :max="settings.lowresSliderMax" :step="100"
               @update="mapViewer.loadedLowresViewDistance = $event; $bluemap.mapViewer.updateLoadedMapArea()" @lazy="$bluemap.saveUserSettings()">{{ $t("renderDistance.lowersLayer") }}</Slider>
+      <SwitchButton :on="!appState.controls.pauseTileLoading" @action="appState.controls.pauseTileLoading = !appState.controls.pauseTileLoading; $bluemap.saveUserSettings()">{{ $t("renderDistance.loadHiresWhileMoving") }}</SwitchButton>
     </Group>
 
     <Group :title="$t('freeFlightControls.title')">
@@ -96,6 +97,10 @@ name: "SettingsMenu",
   methods: {
     switchDebug() {
       this.$bluemap.setDebug(!this.appState.debug);
+    },
+    renderDistanceFormatter(value) {
+      let f = parseFloat(value);
+      return f === 0 ? this.$t("renderDistance.off") : f.toFixed(0);
     }
   }
 }

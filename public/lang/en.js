@@ -55,7 +55,9 @@ export default {
     renderDistance: {
         title: "Render Distance",
         hiresLayer: "Hires layer",
-        lowersLayer: "Lowres layer"
+        lowersLayer: "Lowres layer",
+        loadHiresWhileMoving: "Load hires while moving",
+        off: "Off"
     },
     theme: {
         title: "Theme",

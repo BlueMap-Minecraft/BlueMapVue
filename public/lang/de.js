@@ -55,7 +55,9 @@ export default {
     renderDistance: {
         title: "Renderdistanz",
         hiresLayer: "Hires-Schicht",
-        lowersLayer: "Lowres-Schicht"
+        lowersLayer: "Lowres-Schicht",
+        loadHiresWhileMoving: "Lade Hires während Bewegung",
+        off: "Off"
     },
     theme: {
         title: "Farbmodus",

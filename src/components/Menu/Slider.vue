@@ -1,6 +1,6 @@
 <template>
 <div class="slider">
-  <div class="label"><slot />: <span class="value">{{formattedValue}}</span></div>
+  <div class="label"><slot />: <span class="value">{{formatter(value)}}</span></div>
   <label>
     <input type="range" :min="min" :max="max" :step="step" :value="value" @input="$emit('update', parseFloat($event.target.value))" @change="$emit('lazy', parseFloat($event.target.value))">
   </label>
@@ -21,10 +21,11 @@ export default {
     min: Number,
     max: Number,
     step: Number,
-  },
-  computed: {
-    formattedValue() {
-      return parseFloat(this.value).toFixed(countDecimals(this.step));
+    formatter: {
+      type: Function,
+      default: function(value) {
+        return parseFloat(value).toFixed(countDecimals(this.step));
+      }
     }
   }
 }

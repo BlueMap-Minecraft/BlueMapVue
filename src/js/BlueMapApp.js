@@ -78,6 +78,8 @@ export class BlueMapApp {
         /** @type Map<BlueMapMap> */
         this.mapsMap = new Map();
 
+        this.lastCameraMove = 0;
+
         this.dataUrl = "maps/";
 
         this.mainMenu = new MainMenu();
@@ -88,6 +90,7 @@ export class BlueMapApp {
                 mouseSensitivity: 1,
                 invertMouse: false,
                 enableFreeFlight: false,
+                pauseTileLoading: false
             },
             menu: this.mainMenu,
             maps: [],
@@ -258,7 +261,7 @@ export class BlueMapApp {
         // create maps
         if (settings.maps !== undefined){
             for (let mapId of settings.maps) {
-                let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.mapViewer.events);
+                let map = new BlueMapMap(mapId, this.dataUrl + mapId + "/", this.loadBlocker, this.mapViewer.events);
                 maps.push(map);
 
                 await map.loadSettings()
@@ -552,6 +555,7 @@ export class BlueMapApp {
         this.mapViewer.updateLoadedMapArea();
         this.appState.controls.mouseSensitivity = this.loadUserSetting("mouseSensitivity", this.appState.controls.mouseSensitivity);
         this.appState.controls.invertMouse = this.loadUserSetting("invertMouse", this.appState.controls.invertMouse);
+        this.appState.controls.pauseTileLoading = this.loadUserSetting("pauseTileLoading", this.appState.controls.pauseTileLoading);
         this.updateControlsSettings();
         this.setTheme(this.loadUserSetting("theme", this.appState.theme));
         await i18n.setLanguage(this.loadUserSetting("lang", i18n.locale));
@@ -571,6 +575,7 @@ export class BlueMapApp {
         this.saveUserSetting("lowresViewDistance", this.mapViewer.data.loadedLowresViewDistance);
         this.saveUserSetting("mouseSensitivity", this.appState.controls.mouseSensitivity);
         this.saveUserSetting("invertMouse", this.appState.controls.invertMouse);
+        this.saveUserSetting("pauseTileLoading", this.appState.controls.pauseTileLoading);
         this.saveUserSetting("theme", this.appState.theme);
         this.saveUserSetting("lang", i18n.locale);
         this.saveUserSetting("debug", this.appState.debug);
@@ -595,6 +600,22 @@ export class BlueMapApp {
     cameraMoved = () => {
         if (this.hashUpdateTimeout) clearTimeout(this.hashUpdateTimeout);
         this.hashUpdateTimeout = setTimeout(this.updatePageAddress, 1500);
+        this.lastCameraMove = Date.now();
+    }
+
+    loadBlocker = async () => {
+        if (!this.appState.controls.pauseTileLoading) return;
+
+        let timeToWait;
+        do {
+            let timeSinceLastMove = Date.now() - this.lastCameraMove;
+            timeToWait = 250 - timeSinceLastMove;
+            if (timeToWait > 0) await this.sleep(timeToWait);
+        } while (timeToWait > 0);
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     updatePageAddress = () => {
