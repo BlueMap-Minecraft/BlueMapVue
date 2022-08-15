@@ -23,6 +23,14 @@
  * THE SOFTWARE.
  */
 
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: local("Quicksand"), url("./fonts/Quicksand.ttf") format('truetype-variations');
+}
+
 @import "variables.scss";
 
 // ### global rules ###

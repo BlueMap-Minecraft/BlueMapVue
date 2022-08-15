@@ -27,8 +27,6 @@
 $mobile-break: 575.98px;
 
 // themes
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
-
 @mixin dark-theme {
   font-family: 'Quicksand', sans-serif;
   font-size: 16px;
