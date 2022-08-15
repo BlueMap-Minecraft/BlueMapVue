@@ -72,9 +72,13 @@ export class PopupMarker extends Marker {
         let isHires = true;
         let int = evt.detail.hiresHit;
 
-        if (!int) {
-            isHires = false;
-            int = evt.detail.lowresHit;
+        if (evt.detail.lowresHits) {
+            for (let i = 0; i < evt.detail.lowresHits.length; i++) {
+                if (!int) {
+                    isHires = false;
+                    int = evt.detail.lowresHits[i];
+                } else break;
+            }
         }
 
         if (!int) return;
@@ -164,12 +168,16 @@ export class PopupMarker extends Marker {
             let info = "";
 
             if (isHires) {
-                let hrPath = evt.detail.hiresHit.object.userData.tileUrl;
+                let hrPath = evt.detail.hiresHit?.object?.userData?.tileUrl;
                 info += `<div>${hrPath}</div>`;
             }
 
-            let lrPath = evt.detail.lowresHit.object.userData.tileUrl;
-            info += `<div>${lrPath}</div>`;
+            if (evt.detail.lowresHits) {
+                for (let i = 0; i < evt.detail.lowresHits.length; i++) {
+                    let lrPath = evt.detail.lowresHits[i]?.object?.userData?.tileUrl;
+                    if (lrPath) info += `<div>${lrPath}</div>`;
+                }
+            }
 
             this.element.innerHTML += `
                 <hr>

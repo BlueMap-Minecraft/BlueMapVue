@@ -681,7 +681,8 @@ export class BlueMapApp {
     mapInteraction = event => {
         if (event.detail.data.doubleTap) {
             let cm = this.mapViewer.controlsManager;
-            let pos = (event.detail.hit ? event.detail.hit.point : false) || event.detail.object.getWorldPosition(new Vector3());
+            let pos = event.detail.hit?.point || event.detail.object?.getWorldPosition(new Vector3());
+            if (!pos) return;
 
             let startDistance = cm.distance;
             let targetDistance = Math.max(startDistance * 0.25, 5);
