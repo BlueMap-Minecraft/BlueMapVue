@@ -74,15 +74,8 @@ export default {
 
       if (this.marker.type === "player") {
 
-        if (this.$bluemap.mapViewer.map.data.world !== this.marker.world) {
-          let matchingMap = null;
-          for (let map of this.$bluemap.maps) {
-            if (map.data.world === this.marker.world) {
-              matchingMap = map;
-              break;
-            }
-          }
-
+        if (this.marker.foreign) {
+          let matchingMap = await this.$bluemap.findPlayerMap(this.marker.playerUuid);
           if (!matchingMap) return;
 
           //this.$bluemap.appState.menu.closeAll();
