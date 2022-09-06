@@ -702,4 +702,11 @@ export class BlueMapApp {
         }
     }
 
+    takeScreenshot = () => {
+        let link = document.createElement("a");
+        link.download = "bluemap-screenshot.png";
+        link.href = this.mapViewer.renderer.domElement.toDataURL('image/png');
+        link.click();
+    }
+
 }
