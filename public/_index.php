@@ -36,6 +36,7 @@ function startsWith($haystack, $needle) {
 
 // determine relative request-path
 $root = dirname($_SERVER['PHP_SELF']);
+if ($root === "/") $root = "";
 $uriPath = $_SERVER['REQUEST_URI'];
 $path = substr($uriPath, strlen($root));
 
