@@ -34,24 +34,39 @@ String.prototype.includesCI = function (val) {
 }
 
 // bluemap app
-const bluemap = new BlueMapApp(document.getElementById("map-container"));
-window.bluemap = bluemap;
+try {
+  const bluemap = new BlueMapApp(document.getElementById("map-container"));
+  window.bluemap = bluemap;
 
 // init vue
-Vue.config.productionTip = false;
-Object.defineProperty(Vue.prototype, '$bluemap', {
-  get() { return bluemap; }
-});
+  Vue.config.productionTip = false;
+  Object.defineProperty(Vue.prototype, '$bluemap', {
+    get() {
+      return bluemap;
+    }
+  });
 
-const vue = new Vue({
-  i18n,
-  render: h => h(App)
-}).$mount('#app');
+  const vue = new Vue({
+    i18n,
+    render: h => h(App)
+  }).$mount('#app');
 
 // load languages
-i18n.loadLanguageSettings().catch(error => console.error(error));
+  i18n.loadLanguageSettings().catch(error => console.error(error));
 
 // load bluemap next tick (to let the assets load first)
-vue.$nextTick(() => {
-  bluemap.load().catch(error => console.error(error));
-});
+  vue.$nextTick(() => {
+    bluemap.load().catch(error => console.error(error));
+  });
+} catch (e) {
+  console.error("Failed to load BlueMap webapp!", e);
+  document.body.innerHTML = `
+    <div id="bm-app-err">
+      <div>
+        <img src="assets/logo.png" alt="bluemap logo">
+        <div class="bm-app-err-main">Failed to load BlueMap webapp!</div>
+        <div class="bm-app-err-hint">Make sure you have <a href="https://get.webgl.org/">WebGL</a> enabled on your browser.</div>
+      </div>
+    </div>
+  `;
+}
