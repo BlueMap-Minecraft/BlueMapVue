@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	Cette carte a été générée avec &#9829; par <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	Cette carte a été générée avec &#9829; par <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }

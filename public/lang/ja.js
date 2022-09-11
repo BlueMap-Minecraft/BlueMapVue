@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	このマップは<a href="https://bluecolo.red/bluemap">BlueMap</a>で生成されています！&#9829;
+<p class="info-footer">
+	このマップは<a href="https://bluecolo.red/bluemap">BlueMap</a> {version}で生成されています！&#9829;
 </p>
 		`
     }

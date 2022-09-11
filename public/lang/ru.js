@@ -136,8 +136,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	Эта карта сгенерирована с &#9829; <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	Эта карта сгенерирована с &#9829; <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }

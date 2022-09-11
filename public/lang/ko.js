@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	이 지도는 &#9829; <a href="https://bluecolo.red/bluemap">BlueMap</a> 을 이용해 제작되었습니다.
+<p class="info-footer">
+	이 지도는 &#9829; <a href="https://bluecolo.red/bluemap">BlueMap</a> {version} 을 이용해 제작되었습니다
 </p>
 		`
     }

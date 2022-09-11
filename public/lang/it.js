@@ -136,8 +136,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	Questa mappa e' stata generata con &#9829; usando <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	Questa mappa e' stata generata con &#9829; usando <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }

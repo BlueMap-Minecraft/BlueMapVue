@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	Ez a térkép &#9829; a <a href="https://bluecolo.red/bluemap">BlueMap</a> segítségével lett generálva.
+<p class="info-footer">
+	Ez a térkép &#9829; a <a href="https://bluecolo.red/bluemap">BlueMap</a> {version} segítségével lett generálva
 </p>
 		`
     }

@@ -137,8 +137,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	Šī karte veidota ar &#9829; <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	Šī karte veidota ar &#9829; <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }

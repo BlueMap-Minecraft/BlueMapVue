@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-    Tämä kartta on tehty rakkaudella &#9829; käyttäen <a href="https://bluecolo.red/bluemap">BlueMap</a> -ohjelmaa.
+<p class="info-footer">
+    Tämä kartta on tehty rakkaudella &#9829; käyttäen <a href="https://bluecolo.red/bluemap">BlueMap</a> {version} -ohjelmaa
 </p>
 		`
     }

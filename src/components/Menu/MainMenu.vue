@@ -24,7 +24,9 @@
 
     <SettingsMenu v-if="menu.currentPage().id === 'settings'" />
 
-    <div class="info-content" v-if="menu.currentPage().id === 'info'" v-html="$t('info.content')"></div>
+    <div class="info-content" v-if="menu.currentPage().id === 'info'" v-html="$t('info.content', {
+      version: $bluemap.settings.version
+    })"></div>
 
   </SideMenu>
 </template>
@@ -76,6 +78,10 @@ export default {
         text-align: inherit;
       }
     }
+  }
+
+  .info-footer {
+    text-align: center;
   }
 }
 </style>

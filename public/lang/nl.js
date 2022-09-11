@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	Deze kaart is met &#9829; door <a href="https://bluecolo.red/bluemap">BlueMap</a> gegenereerd.
+<p class="info-footer">
+	Deze kaart is met &#9829; door <a href="https://bluecolo.red/bluemap">BlueMap</a> {version} gegenereerd
 </p>
 		`
     }

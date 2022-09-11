@@ -55,6 +55,7 @@ export class BlueMapApp {
         this.markerFileManager = null;
 
         /** @type {{
+         *      version: string,
          *      useCookies: boolean,
          *      enableFreeFlight: boolean,
          *      resolutionDefault: number,
@@ -639,7 +640,8 @@ export class BlueMapApp {
         history.replaceState(undefined, undefined, hash);
 
         document.title = i18n.t("pageTitle", {
-            map: this.mapViewer.map ? this.mapViewer.map.data.name : "?"
+            map: this.mapViewer.map ? this.mapViewer.map.data.name : "?",
+            version: this.settings.version
         });
     }
 

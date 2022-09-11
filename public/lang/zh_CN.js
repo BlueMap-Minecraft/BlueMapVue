@@ -137,8 +137,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	本地图由 &#9829 生成; 正在使用 <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	本地图由 &#9829 生成; 正在使用 <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }

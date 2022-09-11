@@ -136,8 +136,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	此地圖是用 &#9829; 製作，地圖插件名稱是 <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	此地圖是用 &#9829; 製作，地圖插件名稱是 <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }

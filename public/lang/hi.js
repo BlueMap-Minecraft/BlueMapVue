@@ -138,8 +138,8 @@ export default {
 	</table>
 </p>
 <br><hr>
-<p>
-	का उपयोग कर उत्पन्न <a href="https://bluecolo.red/bluemap">BlueMap</a>.
+<p class="info-footer">
+	का उपयोग कर उत्पन्न <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}
 </p>
 		`
     }
