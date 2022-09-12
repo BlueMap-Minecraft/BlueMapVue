@@ -41,6 +41,10 @@
       >{{theme.name}}</SimpleButton>
     </Group>
 
+    <Group :title="$t('screenshot.title')">
+      <SwitchButton :on="appState.screenshot.clipboard" @action="appState.screenshot.clipboard = !appState.screenshot.clipboard; $bluemap.saveUserSettings()">{{ $t("screenshot.clipboard") }}</SwitchButton>
+    </Group>
+
     <Group v-if="$i18n.languages.length > 1" :title="$t('language.title')">
       <SimpleButton v-for="lang of $i18n.languages" :key="lang.locale"
                     :active="lang.locale === $i18n.locale"

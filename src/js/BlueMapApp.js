@@ -95,6 +95,9 @@ export class BlueMapApp {
             menu: this.mainMenu,
             maps: [],
             theme: null,
+            screenshot: {
+                clipboard: true
+            },
             debug: false
         };
 
@@ -517,6 +520,10 @@ export class BlueMapApp {
         }
     }
 
+    setScreenshotClipboard(clipboard) {
+        this.appState.screenshot.clipboard = clipboard;
+    }
+
     async updateMap() {
         try {
             this.mapViewer.clearTileCache();
@@ -558,6 +565,7 @@ export class BlueMapApp {
         this.appState.controls.pauseTileLoading = this.loadUserSetting("pauseTileLoading", this.appState.controls.pauseTileLoading);
         this.updateControlsSettings();
         this.setTheme(this.loadUserSetting("theme", this.appState.theme));
+        this.setScreenshotClipboard(this.loadUserSetting("screenshotClipboard", this.appState.screenshot.clipboard));
         await i18n.setLanguage(this.loadUserSetting("lang", i18n.locale));
         this.setDebug(this.loadUserSetting("debug", this.appState.debug));
 
@@ -577,6 +585,7 @@ export class BlueMapApp {
         this.saveUserSetting("invertMouse", this.appState.controls.invertMouse);
         this.saveUserSetting("pauseTileLoading", this.appState.controls.pauseTileLoading);
         this.saveUserSetting("theme", this.appState.theme);
+        this.saveUserSetting("screenshotClipboard", this.appState.screenshot.clipboard);
         this.saveUserSetting("lang", i18n.locale);
         this.saveUserSetting("debug", this.appState.debug);
 
@@ -707,6 +716,15 @@ export class BlueMapApp {
         link.download = "bluemap-screenshot.png";
         link.href = this.mapViewer.renderer.domElement.toDataURL('image/png');
         link.click();
+
+        if (this.appState.screenshot.clipboard) {
+            this.mapViewer.renderer.domElement.toBlob(blob => {
+                // eslint-disable-next-line no-undef
+                navigator.clipboard.write([new ClipboardItem({ ['image/png']: blob })]).catch(e => {
+                    alert(this.events, "Failed to copy screenshot to clipboard: " + e, "error");
+                });
+            });
+        }
     }
 
 }
