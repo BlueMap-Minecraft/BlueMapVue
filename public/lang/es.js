@@ -76,6 +76,11 @@ export default {
     compass: {
         tooltip: "Brújula / Norte"
     },
+    screenshot: {
+        title: "Captura de Pantalla",
+        button: "Tomar Captura de Pantalla",
+        clipboard: "Copiar al Portapapeles",
+    },
     controls: {
         title: "Vista / Controles",
         perspective: {
