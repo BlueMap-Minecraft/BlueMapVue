@@ -79,7 +79,7 @@ export default {
 		tooltip: "Compass / Face North"
 	},
 	screenshot: {
-		tooltip: "Take Screenshot",
+		button: "Take Screenshot",
 	},
 	controls: {
 		title: "View / Controls",

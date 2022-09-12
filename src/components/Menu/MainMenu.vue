@@ -13,6 +13,7 @@
       <hr>
       <SimpleButton @action="goFullscreen">{{ $t("goFullscreen.button") }}</SimpleButton>
       <SimpleButton @action="$bluemap.resetCamera()">{{ $t("resetCamera.button") }}</SimpleButton>
+      <SimpleButton @action="$bluemap.takeScreenshot()">{{ $t("screenshot.button") }}</SimpleButton>
       <SimpleButton @action="$bluemap.updateMap()" :title="$t('updateMap.tooltip')">{{ $t("updateMap.button") }}</SimpleButton>
     </div>
 

@@ -43,18 +43,6 @@
       </svg>
     </SvgButton>
     <div class="space thin-hide greedy"></div>
-    <SvgButton class="thin-hide" :title="$t('screenshot.tooltip')" @action="$bluemap.takeScreenshot()">
-      <svg viewBox="0 0 30 30">
-        <path d="M3.75 7.5 C 3.058594 7.5 2.5 8.058594 2.5 8.75 L 2.5 23.75 C 2.5 24.441406 3.058594 25 3.75 25 L 26.25 25
-        C 26.941406 25 27.5 24.441406 27.5 23.75 L 27.5 8.75 C 27.5 8.058594 26.941406 7.5 26.25 7.5 L 20.625 7.5 L 19.375
-        4.375 L 10.625 4.375 L 9.375 7.5 Z M 15 10 C 18.445312 10.015625 21.226562 12.820312 21.21875 16.265625 C 21.210938
-        19.710938 18.414062 22.5 14.96875 22.5 C 11.523438 22.5 8.726562 19.710938 8.71875 16.265625 C 8.710938 12.820312
-        11.492188 10.015625 14.9375 10 Z M 15 13.125 C 13.28125 13.140625 11.898438 14.546875 11.90625 16.265625 C 11.914062
-        17.984375 13.3125 19.375 15.03125 19.375 C 16.75 19.375 18.148438 17.984375 18.15625 16.265625 C 18.164062 14.546875
-        16.78125 13.140625 15.0625 13.125 Z M 15 13.125"/>
-      </svg>
-    </SvgButton>
-    <div class="space thin-hide"></div>
     <DayNightSwitch class="thin-hide" :title="$t('lighting.dayNightSwitch.tooltip')" />
     <div class="space thin-hide"></div>
     <ControlsSwitch class="thin-hide"></ControlsSwitch>
