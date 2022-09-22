@@ -55,10 +55,10 @@
 </template>
 
 <script>
-import Group from "@/components/Menu/Group";
-import SimpleButton from "@/components/Menu/SimpleButton";
-import Slider from "@/components/Menu/Slider";
-import SwitchButton from "@/components/Menu/SwitchButton";
+import Group from "./Group.vue";
+import SimpleButton from "./SimpleButton.vue";
+import Slider from "./Slider.vue";
+import SwitchButton from "./SwitchButton.vue";
 import i18n from "../../i18n";
 
 const themes = [

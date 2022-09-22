@@ -11,7 +11,7 @@
 
 <script>
   import {animate, EasingFunctions} from "bluemap/src/util/Utils";
-  import SvgButton from "@/components/ControlBar/SvgButton";
+  import SvgButton from "./SvgButton.vue";
 
   let animation;
 

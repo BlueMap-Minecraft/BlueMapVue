@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import MarkerItem from "@/components/Menu/MarkerItem";
-import TextInput from "@/components/Menu/TextInput";
-import MarkerSet from "@/components/Menu/MarkerSet";
-import {MainMenu} from "@/js/MainMenu";
+import MarkerItem from "./MarkerItem.vue";
+import TextInput from "./TextInput.vue";
+import MarkerSet from "./MarkerSet.vue";
+import {MainMenu} from "../../js/MainMenu";
 export default {
   name: "MarkerSetMenu",
   components: {MarkerSet, TextInput, MarkerItem},

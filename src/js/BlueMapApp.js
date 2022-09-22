@@ -29,10 +29,10 @@ import {FreeFlightControls} from "bluemap/src/controls/freeflight/FreeFlightCont
 import {FileLoader, MathUtils, Vector3} from "three";
 import {Map as BlueMapMap} from "bluemap/src/map/Map";
 import {alert, animate, EasingFunctions, generateCacheHash} from "bluemap/src/util/Utils";
-import {MainMenu} from "@/js/MainMenu";
-import {PopupMarker} from "@/js/PopupMarker";
+import {MainMenu} from "./MainMenu";
+import {PopupMarker} from "./PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
-import {getLocalStorage, round, setLocalStorage} from "@/js/Utils";
+import {getLocalStorage, round, setLocalStorage} from "./Utils";
 import i18n from "../i18n";
 import {MarkerManager, MarkerFileType} from "bluemap/src/markers/MarkerManager";
 

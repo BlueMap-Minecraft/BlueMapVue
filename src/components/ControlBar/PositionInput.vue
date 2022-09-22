@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import NumberInput from "@/components/ControlBar/NumberInput";
+  import NumberInput from "./NumberInput.vue";
 
   export default {
     name: "PositionInput",
