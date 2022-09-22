@@ -23,8 +23,7 @@
   "homepage": "https://bluecolo.red/bluemap",
   "dependencies": {
     "bluemap": "file:./BlueMapWeb",
-    "vue": "^2.6.11",
-    "vue-i18n": "^8.24.1"
+    "vue": "^2.7.10",
   },
   "scripts": {
     "dev": "vite",
