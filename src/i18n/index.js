@@ -21,7 +21,7 @@ VueI18n.prototype.setLanguage = async function(lang) {
 
 VueI18n.prototype.loadLanguageSettings = async function() {
 	let settings = await fetchYaml("./lang/settings.yaml");
-	console.log(settings)
+
 	this.languages = settings.languages;
 	this.setLanguage(settings.default);
 };
