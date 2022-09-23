@@ -1,0 +1,207 @@
+pageTitle: BlueMap - {map}
+menu:
+  title: Menu
+  tooltip: Menu
+maps:
+  title: Mapy
+  button: Mapy
+  tooltip: Lista map
+markers:
+  title: Punkty
+  button: Punkty
+  tooltip: Lista punktów
+  marker: punkt | punkty
+  markerSet: zestaw punktów | zestawy punktów
+  searchPlaceholder: Szukaj...
+settings:
+  title: Ustawienia
+  button: Ustawienia
+goFullscreen:
+  button: Tryb pełnoekranowy
+resetCamera:
+  button: Wyśrodkuj kamerę
+  tooltip: Zresetuj pozycję kamery
+updateMap:
+  button: Załaduj mapę ponownie
+  tooltip: Wyczyść pamięć podręczną mapy
+lighting:
+  title: Oświetlenie
+  dayNightSwitch:
+    tooltip: Dzień/Noc
+  sunlight: Światło słoneczne
+  ambientLight: Światło otoczenia
+resolution:
+  title: Rozdzielczość
+  high: Wysoka (SSAA, x2)
+  normal: Normalna (Bazowa, x1)
+  low: Niska (Skalowanie, x0.5)
+freeFlightControls:
+  title: Sterowanie w locie swobodnym
+  mouseSensitivity: Czułość myszy
+  invertMouseY: Odwróć oś Y myszy
+renderDistance:
+  title: Odległość renderowania
+  hiresLayer: Warstwa wysokiej rozdzielczości
+  lowersLayer: Warstwa niskiej rozdzielczości
+theme:
+  title: Motyw
+  default: Domyślny (według ustawień systemowych)
+  dark: Tryb ciemny
+  light: Tryb jasny
+debug:
+  button: Debugowanie
+resetAllSettings:
+  button: Przywróć ustawienia fabryczne
+players:
+  title: Gracze
+  tooltip: Lista graczy
+compass:
+  tooltip: Kompas (północ)
+controls:
+  title: Widok
+  perspective:
+    button: Perspektywa
+    tooltip: Widok z perspektywy
+  flatView:
+    button: Płaski
+    tooltip: Widok płaski
+  freeFlight:
+    button: Swobodny lot
+    tooltip: Tryb widza
+language:
+  title: Język
+blockTooltip:
+  block: Blok
+  position: Pozycja
+  chunk: Chunk
+  region:
+    region: Region
+    file: Plik
+  light:
+    light: Oświetlenie
+    sun: Słońce
+    block: Blok
+info:
+  title: Informacje
+  button: Informacje i skróty klawiszowe
+  content: "
+
+    <img src=\"assets/logo.png\" style=\"display: block; width: 40%; margin:
+    3em auto; border-radius: 50%\">
+
+    <p>
+
+    \t<h2>Sterowanie myszką</h2>
+
+    \t<table>
+
+    \t\t<tr><th>Poruszanie się</th><td><kbd>lewy przycisk</kbd> +
+    przeciągnięcie</td></tr>
+
+    \t\t<tr><th>Zbliżenie i oddalenie</th><td><kbd>kółko myszy</kbd>
+    (przewijanie)</td></tr>
+
+    \t\t<tr><th>Obrót i pochylenie</th><td><kbd>prawy przycisk</kbd> +
+    przeciągnięcie</td></tr>
+
+    \t</table>
+
+    </p>
+
+    <br />
+
+    <p>
+
+    \t<h2>Sterowanie klawiaturą</h2>
+
+    \t<table>
+
+    \t\t<tr>
+
+    \t\t\t<th>Poruszanie się</th>
+
+    \t\t\t<td>
+
+    \t\t\t\t<kbd>Klawisze WASD</kbd>
+
+    \t\t\t\t<br />
+
+    \t\t\t\talbo <kbd>Strzałki</kbd>
+
+    \t\t\t</td>
+
+    \t\t</tr>
+
+    \t\t<tr>
+
+    \t\t\t<th>Zbliżenie i oddalenie</th>
+
+    \t\t\t<td>
+
+    \t\t\t\tKlawiatura numeryczna: <kbd>+</kbd> / <kbd>-</kbd>
+
+    \t\t\t\t<br />
+
+    \t\t\t\tlub <kbd>Insert (Ins)</kbd> / <kbd>Home</kbd>
+
+    \t\t\t</td>
+
+    \t\t</tr>
+
+    \t\t<tr>
+
+    \t\t\t<th>Obrót i pochylenie</th>
+
+    \t\t\t<td>
+
+    \t\t\t\t<kbd>Lewy ALT</kbd> + <kbd>WASD</kbd>,
+
+    \t\t\t\t<br />
+
+    \t\t\t\t<kbd>Lewy ALT</kbd> + <kbd>Strzałki</kbd>,
+
+    \t\t\t\t<br /><br />
+
+    \t\t\t\tAlternatywnie: <kbd>Delete</kbd> / <kbd>End</kbd> / <kbd>Page
+    Up</kbd> / <kbd>Page Down</kbd>
+
+    \t\t\t</td>
+
+    \t\t</tr>
+
+    \t</table>
+
+    </p>
+
+    <br />
+
+    <p>
+
+    \t<h2>Sterowanie dotykowe (telefon)</h2>
+
+    \t<table>
+
+    \t\t<tr><th>Poruszanie się</th><td>Przeciąganie jednym palcem po
+    ekranie</td></tr>
+
+    \t\t<tr><th>Zbliżenie i oddalenie</th><td>Uszczypnięcie dwoma
+    palcami</td></tr>
+
+    \t\t<tr><th>Obrót</th><td>Przeciąganie palca po ekranie, jednocześnie
+    trzymając mapę drugim palcem</td></tr>
+
+    \t\t<tr><th>Pochylenie</th><td>Przeciąganie dwoma palcami po ekranie w
+    pionie</td></tr>
+
+    \t</table>
+
+    </p>
+
+    <br><hr>
+
+    <p class=\"info-footer\">
+
+    Ta mapa została wygenerowana z &#9829; używając <a
+    href=\"https://bluecolo.red/bluemap\">BlueMap</a> {version}</p>
+
+    \t\t"

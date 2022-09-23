@@ -1,3 +1,5 @@
+import YAML from 'yaml';
+
 /**
  * Converts a given value to JSON and writes it to the given key in
  * localStorage.
@@ -27,4 +29,10 @@ export const getLocalStorage = key => {
 export const round = (value, precision) => {
     let f = Math.pow(10, precision);
     return Math.round(value * f) / f;
+}
+
+export const fetchYaml = (url) => {
+    return fetch(url)
+        .then((res) => res.text())
+        .then((value) => YAML.parse(value));
 }
