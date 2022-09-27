@@ -14,7 +14,9 @@ export default {
         button: "Markører",
         tooltip: "Markørliste",
         marker: "markør | markører",
-        markerSet: "markørsett | markørsett"
+        markerSet: "markørsett | markørsett",
+        searchPlaceholder: "Søk...",
+        followPlayerTitle: "Følg spiller"
     },
     settings: {
         title: "Innstillinger",
@@ -53,7 +55,9 @@ export default {
     renderDistance: {
         title: "Innlastningsavstand",
         hiresLayer: "Høyoppløsningslag",
-        lowersLayer: "Lavoppløsningslag"
+        lowersLayer: "Lavoppløsningslag",
+        loadHiresWhileMoving: "Last inn høyoppløsning under bevegelse",
+        off: "Av"
     },
     theme: {
         title: "Tema",
@@ -73,6 +77,11 @@ export default {
     },
     compass: {
         tooltip: "Kompass / Pek nord"
+    },
+    screenshot: {
+        title: "Skjermbilde",
+        button: "Ta skjermbilde",
+        clipboard: "Kopier til utklippstavle"
     },
     controls: {
         title: "Visning / Kontroller",
