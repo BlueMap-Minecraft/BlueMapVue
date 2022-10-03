@@ -39,6 +39,10 @@ export default {
             name: "Nederlands"
         },
         {
+            locale: "no_nb",
+            name: "Norsk bokmål"
+        },
+        {
             locale: "pl",
             name: "Polski"
         },
