@@ -39,7 +39,7 @@ export default {
   }
 
   &:hover {
-    background-color: var(--theme-bg-light);
+    background-color: var(--theme-bg-hover);
   }
 }
 

@@ -43,13 +43,12 @@ export default {
   overflow-x: hidden;
   text-overflow: ellipsis;
 
-  &.selected, &:hover {
+  &.selected {
     background-color: var(--theme-bg-light);
   }
 
-  &:active {
-    background-color: var(--theme-fg-light);
-    color: var(--theme-bg);
+  &:hover {
+    background-color: var(--theme-bg-hover);
   }
 
   .sky {

@@ -42,6 +42,10 @@
   .theme-light {
     @include light-theme;
   }
+
+  .theme-contrast {
+    @include contrast-theme;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -137,13 +141,15 @@ input {
   width: 0.5em;
 }
 ::-webkit-scrollbar-track {
-  background: var(--theme-bg-light);
+  background: var(--theme-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--theme-fg-light);
+  background: var(--theme-bg-light);
+  border-radius: 0.5em;
+  border: solid var(--theme-bg) 0.1em;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--theme-fg);
+  background: var(--theme-fg-light);
 }
 
 //app-error

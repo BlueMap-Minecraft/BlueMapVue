@@ -26,7 +26,11 @@
   background-color: var(--theme-bg);
   color: var(--theme-fg);
 
-  &:hover, &.active {
+  &:hover {
+    background-color: var(--theme-bg-hover);
+  }
+
+  &.active {
     background-color: var(--theme-bg-light);
   }
 

@@ -37,7 +37,7 @@ export default {
   padding: 0 0.5em;
 
   &:hover {
-    background-color: var(--theme-bg-light);
+    background-color: var(--theme-bg-hover);
   }
 
   > .label {
@@ -60,7 +60,7 @@ export default {
       //border: solid 0.125em var(--theme-fg-light);
 
       overflow: hidden;
-      background-color: var(--theme-fg-light);
+      background-color: var(--theme-bg-light);
 
       &::-webkit-slider-thumb {
         appearance: none;
@@ -71,8 +71,8 @@ export default {
         width: 1em;
         height: 1em;
 
-        border-radius: 100%;
-        border: solid 0.125em var(--theme-fg-light);
+        border-radius: 1em;
+        border: solid 0.125em var(--theme-bg-light);
 
         background-color: var(--theme-bg);
 
@@ -83,8 +83,8 @@ export default {
         width: 0.75em;
         height: 0.75em;
 
-        border-radius: 100%;
-        border: solid 0.125em var(--theme-fg-light);
+        border-radius: 0.75em;
+        border: solid 0.125em var(--theme-bg-light);
 
         background-color: var(--theme-bg);
       }

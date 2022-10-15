@@ -33,12 +33,13 @@ $mobile-break: 575.98px;
   font-weight: 400;
 
   --theme-bg: #181818;
-  --theme-bg-light: #333;
+  --theme-bg-hover: #222;
+  --theme-bg-light: #444;
   --theme-fg: #fff;
   --theme-fg-light: #aaa;
 
   //SwitchButton
-  --theme-switch-button-on: #006EDE;
+  --theme-switch-button-on: #00489d;
 
   //DayNightSwitch
   --theme-stars-day: #fff;
@@ -53,16 +54,38 @@ $mobile-break: 575.98px;
   font-weight: 500;
 
   --theme-bg: #eee;
-  --theme-bg-light: #aaa;
+  --theme-bg-hover: #ddd;
+  --theme-bg-light: #999;
   --theme-fg: #000;
-  --theme-fg-light: #444;
+  --theme-fg-light: #333;
 
   //SwitchButton
-  --theme-switch-button-on: #006EDE;
+  --theme-switch-button-on: #6593dc;
 
   //DayNightSwitch
   --theme-stars-day: #444;
   --theme-moon-day: #000;
   --theme-stars-night: #fff;
   --theme-moon-night: #ff0;
+}
+
+@mixin contrast-theme {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  --theme-bg: #000;
+  --theme-bg-hover: #222;
+  --theme-bg-light: #666;
+  --theme-fg: #fff;
+  --theme-fg-light: #aaa;
+
+  //SwitchButton
+  --theme-switch-button-on: #006fff;
+
+  //DayNightSwitch
+  --theme-stars-day: #fff;
+  --theme-moon-day: #ff0;
+  --theme-stars-night: #444;
+  --theme-moon-night: #000;
 }

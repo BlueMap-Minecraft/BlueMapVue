@@ -43,7 +43,11 @@ export default {
     text-overflow: ellipsis;
   }
 
-  &:hover, &.active {
+  &:hover {
+    background-color: var(--theme-bg-hover);
+  }
+
+  &.active {
     background-color: var(--theme-bg-light);
   }
 

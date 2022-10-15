@@ -63,7 +63,8 @@ export default {
         title: "Theme",
         default: "Default (System/Browser)",
         dark: "Dark",
-        light: "Light"
+        light: "Light",
+        contrast: "Contrast"
     },
     debug: {
         button: "Debug"

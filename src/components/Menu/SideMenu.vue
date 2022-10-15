@@ -100,7 +100,7 @@ export default {
     text-align: center;
 
     background-color: inherit;
-    border-bottom: solid 1px var(--theme-bg-light);
+    border-bottom: solid 1px var(--theme-bg-hover);
 
     padding: 0.5em;
     @media (max-width: $mobile-break) {
@@ -123,7 +123,7 @@ export default {
 
     hr {
       border: none;
-      border-bottom: solid 1px var(--theme-bg-light);
+      border-bottom: solid 2px var(--theme-bg-hover);
       margin: 0.5em 0;
     }
   }

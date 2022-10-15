@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{'theme-light': appState.theme === 'light', 'theme-dark': appState.theme === 'dark'}">
+  <div id="app" :class="{'theme-light': appState.theme === 'light', 'theme-dark': appState.theme === 'dark', 'theme-contrast': appState.theme === 'contrast'}">
     <FreeFlightMobileControls v-if="appState.controls.state === 'free'" />
     <ControlBar />
     <MainMenu :menu="appState.menu" />

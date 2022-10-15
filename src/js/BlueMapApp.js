@@ -509,15 +509,23 @@ export class BlueMapApp {
 
         if (theme === "light") {
             this.mapViewer.rootElement.classList.remove("theme-dark");
+            this.mapViewer.rootElement.classList.remove("theme-contrast");
             this.mapViewer.rootElement.classList.add("theme-light");
         }
         else if (theme === "dark") {
             this.mapViewer.rootElement.classList.remove("theme-light");
+            this.mapViewer.rootElement.classList.remove("theme-contrast");
             this.mapViewer.rootElement.classList.add("theme-dark");
+        }
+        else if (theme === "contrast") {
+            this.mapViewer.rootElement.classList.remove("theme-light");
+            this.mapViewer.rootElement.classList.remove("theme-dark");
+            this.mapViewer.rootElement.classList.add("theme-contrast");
         }
         else {
             this.mapViewer.rootElement.classList.remove("theme-light");
             this.mapViewer.rootElement.classList.remove("theme-dark");
+            this.mapViewer.rootElement.classList.remove("theme-contrast");
         }
     }
 

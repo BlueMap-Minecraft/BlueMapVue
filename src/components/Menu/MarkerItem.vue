@@ -127,7 +127,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      background-color: var(--theme-bg-light);
+      background-color: var(--theme-bg-hover);
     }
 
     > .info {
@@ -158,7 +158,7 @@ export default {
           &:not(:first-child) {
             margin-left: 0.5em;
             padding-left: 0.5em;
-            border-left: solid 1px var(--theme-bg-light);
+            border-left: solid 1px var(--theme-bg-hover);
           }
         }
       }

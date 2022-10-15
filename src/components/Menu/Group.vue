@@ -21,7 +21,7 @@ export default {
   position: relative;
   margin: 2em 0 1em;
   padding-top: 1em;
-  border: solid 1px var(--theme-bg-light);
+  border: solid 2px var(--theme-bg-hover);
 
 
   > .title {

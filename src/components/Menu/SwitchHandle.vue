@@ -17,7 +17,7 @@ export default {
   width: 2em;
 
   border-radius: 1em;
-  background-color: var(--theme-fg-light);
+  background-color: var(--theme-bg-light);
 
   transition: background-color 0.3s;
 

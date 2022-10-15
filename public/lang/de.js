@@ -63,7 +63,8 @@ export default {
         title: "Farbmodus",
         default: "Standard (System/Browser)",
         dark: "Dunkel",
-        light: "Hell"
+        light: "Hell",
+        contrast: "Kontrast"
     },
     debug: {
         button: "Debug"

@@ -13,7 +13,7 @@ export default {
 
 <style lang="scss">
 .side-menu .text-input {
-  background-color: var(--theme-bg-light);
+  background-color: var(--theme-bg-hover);
   width: calc(100% - 1em);
   padding: 0.5em;
 }

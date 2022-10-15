@@ -79,7 +79,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      background-color: var(--theme-bg-light);
+      background-color: var(--theme-bg-hover);
     }
 
     > .marker-set-switch {
@@ -120,7 +120,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      background-color: var(--theme-bg-light);
+      background-color: var(--theme-bg-hover);
     }
 
     > svg {
