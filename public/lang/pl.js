@@ -10,12 +10,13 @@ export default {
         tooltip: "Lista map"
     },
     markers: {
-        title: "Punkty",
-        button: "Punkty",
-        tooltip: "Lista punktów",
-        marker: "punkt | punkty",
-        markerSet: "zestaw punktów | zestawy punktów",
-        searchPlaceholder: "Szukaj..."
+        title: "Znaczniki",
+        button: "Znaczniki",
+        tooltip: "Lista znaczników",
+        marker: "znacznik | znaczniki",
+        markerSet: "zbiór znaczników | zbiory znaczników",
+        searchPlaceholder: "Wyszukaj...",
+        followPlayerTitle: "Śledzenie gracza"
     },
     settings: {
         title: "Ustawienia",
@@ -43,13 +44,13 @@ export default {
     resolution: {
         title: "Rozdzielczość",
         high: "Wysoka (SSAA, x2)",
-        normal: "Normalna (Bazowa, x1)",
+        normal: "Normalna (Natywna, x1)",
         low: "Niska (Skalowanie, x0.5)"
     },
     freeFlightControls: {
         title: "Sterowanie w locie swobodnym",
         mouseSensitivity: "Czułość myszy",
-        invertMouseY: "Odwróć oś Y myszy"
+        invertMouseY: "Odwróć oś pionową myszy"
     },
     renderDistance: {
         title: "Odległość renderowania",
@@ -60,20 +61,26 @@ export default {
         title: "Motyw",
         default: "Domyślny (według ustawień systemowych)",
         dark: "Tryb ciemny",
-        light: "Tryb jasny"
+        light: "Tryb jasny",
+        contrast: "Wysoki kontrast"
     },
     debug: {
         button: "Debugowanie"
     },
     resetAllSettings: {
-        button: "Przywróć ustawienia fabryczne"
+        button: "Przywróć ustawienia domyślne"
     },
     players: {
         title: "Gracze",
         tooltip: "Lista graczy"
     },
     compass: {
-        tooltip: "Kompas (północ)"
+        tooltip: "Kompas / zwroć na północ"
+    },
+    screenshot: {
+        title: "Zrzut ekranu",
+        button: "Wykonaj zrzut ekranu",
+        clipboard: "Skopiuj do schowka"
     },
     controls: {
         title: "Widok",
@@ -86,7 +93,7 @@ export default {
             tooltip: "Widok płaski",
         },
         freeFlight: {
-            button: "Swobodny lot",
+            button: "Lot swobodny",
             tooltip: "Tryb widza"
         }
     },
@@ -164,7 +171,7 @@ export default {
 </p>
 <br><hr>
 <p class="info-footer">
-Ta mapa została wygenerowana z &#9829; używając <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}</p>
+Ta mapa została wygenerowana z &#9829; za pomocą <a href="https://bluecolo.red/bluemap">BlueMap</a> {version}</p>
 		`
     }
 }
