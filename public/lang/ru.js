@@ -56,7 +56,7 @@ export default {
         title: "Дальность прорисовки",
         hiresLayer: "Высокой чёткости",
         lowersLayer: "Низкой чёткости",
-        loadHiresWhileMoving: "Выс. чёткость при движения",
+        loadHiresWhileMoving: "Выс. чёткость при движении",
         off: "Откл"
     },
     theme: {
