@@ -14,7 +14,9 @@ export default {
         button: "Маркеры",
         tooltip: "Список маркеров",
         marker: "маркер | маркеры",
-        markerSet: "набор маркеров | наборы маркеров"
+        markerSet: "набор маркеров | наборы маркеров",
+        searchPlaceholder: "Поиск...",
+        followPlayerTitle: "Следовать за игроком"
     },
     settings: {
         title: "Настройки",
@@ -53,13 +55,16 @@ export default {
     renderDistance: {
         title: "Дальность прорисовки",
         hiresLayer: "Высокой чёткости",
-        lowersLayer: "Низкой чёткости"
+        lowersLayer: "Низкой чёткости",
+        loadHiresWhileMoving: "Выс. чёткость при движении",
+        off: "Откл"
     },
     theme: {
         title: "Тема",
         default: "По умолчанию (Системная/Браузера)",
         dark: "Тёмная",
-        light: "Светлая"
+        light: "Светлая",
+        contrast: "Контрастная"
     },
     debug: {
         button: "Отладка"
@@ -73,6 +78,11 @@ export default {
     },
     compass: {
         tooltip: "Компас / Указать на север"
+    },
+    screenshot: {
+        title: "Скриншот",
+        button: "Сделать Скриншот",
+        clipboard: "Скопировать в буфер обмена"
     },
     controls: {
         title: "Вид / Управление",
