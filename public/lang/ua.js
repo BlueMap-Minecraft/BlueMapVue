@@ -45,7 +45,7 @@ export default {
         title: "Роздільна здатність",
         high: "Висока (SSAA, x2)",
         normal: "Нормальна (Системна, x1)",
-        low: "Низька (\"Upscale\", x0.5)"
+        low: "Низька (Апскейл, x0.5)"
     },
     freeFlightControls: {
         title: "Налаштування вільного польоту",
@@ -55,13 +55,16 @@ export default {
     renderDistance: {
         title: "Відстань промальовки",
         hiresLayer: "Високодеталізований шар",
-        lowersLayer: "Низькодеталізований шар"
+        lowersLayer: "Низькодеталізований шар",
+        loadHiresWhileMoving: "Вис. шар під час руху",
+        off: "Вимк"
     },
     theme: {
         title: "Тема",
         default: "За замовчуванням (Браузерна)",
         dark: "Темна",
-        light: "Світла"
+        light: "Світла",
+        contrast: "Контрастна"
     },
     debug: {
         button: "Відлагоджувальний режим"
@@ -75,6 +78,11 @@ export default {
     },
     compass: {
         tooltip: "Компас / Повернути на північ"
+    },
+    screenshot: {
+        title: "Скріншот",
+        button: "Зробити Скріншот",
+        clipboard: "Скопіювати в буфер обміну"
     },
     controls: {
         title: "Налаштування відображення",
@@ -144,4 +152,4 @@ export default {
 		`
     }
 }
-//Переклав Y0shioSato
+//Переклав Y0shioSato, оновив KaRiLaA
