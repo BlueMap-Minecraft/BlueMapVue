@@ -34,7 +34,8 @@ import {PopupMarker} from "@/js/PopupMarker";
 import {MarkerSet} from "bluemap/src/markers/MarkerSet";
 import {getLocalStorage, round, setLocalStorage} from "@/js/Utils";
 import i18n from "../i18n";
-import {MarkerManager, MarkerFileType} from "bluemap/src/markers/MarkerManager";
+import {PlayerMarkerManager} from "bluemap/src/markers/PlayerMarkerManager";
+import {NormalMarkerManager} from "bluemap/src/markers/NormalMarkerManager";
 
 export class BlueMapApp {
 
@@ -49,9 +50,9 @@ export class BlueMapApp {
         this.mapControls = new MapControls(this.mapViewer.renderer.domElement);
         this.freeFlightControls = new FreeFlightControls(this.mapViewer.renderer.domElement);
 
-        /** @type {MarkerManager} */
+        /** @type {PlayerMarkerManager} */
         this.playerMarkerManager = null;
-        /** @type {MarkerManager} */
+        /** @type {NormalMarkerManager} */
         this.markerFileManager = null;
 
         /** @type {{
@@ -68,7 +69,9 @@ export class BlueMapApp {
          *      lowresSliderDefault: number,
          *      lowresSliderMin: number,
          *      startLocation: string,
-         *      maps: string[]
+         *      maps: string[],
+         *      scripts: string[],
+         *      styles: string[]
          *  }}
          **/
         this.settings = null;
@@ -134,6 +137,14 @@ export class BlueMapApp {
         this.mapControls.maxDistance = this.settings.maxZoomDistance;
         this.appState.controls.enableFreeFlight = this.settings.enableFreeFlight;
 
+        // load settings-styles
+        if (this.settings.styles) for (let styleUrl of this.settings.styles) {
+            let styleElement = document.createElement("link");
+            styleElement.rel = "stylesheet";
+            styleElement.href = styleUrl;
+            document.head.appendChild(styleElement);
+        }
+
         // unload loaded maps
         await this.mapViewer.switchMap(null);
         oldMaps.forEach(map => map.dispose());
@@ -165,6 +176,14 @@ export class BlueMapApp {
 
         // save user settings
         this.saveUserSettings();
+
+
+        // load settings-scripts
+        if (this.settings.scripts) for (let scriptUrl of this.settings.scripts) {
+            let scriptElement = document.createElement("script");
+            scriptElement.src = scriptUrl;
+            document.body.appendChild(scriptElement);
+        }
     }
 
     update = async () => {
@@ -336,7 +355,7 @@ export class BlueMapApp {
         const map = this.mapViewer.map;
         if (!map) return;
 
-        this.playerMarkerManager = new MarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/players", MarkerFileType.PLAYER, this.events);
+        this.playerMarkerManager = new PlayerMarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/players.json", map.data.dataUrl + "live/assets/playerheads/", this.events);
         this.playerMarkerManager.setAutoUpdateInterval(0);
         return this.playerMarkerManager.update()
             .then(() => {
@@ -358,7 +377,7 @@ export class BlueMapApp {
         const map = this.mapViewer.map;
         if (!map) return;
 
-        this.markerFileManager = new MarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/markers", MarkerFileType.NORMAL, this.events);
+        this.markerFileManager = new NormalMarkerManager(this.mapViewer.markers, map.data.dataUrl + "live/markers.json", this.events);
         return this.markerFileManager.update()
             .then(() => {
                 this.markerFileManager.setAutoUpdateInterval(1000 * 10);

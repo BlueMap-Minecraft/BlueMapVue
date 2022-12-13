@@ -33,10 +33,61 @@ function startsWith($haystack, $needle) {
     return substr($haystack, 0, strlen($needle)) === $needle;
 }
 
+// mime-types for meta-files
+$mimeDefault = "application/octet-stream";
+$mimeTypes = [
+    "txt" => "text/plain",
+    "css" => "text/css",
+    "csv" => "text/csv",
+    "htm" => "text/html",
+    "html" => "text/html",
+    "js" => "text/javascript",
+    "xml" => "text/xml",
+
+    "png" => "image/png",
+    "jpg" => "image/jpeg",
+    "jpeg" => "image/jpeg",
+    "gif" => "image/gif",
+    "webp" => "image/webp",
+    "tif" => "image/tiff",
+    "tiff" => "image/tiff",
+    "svg" => "image/svg+xml",
+
+    "json" => "application/json",
+
+    "mp3" => "audio/mpeg",
+    "oga" => "audio/ogg",
+    "wav" => "audio/wav",
+    "weba" => "audio/webm",
+
+    "mp4" => "video/mp4",
+    "mpeg" => "video/mpeg",
+    "webm" => "video/webm",
+
+    "ttf" => "font/ttf",
+    "woff" => "font/woff",
+    "woff2" => "font/woff2"
+];
+
+function getMimeType($path) {
+    global $mimeDefault, $mimeTypes;
+
+    $i = strrpos($path, ".");
+    if ($i === false) return $mimeDefault;
+
+    $s = strrpos($path, "/");
+    if ($s !== false && $i < $s) return $mimeDefault;
+
+    $suffix = substr($path, $i + 1);
+    if (isset($mimeTypes[$suffix]))
+        return $mimeTypes[$suffix];
+
+    return $mimeDefault;
+}
 
 // determine relative request-path
 $root = dirname($_SERVER['PHP_SELF']);
-if ($root === "/") $root = "";
+if ($root === "/" || $root === "\\") $root = "";
 $uriPath = $_SERVER['REQUEST_URI'];
 $path = substr($uriPath, strlen($root));
 
@@ -63,38 +114,6 @@ if (startsWith($path, "/maps/")) {
     // get sql-connection
     $sql = new mysqli($hostname, $username, $password, $database, $port);
     if ($sql->errno) error(500, "Failed to connect to Database!");
-
-    // meta-files
-    $metaFiles = [
-        "textures.json" => "textures",
-        "settings.json" => "settings",
-        "live/markers" => "markers",
-        "live/players" => "players"
-    ];
-
-    // provide meta-files
-    foreach ($metaFiles as $metaFilePath => $metaKey) {
-        if (startsWith($mapPath, $metaFilePath)) {
-            $statement = $sql->prepare("
-                SELECT t.`value` 
-                FROM `bluemap_map_meta` t
-                 INNER JOIN `bluemap_map` m
-                  ON t.`map` = m.`id`
-                WHERE m.`map_id` = ?
-                AND t.`key` = ?
-            ");
-            $statement->bind_param("ss", $mapId, $metaKey);
-            $statement->execute();
-            if ($statement->errno) error(500, "Database query failed!");
-
-            $result = $statement->get_result();
-            if ($result && $line = $result->fetch_assoc()) {
-                header("Content-Type: application/json");
-                echo $line["value"];
-                exit;
-            }
-        }
-    }
 
     // provide map-tiles
     if (startsWith($mapPath, "tiles/")) {
@@ -140,12 +159,32 @@ if (startsWith($path, "/maps/")) {
             exit;
         }
 
+        // empty json response if nothing found
+        header("Content-Type: application/json");
+        echo "{}";
+        exit;
+
     }
 
-    // empty json response if nothing found
-    header("Content-Type: application/json");
-    echo "{}";
-    exit;
+    // provide meta-files
+    $statement = $sql->prepare("
+        SELECT t.`value`
+        FROM `bluemap_map_meta` t
+         INNER JOIN `bluemap_map` m
+          ON t.`map` = m.`id`
+        WHERE m.`map_id` = ?
+        AND t.`key` = ?
+    ");
+    $statement->bind_param("ss", $mapId, $mapPath);
+    $statement->execute();
+    if ($statement->errno) error(500, "Database query failed!");
+
+    $result = $statement->get_result();
+    if ($result && $line = $result->fetch_assoc()) {
+        header("Content-Type: ".getMimeType($mapPath));
+        echo $line["value"];
+        exit;
+    }
 
 }
 
