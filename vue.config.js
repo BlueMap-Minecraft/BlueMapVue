@@ -14,11 +14,6 @@ module.exports = {
                 //target: 'http://localhost:8100',
                 target: 'https://bluecolored.de/bluemap',
                 changeOrigin: true,
-            },
-            '/assets/playerheads': {
-                //target: 'http://localhost:8100',
-                target: 'https://bluecolored.de/bluemap',
-                changeOrigin: true,
             }
         }
     }

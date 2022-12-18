@@ -121,6 +121,7 @@
   .bm-marker-player {
     position: relative;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(1px 1px 3px #0008);
 
     img {
       width: 32px;
