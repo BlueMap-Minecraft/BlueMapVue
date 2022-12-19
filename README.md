@@ -1,5 +1,9 @@
 # bluemapvue
 
+```diff
+- THIS REPO IS ARCHIVED: BlueMap's WebApp is now directly included in the main repo! -
+```
+
 ## Project setup
 ```
 npm install
